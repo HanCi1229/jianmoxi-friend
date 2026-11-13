@@ -1,0 +1,77 @@
+html.editorial.notebook body[data-page="inspiration"]{background:var(--paper,#f5f2ec)}
+html.editorial.notebook .moment-masthead{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:72px;margin:0 4px 4px}
+html.editorial.notebook .moment-masthead .notebook-date{flex:none}
+html.editorial.notebook #moment-controls{display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:0}
+html.editorial.notebook .moment-location{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;column-gap:8px;min-height:32px;padding:2px 0;font:12px/1.6 var(--sans);color:var(--muted);border:0;background:none}
+html.editorial.notebook .moment-location>span:first-child{max-width:105px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html.editorial.notebook .moment-weather{white-space:nowrap}
+html.editorial.notebook .moment-mood{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:14px;padding:3px 10px;min-height:30px;font:11px/1.5 var(--sans);color:var(--muted);background:transparent}
+html.editorial.notebook .moment-masthead .notebook-date>strong{font-size:48px}
+html.editorial.notebook .paper-stage .fragment-grid{scroll-padding-inline:15%}
+html.editorial.notebook .notebook-focus .fragment-grid .fragment-card{max-width:70%;flex-basis:70%}
+html.editorial.notebook .notebook-focus .fragment-grid .fragment-card:first-child{margin-left:15%}
+html.editorial.notebook .notebook-focus .fragment-grid .fragment-card:last-child{margin-right:15%}
+html.editorial.notebook body[data-page="inspiration"] #main{padding-top:12px}
+.moment-note{font-size:14px;line-height:1.8;color:var(--muted)}
+#moment-city-form{margin-top:20px}#moment-city-form label{display:block;font-size:13px;margin-bottom:8px}
+.moment-search{display:flex;gap:8px}.moment-search input{min-width:0;flex:1;padding:10px 12px;font-size:16px;border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--ink)}
+#moment-results{margin:12px 0;font-size:13px}.moment-city-result{display:block;width:100%;padding:12px;text-align:left;border-bottom:1px solid var(--line);background:none;color:var(--ink)}
+.moment-moods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.moment-credit{font:11px/1.8 var(--sans);color:var(--muted);margin-top:24px}.moment-credit a{text-decoration:underline}
+@media(max-width:380px){html.editorial.notebook .moment-masthead{gap:6px}html.editorial.notebook .moment-masthead .notebook-date>strong{font-size:42px}html.editorial.notebook .notebook-date>div span{font-size:10px}html.editorial.notebook .moment-location{font-size:11px;column-gap:5px}}
+
+/* Two shared rows align the daily sentence with its mood control. */
+html.editorial.notebook .moment-masthead{display:grid;grid-template-columns:minmax(0,1fr) 84px;grid-template-rows:auto auto;column-gap:12px;row-gap:5px;align-items:center;margin-bottom:6px}
+html.editorial.notebook .moment-masthead .notebook-date{grid-column:1;grid-row:1;min-width:0}
+html.editorial.notebook #moment-controls{display:contents}
+html.editorial.notebook .moment-location{grid-column:2;grid-row:1;justify-self:end;width:max-content;max-width:160px;align-self:center}
+html.editorial.notebook .moment-mood{grid-column:2;grid-row:2;justify-self:end;border-radius:3px;min-height:32px;padding:3px 10px}
+html.editorial.notebook #moment-kind-words{grid-column:1;grid-row:2;margin:0;min-width:0;min-height:32px;align-content:center;color:var(--muted);font:400 12px/1.8 var(--serif);text-wrap:pretty}
+
+/* Compact paper actions: three equal, horizontal faces with larger hit areas. */
+html.editorial.notebook .notebook-inspiration .fragment-grid .fragment-foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:0 8px;min-height:44px;border-top:1px solid #eeeae3;align-items:center}
+html.editorial.notebook .notebook-inspiration .fragment-foot button.paper-action{display:flex;align-items:center;justify-content:center;position:relative;width:100%;height:44px;min-height:44px;min-width:0;padding:0;margin:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--muted)}
+html.editorial.notebook .fragment-foot .paper-action .fragment-action-face{display:flex;align-items:center;justify-content:center;gap:4px;width:100%;height:28px;padding:0 3px;border:1px solid #dcd5c7;border-radius:1px;background:#faf8f1;color:#66715e;font:500 11px/1 var(--serif);letter-spacing:.2px;transition:background .15s,color .15s,border-color .15s}
+html.editorial.notebook .fragment-action-face svg{width:14px;height:14px;flex:none;stroke-width:1.5}
+html.editorial.notebook .fragment-foot button:active .fragment-action-face{background:#ede8dd;border-color:#bdb5a5}
+html.editorial.notebook .fragment-foot .paper-action.is-saved .fragment-action-face{color:#a34b3e;background:#f6ece5;border-color:#d9ada0}
+html.editorial.notebook .fragment-foot button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+@media(max-width:760px){
+ html.editorial.notebook .mobile-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:min(370px,calc(100% - 20px));border:0;border-top:1px solid #ded7c9;border-radius:0;box-shadow:none;background:var(--paper);padding:1px 0 calc(1px + var(--shell-safe-bottom));gap:5px;align-items:end}
+ html.editorial.notebook .mobile-nav button{position:relative;display:flex;flex-direction:row;border:0;border-radius:0;background:transparent;color:#89877c;gap:0;font:500 12px/1.2 var(--serif);height:44px;min-height:44px;min-width:0;padding:0 0 3px;align-items:flex-end;box-shadow:none}
+ html.editorial.notebook .nav-bookmark-face{display:flex;align-items:center;justify-content:center;gap:5px;width:100%;height:36px;border:1px solid transparent;border-radius:1px;white-space:nowrap}
+ html.editorial.notebook .mobile-nav button.active{background:transparent;color:#34483c;font-weight:600}
+ html.editorial.notebook .mobile-nav button.active::before{content:none}
+ html.editorial.notebook .mobile-nav button.active .nav-bookmark-face{border-color:#ad6555;background:#f4ece1}
+ html.editorial.notebook .mobile-nav button svg{width:17px;height:17px;flex:none;stroke-width:1.5}
+ html.editorial.notebook .mobile-nav button:active .nav-bookmark-face{background:var(--soft)}
+ html.editorial.notebook .mobile-nav button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+}
+@media(max-width:380px){html.editorial.notebook .moment-masthead{column-gap:8px;row-gap:5px}html.editorial.notebook #moment-kind-words{font-size:11px}html.editorial.notebook .moment-location{max-width:135px}}
+@media(prefers-reduced-motion:reduce){html.editorial.notebook .fragment-action-face{transition:none}}
+
+@media(max-width:380px) and (min-height:541px){
+ html.editorial.notebook .notebook-inspiration .fragment-grid .fragment-photo{height:clamp(90px,17dvh,130px)}
+ html.editorial.notebook .notebook-inspiration .fragment-grid .fragment-copy{padding:14px 16px;gap:12px}
+ html.editorial.notebook .notebook-inspiration .fragment-grid .fragment-copy blockquote{line-height:1.8}
+}
+
+/* Bookplate, correspondence and brush marks: restrained ink with a cinnabar detail. */
+html.editorial.notebook svg.literary-icon{fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
+html.editorial.notebook svg.literary-icon .literary-ink{fill:currentColor;stroke:none}
+html.editorial.notebook svg.literary-icon .literary-accent{stroke:#a65c4d;fill:none;opacity:.65}
+html.editorial.notebook .active svg.literary-icon .literary-accent,
+html.editorial.notebook .is-saved svg.literary-icon .literary-accent{opacity:1}
+html.editorial.notebook .mobile-nav button svg.literary-icon{width:21px;height:21px}
+html.editorial.notebook .fragment-action-face svg.literary-icon{width:15px;height:15px}
+
+html.editorial.notebook .detail-inspiration.interpretation-only{margin:0;padding:0;border:0;display:block}
+html.editorial.notebook .interpretation-only .insight-reading p{white-space:pre-line}
+
+/* Keep mood text legible in every state, without inheriting generic secondary buttons. */
+html.editorial.notebook .moment-moods .moment-mood-option{min-height:44px;padding:11px 8px;border:1px solid var(--line);border-radius:7px;background:var(--white);color:var(--ink);font:400 14px/1.5 var(--sans)}
+html.editorial.notebook .moment-moods .moment-mood-option[aria-pressed="true"]{background:var(--tint);color:var(--ink);border-color:var(--accent);font-weight:600}
+html.editorial.notebook .moment-moods .moment-mood-option:active{background:var(--soft);color:var(--ink)}
+html.editorial.notebook .moment-moods .moment-mood-option:focus-visible{outline:2px solid var(--accent);outline-offset:2px;color:var(--ink)}
+html.editorial.notebook .moment-mood:is(:active,:focus-visible){color:var(--ink);background:var(--soft)}
+@media(hover:hover){html.editorial.notebook .moment-moods .moment-mood-option:hover{background:var(--soft);color:var(--ink)}}

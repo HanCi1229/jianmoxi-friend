@@ -1,0 +1,26 @@
+html.editorial.notebook .reading-room .reading-room-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 10px;padding:0;border:0}
+html.editorial.notebook .reading-room-heading h1{font:500 28px/1.3 var(--serif);margin:0}
+.reading-room-actions{display:flex;align-items:center;justify-content:flex-end;gap:4px;min-width:0}
+html.editorial.notebook .reading-room-actions button{min-height:44px;min-width:40px;padding:8px;border:0;background:transparent;color:var(--ink)}
+html.editorial.notebook .reading-room-actions .reading-guide-entry{font:500 14px/1.5 var(--sans,sans-serif);color:var(--green,var(--ink));max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reading-room-actions .compact-action-label{display:none}
+.reading-room-actions svg{width:20px;height:20px}
+html.editorial.notebook .reading-muse-quote:empty{display:none}
+html.editorial.notebook .reading-muse-quote{margin:0 0 16px;max-width:560px}
+html.editorial.notebook .reading-quote-link{display:block;text-align:left;padding:0;width:100%;background:none;border:0;color:var(--ink)}
+html.editorial.notebook .reading-quote-link blockquote{font:400 14px/1.8 var(--serif);margin:0 0 4px;letter-spacing:.02em}
+html.editorial.notebook .reading-quote-link cite{font:400 11px/1.6 var(--sans,sans-serif);color:var(--muted);font-style:normal}
+html.editorial.notebook .reading-room .slim-search{width:100%;max-width:560px;margin-bottom:10px}
+html.editorial.notebook .reading-room .compact-library-filters{display:block;margin:0 0 6px;padding:0;border-bottom:1px solid var(--line)}
+html.editorial.notebook .reading-room .library-tabs{display:flex;width:100%;min-width:0;gap:6px;overflow-x:auto;scrollbar-width:none;border:0;padding:0;margin:0}
+html.editorial.notebook .reading-room .library-tabs button{flex:0 0 auto;min-height:44px;padding:8px 12px;font-size:14px;border-radius:0;background:transparent}
+html.editorial.notebook .reading-room .library-tabs button.active{border-bottom:2px solid var(--green,var(--ink));background:transparent}
+html.editorial.notebook .reading-room .library-section-title{margin:0;padding:10px 0;min-height:30px;align-items:center;gap:12px}
+html.editorial.notebook .reading-room .library-section-title h2{font:500 17px/1.5 var(--serif);margin:0}
+html.editorial.notebook .reading-room .reading-count-only{justify-content:flex-end;padding:4px 0 0;min-height:20px}
+html.editorial.notebook .reading-room .reading-count-only span{font-size:11px;color:var(--muted)}
+.reading-selection-tools{display:flex;align-items:center;gap:8px;margin-left:auto}
+html.editorial.notebook .reading-selection-tools button{font-size:12px;min-height:44px;padding:6px}
+.reading-quote-detail{font:400 20px/1.8 var(--serif);margin:12px 0}
+.reading-room button:focus-visible{outline:2px solid var(--green,var(--ink));outline-offset:3px}
+@media(min-width:761px){html.editorial.notebook .reading-room-heading h1{font-size:32px}.reading-room-actions{gap:10px}html.editorial.notebook .reading-muse-quote{margin-bottom:18px}}

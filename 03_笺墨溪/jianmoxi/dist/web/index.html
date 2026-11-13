@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN" class="editorial notebook">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f4ef">
+  <link rel="icon" type="image/svg+xml" href="/assets/jianmoxi-icon.svg">
+  <title>笺墨溪 · 把生活写下来</title>
+  <style>
+  #web-startup{position:fixed;inset:0;z-index:10000;display:grid;place-content:center;gap:16px;padding:32px;text-align:center;background:#f6f4ef;color:#3c3b35;font:16px/1.8 system-ui,sans-serif}
+  #web-startup h1{margin:0;font:30px/1.5 Georgia,'SimSun',serif;letter-spacing:3px}
+  #web-startup p{margin:0;color:#706e65}#web-startup a{display:inline-block;padding:10px 20px;border:1px solid #697660;border-radius:7px;color:#4b5d42;text-decoration:none}
+  #web-startup [hidden]{display:none!important}
+  </style>
+  <script>
+  setTimeout(function(){var box=document.getElementById('web-startup');if(box){box.querySelector('p').textContent='打开得有些慢，仍在连接。你也可以重新打开。';box.querySelector('[data-startup-actions]').hidden=false}},15000);
+  </script>
+</head>
+<body>
+  <section id="web-startup" role="status" aria-live="polite"><h1>笺墨溪</h1><p>正在打开你的写作空间……</p><div data-startup-actions hidden><a href="/web/index.html">重新打开</a></div></section>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <aside class="sidebar rail">
+    <a class="brand" href="#inspiration" data-shell-page="inspiration"><span class="brand-mark">笺墨溪</span><small>把生活写下来</small></a>
+    <button class="new-writing" type="button" data-action="new"><span class="web-classic-plus" aria-hidden="true">＋ </span>写一篇</button>
+    <nav aria-label="主导航" id="desktop-nav"></nav>
+    <div class="sidebar-bottom rail-bottom"><button class="web-skin-toggle" type="button" data-open-web-skins aria-haspopup="dialog"><span class="web-skin-mark" aria-hidden="true"></span><span>外观皮肤<small data-web-skin-name>经典纸笺</small></span></button><span class="tiny-label">留一点时间，给自己。</span><button class="profile" data-nav="journal" data-shell-page="journal"><span class="avatar">我</span><span>我的<small>手记、收藏与设置</small></span></button></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><div class="topbar-heading"><span class="topbar-kicker">笺墨溪</span><div class="breadcrumb" id="breadcrumb">发现灵感</div></div><div class="top-tools"><button class="top-search" id="context-search" type="button" aria-label="搜索当前页面" aria-keyshortcuts="/" title="搜索当前页面（/）" hidden>搜索 <kbd>/</kbd></button><span class="preview-label">笺墨溪 · Web</span></div></header>
+    <section class="web-skin-feature" aria-labelledby="web-skin-title" hidden>
+      <div class="web-skin-feature-copy">
+        <span class="web-skin-edition"></span>
+        <h1 id="web-skin-title"></h1>
+        <p class="web-skin-caption"></p>
+      </div>
+      <div class="web-skin-art" aria-hidden="true"></div>
+    </section>
+    <main id="main" tabindex="-1"><section class="empty"><h1>正在打开笺墨溪</h1><p>一页一页，慢慢来。</p></section></main>
+    <footer class="page-footer"><span>笺墨溪 · 为每一个想写下来的瞬间</span><span>生活本身，就是来处。</span></footer>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="底部导航"></nav>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="dialog" aria-label="详情"><div id="dialog-body"></div></dialog>
+  <script src="boot.js?v=accounts-3"></script>
+</body>
+</html>

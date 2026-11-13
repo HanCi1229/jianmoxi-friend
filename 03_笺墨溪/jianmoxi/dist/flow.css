@@ -1,0 +1,24 @@
+/* Search inputs used to inherit a 22px bottom margin from .search, inflating their wrapper. */
+html.editorial.notebook :is(#library-search,#article-search){margin:0;height:36px;min-height:36px;max-height:36px;padding:6px 0;line-height:24px;border:0;box-sizing:border-box;font-size:16px}
+html.editorial.notebook :is(.library-search,.article-search).slim-search{display:flex;align-items:center;gap:8px;width:min(100%,400px);height:38px;min-height:38px;max-height:38px;padding:0 12px;margin:0 0 16px;border:1px solid var(--line);border-radius:20px;background:var(--white)}
+html.editorial.notebook .slim-search svg{width:17px;height:17px}
+html.editorial.notebook .compact-heading{border:0;padding-bottom:0;margin-bottom:14px;align-items:center;gap:20px}
+html.editorial.notebook .compact-heading>div:first-child{flex:0 0 auto}
+html.editorial.notebook .compact-heading .compact-create{margin-left:auto}
+html.editorial.notebook .compact-heading .reading-daily-quote{flex:1;min-width:0;text-align:right;color:var(--muted);max-width:520px;margin-left:auto}
+html.editorial.notebook .reading-daily-quote:empty{display:none}
+html.editorial.notebook .reading-daily-quote blockquote{font:500 15px/1.8 var(--serif);margin:0;color:var(--ink)}
+html.editorial.notebook .reading-daily-quote cite{display:block;font:11px/1.6 var(--sans);margin-top:5px;color:var(--muted)}
+html.editorial.notebook .library-continuation{display:flex;align-items:center;justify-content:center;gap:12px;min-height:56px;margin:12px 0;color:var(--muted);font-size:12px}
+html.editorial.notebook .compact-library-filters .library-tabs{border-top:0}
+html.editorial.notebook .notebook-focus .fragment-grid{display:flex;flex-direction:row;overflow-x:auto;gap:16px;scroll-snap-type:x mandatory;scrollbar-width:none;align-items:flex-start;overscroll-behavior-x:contain;padding:0 0 6px}
+html.editorial.notebook .notebook-focus .fragment-grid::-webkit-scrollbar{display:none}
+html.editorial.notebook .notebook-focus .fragment-grid .fragment-card{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;max-width:100%}
+html.editorial.notebook .notebook-focus .fragment-grid .fragment-photo{touch-action:auto}
+@media(max-width:760px){
+ html.editorial.notebook .compact-heading{gap:16px;margin-bottom:14px}
+ html.editorial.notebook .compact-heading .reading-daily-quote blockquote{font-size:13px;line-height:1.8}
+ html.editorial.notebook .compact-heading .reading-daily-quote cite{font-size:10px;margin-top:4px}
+ html.editorial.notebook :is(.library-search,.article-search).slim-search{width:min(100%,340px);margin-bottom:14px}
+ html.editorial.notebook .notebook-focus .fragment-grid .fragment-card{flex-basis:96%;max-width:96%}
+}

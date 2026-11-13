@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360">
+<defs>
+ <pattern id="dots" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#151121" opacity=".36"/></pattern>
+ <pattern id="lines" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 10 10 0" stroke="#282039" stroke-width="1"/></pattern>
+</defs>
+<rect width="900" height="360" fill="#dcd3ff"/>
+<path d="M0 0h400L187 360H0Z" fill="#f3f0e8"/><path d="M0 0h400L187 360H0Z" fill="url(#dots)"/>
+<circle cx="693" cy="157" r="165" fill="#6647db"/>
+<path d="M539 13a165 165 0 1 1 270 174Z" fill="url(#lines)" opacity=".48"/>
+<g transform="translate(447 171) rotate(-11)">
+  <rect x="-144" y="-123" width="294" height="246" fill="#161020" transform="translate(12 12)"/>
+  <rect x="-144" y="-123" width="294" height="246" fill="#faf7ec" stroke="#17121f" stroke-width="2"/>
+  <path d="M-126-86H132M-126 88H132M-126 98H132" fill="none" stroke="#191322" stroke-width="2"/>
+  <path d="M-126-64H37V71h-163Z" fill="#b2a3f0"/><circle cx="-48" cy="-11" r="47" fill="#301d75"/><path d="m-126 66 84-74L36 69Z" fill="#f5dc49"/>
+  <path d="M53-62H131M53-53H131M53-44H111M53 18H131M53 27H131M53 36H109M53 61H131" fill="none" stroke="#302541" stroke-width="2"/>
+  <text x="-126" y="-95" fill="#241940" font-family="Georgia,serif" font-size="23" font-weight="700" letter-spacing="3">WEEKLY</text>
+</g>
+<path d="m779 191 97 20-20 97-97-20Z" fill="#f5dc49" stroke="#201631" stroke-width="2"/>
+<path d="m788 239 23 26 34-40" fill="none" stroke="#201631" stroke-width="4"/>
+<path d="M704 307h103m-89 8h89m-84 8h84" stroke="#2d1b54" stroke-width="2"/>
+</svg>

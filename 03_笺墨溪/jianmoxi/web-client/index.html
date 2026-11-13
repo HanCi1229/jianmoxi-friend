@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f4ef">
+  <title>笺墨溪 · 写作与阅读</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="layout.css">
+</head>
+<body data-view="inspiration">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <!-- 宽屏：左侧固定导航。窄屏隐藏，回落到一致位置的底部五栏导航。 -->
+  <aside class="rail" aria-label="侧边导航">
+    <a class="brand" href="#inspiration" data-nav="inspiration">
+      <span class="brand-mark">笺墨溪</span>
+      <small>把生活写下来</small>
+    </a>
+    <button class="new-writing" type="button" data-action="new">＋ 写一篇</button>
+    <nav class="rail-nav" id="desktop-nav" aria-label="主导航"></nav>
+    <div class="rail-bottom">
+      <p class="preview-flag">留一点时间，给自己。</p>
+      <span class="tiny-label">留一点时间，给自己。</span>
+      <button class="profile" type="button" data-nav="journal">
+        <span class="avatar">我</span>
+        <span>我的写作生活<small>一页一页，慢慢来</small></span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <span class="breadcrumb" id="breadcrumb">发现灵感</span>
+      <div class="top-tools">
+        <span class="preview-label" id="sync-status">正在连接</span>
+        <button class="text-btn" type="button" data-action="logout" id="logout-button" hidden>退出登录</button>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <!-- 顶部信息条：日期、地点天气、心情、暖心短句，各板块位置一致 -->
+      <header class="masthead" id="masthead">
+        <div class="date-block">
+          <strong id="m-date">—</strong>
+          <div><span id="m-ym">—</span><span id="m-week">—</span></div>
+        </div>
+        <div class="moment-controls">
+          <button class="moment-place" type="button" data-action="place" aria-label="选择地点并查看天气">
+            <span id="m-place">选择地点</span>
+            <span class="weather" id="m-weather" hidden></span>
+          </button>
+          <button class="moment-mood" type="button" data-action="mood"><span id="m-mood">今日心情</span><span aria-hidden="true">⌄</span></button>
+        </div>
+        <p class="kind-words" id="kind-words" aria-live="polite"></p>
+        <button class="info-btn" type="button" data-action="about" aria-label="关于这份预览">i</button>
+      </header>
+
+      <div id="view-host"></div>
+    </main>
+
+    <footer class="page-footer">
+      <span>笺墨溪 · 为每一个想写下来的瞬间</span>
+      <span>生活本身，就是来处。</span>
+    </footer>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="底部导航"></nav>
+
+  <dialog id="dialog" aria-label="详情">
+    <div id="dialog-body"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <section id="login-gate" class="login-gate" hidden aria-labelledby="login-title">
+    <form id="login-form" class="login-card">
+      <span class="brand-mark">笺墨溪</span>
+      <h1 id="login-title">回到你的写作空间</h1>
+      <p>输入访问密码，继续写作与阅读。</p>
+      <label for="login-password">访问密码</label>
+      <input id="login-password" type="password" autocomplete="current-password" required>
+      <p id="login-error" class="login-error" role="alert"></p>
+      <button class="primary" type="submit">进入空间</button>
+    </form>
+  </section>
+
+  <script src="api.js"></script>
+  <script src="home-api.js"></script>
+  <script src="reading-api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

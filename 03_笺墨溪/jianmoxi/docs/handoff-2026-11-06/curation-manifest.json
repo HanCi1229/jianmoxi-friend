@@ -1,0 +1,1066 @@
+[
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-01.json",
+    "batchId": "codex-dragon-20261105-01",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "737b8be8b79fd5d78900cff9e95d0236fcc70780f716795688760eafabfab3e0",
+    "receipt": {
+      "hash": "737b8be8b79fd5d78900cff9e95d0236fcc70780f716795688760eafabfab3e0",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 5,
+      "characters": 15984,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793878865,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-02.json",
+    "batchId": "codex-dragon-20261105-02",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      5,
+      6
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "24ac5f5044c5b8ebcedd23240c554aa0e8330cedd77b6155a1533e1c27ae1e5f",
+    "receipt": {
+      "hash": "24ac5f5044c5b8ebcedd23240c554aa0e8330cedd77b6155a1533e1c27ae1e5f",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 2,
+      "characters": 23926,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793879036,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-03.json",
+    "batchId": "codex-dragon-20261105-03",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      7
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "ac2540e8d5c382d34bd9a0255c1db12f437dae620e2f7d2eae1aff3efbcc6633",
+    "receipt": {
+      "hash": "ac2540e8d5c382d34bd9a0255c1db12f437dae620e2f7d2eae1aff3efbcc6633",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 14156,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879844,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-04.json",
+    "batchId": "codex-dragon-20261105-04",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      8
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "aa740b4cb88b32a39098d23459399448db92a06d662bd449cad7d499e8e634b8",
+    "receipt": {
+      "hash": "aa740b4cb88b32a39098d23459399448db92a06d662bd449cad7d499e8e634b8",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 12529,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879844,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-05.json",
+    "batchId": "codex-dragon-20261105-05",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      9
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "b783a11b96c604b6197664ec36117572054b3da458b40def800b8bc641be6669",
+    "receipt": {
+      "hash": "b783a11b96c604b6197664ec36117572054b3da458b40def800b8bc641be6669",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 14242,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879844,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-06.json",
+    "batchId": "codex-dragon-20261105-06",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      10
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "58645db5fbedbe4845fd2a251f96c87dd5f9c106ca1079c0972baf3d8ca70eea",
+    "receipt": {
+      "hash": "58645db5fbedbe4845fd2a251f96c87dd5f9c106ca1079c0972baf3d8ca70eea",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 5861,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879844,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-07.json",
+    "batchId": "codex-dragon-20261105-07",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      11
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "74eded41b97b6d2f6def4c9d4e7d106a021591354d60530dac7a1c69ff288dc8",
+    "receipt": {
+      "hash": "74eded41b97b6d2f6def4c9d4e7d106a021591354d60530dac7a1c69ff288dc8",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 14227,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879845,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-08.json",
+    "batchId": "codex-dragon-20261105-08",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      12
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "0ac13bc49091f7c0014e1272d5362bee07550ff559fa26a1e2340f6697fadd35",
+    "receipt": {
+      "hash": "0ac13bc49091f7c0014e1272d5362bee07550ff559fa26a1e2340f6697fadd35",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 10743,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879845,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-09.json",
+    "batchId": "codex-dragon-20261105-09",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      13
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "cb2722e295c650be43638b243e4dfd0dc4e0b118a29fc9eb3ad351f503114937",
+    "receipt": {
+      "hash": "cb2722e295c650be43638b243e4dfd0dc4e0b118a29fc9eb3ad351f503114937",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 14227,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-10.json",
+    "batchId": "codex-dragon-20261105-10",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      14
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "0f6104f3872f57a55e0c7e1fda3aea5cf46d1145be311c4f208b6c96931d3c4f",
+    "receipt": {
+      "hash": "0f6104f3872f57a55e0c7e1fda3aea5cf46d1145be311c4f208b6c96931d3c4f",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 6259,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-11.json",
+    "batchId": "codex-dragon-20261105-11",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      15
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "8c58e8cc2f8dac880650cbcc3ff27490985e56f072282f6646bf90ff9111e8e7",
+    "receipt": {
+      "hash": "8c58e8cc2f8dac880650cbcc3ff27490985e56f072282f6646bf90ff9111e8e7",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 14214,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-12.json",
+    "batchId": "codex-dragon-20261105-12",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      16
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "f72d029a4267cf2936893e4c27562d0b4e09fabff4af3d6eef811c364f8b8a3d",
+    "receipt": {
+      "hash": "f72d029a4267cf2936893e4c27562d0b4e09fabff4af3d6eef811c364f8b8a3d",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 14274,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-13.json",
+    "batchId": "codex-dragon-20261105-13",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      17
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "0dfc0e0957b156f5fc934c2a83e3f16d07dd4f25c69b29483fd2dac502884dfd",
+    "receipt": {
+      "hash": "0dfc0e0957b156f5fc934c2a83e3f16d07dd4f25c69b29483fd2dac502884dfd",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 1901,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-14.json",
+    "batchId": "codex-dragon-20261105-14",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      18
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "3f5ecf42566dae2f865fbaf4931cca87227f45a440359d9715a597061742e486",
+    "receipt": {
+      "hash": "3f5ecf42566dae2f865fbaf4931cca87227f45a440359d9715a597061742e486",
+      "workId": "upload-7c8ea163530b0c871394e5db",
+      "chapters": 1,
+      "characters": 14176,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-15.json",
+    "batchId": "codex-dragon-20261105-15",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      19
+    ],
+    "status": "local-pending",
+    "contentHash": "c9aaf6d108d5faad0316836902a93ad89cc2f3cee8b9cc36ee0b44cdf8bf901f",
+    "receipt": null
+  },
+  {
+    "path": ".deploy/codex-curation/dragon-direct/analysis-16.json",
+    "batchId": "codex-dragon-20261105-16",
+    "workId": "upload-7c8ea163530b0c871394e5db",
+    "kind": "chapters",
+    "chapters": [
+      20
+    ],
+    "status": "local-pending",
+    "contentHash": "a03189d21342848fdf996e75fe0d0653bc3c8ea985d17212f45b26699ac90275",
+    "receipt": null
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/memory-01.json",
+    "batchId": "codex-memory-20261105-01",
+    "workId": "upload-ed55fa83277c2473a163e234",
+    "kind": "chapters",
+    "chapters": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "e8d0c5fdb7373cbbf71a963aa0cbea1face93c819ca2ed0613d34200ea80863f",
+    "receipt": {
+      "hash": "e8d0c5fdb7373cbbf71a963aa0cbea1face93c819ca2ed0613d34200ea80863f",
+      "workId": "upload-ed55fa83277c2473a163e234",
+      "chapters": 4,
+      "characters": 10781,
+      "accepted": 2,
+      "rejected": 0,
+      "completedAt": 1793879845,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/memory-02.json",
+    "batchId": "codex-memory-20261105-02",
+    "workId": "upload-ed55fa83277c2473a163e234",
+    "kind": "chapters",
+    "chapters": [
+      4,
+      5,
+      6
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "9516f260ef0a3c804bface703ee7cead3e129a48a881fba817b4bdd0a6c977d1",
+    "receipt": {
+      "hash": "9516f260ef0a3c804bface703ee7cead3e129a48a881fba817b4bdd0a6c977d1",
+      "workId": "upload-ed55fa83277c2473a163e234",
+      "chapters": 3,
+      "characters": 12111,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879845,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/memory-03.json",
+    "batchId": "codex-memory-20261105-03",
+    "workId": "upload-ed55fa83277c2473a163e234",
+    "kind": "chapters",
+    "chapters": [
+      7,
+      8,
+      9
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "d6d4a59d3ddf61fd951f307fdb1595855ae0ee44f668a37db2009dbd27599865",
+    "receipt": {
+      "hash": "d6d4a59d3ddf61fd951f307fdb1595855ae0ee44f668a37db2009dbd27599865",
+      "workId": "upload-ed55fa83277c2473a163e234",
+      "chapters": 3,
+      "characters": 11685,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793879845,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/memory-04.json",
+    "batchId": "codex-memory-20261105-04",
+    "workId": "upload-ed55fa83277c2473a163e234",
+    "kind": "chapters",
+    "chapters": [
+      10,
+      11,
+      12,
+      13
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "415fd7382f0132da57d45fd151951ccafabf8a1c2640b63c4321c598d6eb2122",
+    "receipt": {
+      "hash": "415fd7382f0132da57d45fd151951ccafabf8a1c2640b63c4321c598d6eb2122",
+      "workId": "upload-ed55fa83277c2473a163e234",
+      "chapters": 4,
+      "characters": 16410,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/memory-05.json",
+    "batchId": "codex-memory-20261105-05",
+    "workId": "upload-ed55fa83277c2473a163e234",
+    "kind": "chapters",
+    "chapters": [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "94acf7800ea2a3bcb15e5eba06b6dac8e078a03d582a091f2d2000fa2bdda644",
+    "receipt": {
+      "hash": "94acf7800ea2a3bcb15e5eba06b6dac8e078a03d582a091f2d2000fa2bdda644",
+      "workId": "upload-ed55fa83277c2473a163e234",
+      "chapters": 7,
+      "characters": 26091,
+      "accepted": 3,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/memory-synthesis.json",
+    "batchId": "codex-memory-20261105-synthesis",
+    "workId": "upload-ed55fa83277c2473a163e234",
+    "kind": "synthesis",
+    "chapters": [],
+    "status": "cloud-confirmed",
+    "contentHash": "d169bb7ef061c7818f59ee5b0bd3cca03f302be8cc5e8e9650b833c926ab9999",
+    "receipt": {
+      "hash": "d169bb7ef061c7818f59ee5b0bd3cca03f302be8cc5e8e9650b833c926ab9999",
+      "workId": "upload-ed55fa83277c2473a163e234",
+      "reductions": 3,
+      "bookComplete": true,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/phoenix-chapters.json",
+    "batchId": "codex-phoenix-20261105-finalchapters",
+    "workId": "upload-bc01366d6ff455688c04b221",
+    "kind": "chapters",
+    "chapters": [
+      15,
+      17
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "aba21ccbf0ee3d47f99d6feb98c42b5d5ab9f649aa7a47dd15ef58b7b4b735e5",
+    "receipt": {
+      "hash": "aba21ccbf0ee3d47f99d6feb98c42b5d5ab9f649aa7a47dd15ef58b7b4b735e5",
+      "workId": "upload-bc01366d6ff455688c04b221",
+      "chapters": 2,
+      "characters": 12866,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879036,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/phoenix-synthesis.json",
+    "batchId": "codex-phoenix-20261105-synthesis",
+    "workId": "upload-bc01366d6ff455688c04b221",
+    "kind": "synthesis",
+    "chapters": [],
+    "status": "cloud-confirmed",
+    "contentHash": "3d537587f2c31c237e6b3fa0ac270cfc67a60676795f4273444fb0242b0cf363",
+    "receipt": {
+      "hash": "3d537587f2c31c237e6b3fa0ac270cfc67a60676795f4273444fb0242b0cf363",
+      "workId": "upload-bc01366d6ff455688c04b221",
+      "reductions": 3,
+      "bookComplete": true,
+      "completedAt": 1793879036,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/xusanguan-01.json",
+    "batchId": "codex-xusanguan-20261105-01",
+    "workId": "upload-81d55efd5eb1319258624376",
+    "kind": "chapters",
+    "chapters": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "45585270e1c6646468820d2f911503df6cede10f13f0284c770f7a676982982d",
+    "receipt": {
+      "hash": "45585270e1c6646468820d2f911503df6cede10f13f0284c770f7a676982982d",
+      "workId": "upload-81d55efd5eb1319258624376",
+      "chapters": 7,
+      "characters": 16051,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/xusanguan-02.json",
+    "batchId": "codex-xusanguan-20261105-02",
+    "workId": "upload-81d55efd5eb1319258624376",
+    "kind": "chapters",
+    "chapters": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "status": "local-pending",
+    "contentHash": "f41d0bb547fa49aa5482384c702fe051af87641adb865dfb6612e2ece3b84295",
+    "receipt": null
+  },
+  {
+    "path": ".deploy/codex-curation/fiction-direct/xusanguan-03.json",
+    "batchId": "codex-xusanguan-20261105-03",
+    "workId": "upload-81d55efd5eb1319258624376",
+    "kind": "chapters",
+    "chapters": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "status": "local-pending",
+    "contentHash": "722912af926840dd7539ebb66db8e5ac90e0a099317d17ce645665f4d2378ff3",
+    "receipt": null
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/chengnan-01.json",
+    "batchId": "codex-chengnan-20261105-01",
+    "workId": "upload-4f7195d4a01989aea4565522",
+    "kind": "chapters",
+    "chapters": [
+      0,
+      1,
+      2
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "47460667ca7cedabcada37cd4380b0302edbea61edd7103b1816c7ee7e53a90d",
+    "receipt": {
+      "hash": "47460667ca7cedabcada37cd4380b0302edbea61edd7103b1816c7ee7e53a90d",
+      "workId": "upload-4f7195d4a01989aea4565522",
+      "chapters": 3,
+      "characters": 31526,
+      "accepted": 0,
+      "rejected": 0,
+      "completedAt": 1793879036,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/chengnan-02.json",
+    "batchId": "codex-chengnan-20261105-02",
+    "workId": "upload-4f7195d4a01989aea4565522",
+    "kind": "chapters",
+    "chapters": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "e0ead734feef59b883910bed8f5b47909c7e01c9dbfc49a1c997e070aae689e1",
+    "receipt": {
+      "hash": "e0ead734feef59b883910bed8f5b47909c7e01c9dbfc49a1c997e070aae689e1",
+      "workId": "upload-4f7195d4a01989aea4565522",
+      "chapters": 5,
+      "characters": 36389,
+      "accepted": 2,
+      "rejected": 0,
+      "completedAt": 1793879845,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/chengnan-synthesis.json",
+    "batchId": "codex-chengnan-20261105-book",
+    "workId": "upload-4f7195d4a01989aea4565522",
+    "kind": "synthesis",
+    "chapters": [],
+    "status": "cloud-confirmed",
+    "contentHash": "5d6c6880f62b7075355b298d0620fdb3de37c356282928de530861a2066972de",
+    "receipt": {
+      "hash": "5d6c6880f62b7075355b298d0620fdb3de37c356282928de530861a2066972de",
+      "workId": "upload-4f7195d4a01989aea4565522",
+      "reductions": 1,
+      "bookComplete": true,
+      "completedAt": 1793879845,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/longshao-01.json",
+    "batchId": "codex-longshao-20261105-01",
+    "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+    "kind": "chapters",
+    "chapters": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "a3560c0705812e9727a8dedb5e713b8108144cb2cdd29fe60ad2432dfaced319",
+    "receipt": {
+      "hash": "a3560c0705812e9727a8dedb5e713b8108144cb2cdd29fe60ad2432dfaced319",
+      "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+      "chapters": 6,
+      "characters": 14835,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793879845,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/longshao-02.json",
+    "batchId": "codex-longshao-20261105-02",
+    "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+    "kind": "chapters",
+    "chapters": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "ad1ec6b30eba0e2920629397232bfd2d0cfa6993c93daddedbe67c481b77c5fc",
+    "receipt": {
+      "hash": "ad1ec6b30eba0e2920629397232bfd2d0cfa6993c93daddedbe67c481b77c5fc",
+      "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+      "chapters": 6,
+      "characters": 15739,
+      "accepted": 2,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/longshao-03.json",
+    "batchId": "codex-longshao-20261105-03",
+    "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+    "kind": "chapters",
+    "chapters": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "e25f9ce3e302f5fb4f1b12832a2488b1f97068e1b5c18039b1ec1def45a908e4",
+    "receipt": {
+      "hash": "e25f9ce3e302f5fb4f1b12832a2488b1f97068e1b5c18039b1ec1def45a908e4",
+      "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+      "chapters": 6,
+      "characters": 21319,
+      "accepted": 2,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/longshao-04.json",
+    "batchId": "codex-longshao-20261105-04",
+    "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+    "kind": "chapters",
+    "chapters": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "92183acb6425338ec3b3d4a5a8da09e28db00a0fb5d2abb0bb914a5daa72b42b",
+    "receipt": {
+      "hash": "92183acb6425338ec3b3d4a5a8da09e28db00a0fb5d2abb0bb914a5daa72b42b",
+      "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+      "chapters": 6,
+      "characters": 10554,
+      "accepted": 2,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/longshao-05.json",
+    "batchId": "codex-longshao-20261105-05",
+    "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+    "kind": "chapters",
+    "chapters": [
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "cebf35589b6ee30a3cc880ac2f03cf896b4c5f08515a308bfddcffcb85211e36",
+    "receipt": {
+      "hash": "cebf35589b6ee30a3cc880ac2f03cf896b4c5f08515a308bfddcffcb85211e36",
+      "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+      "chapters": 7,
+      "characters": 15277,
+      "accepted": 2,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/longshao-06.json",
+    "batchId": "codex-longshao-20261105-06",
+    "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+    "kind": "chapters",
+    "chapters": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
+    ],
+    "status": "local-pending",
+    "contentHash": "198b50bdd1567a60de7040500c9412b3ca717dba8cbaffaf98b8fdcecdb65698",
+    "receipt": null
+  },
+  {
+    "path": ".deploy/codex-curation/prose-direct/longshao-07.json",
+    "batchId": "codex-longshao-20261105-07",
+    "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+    "kind": "chapters",
+    "chapters": [
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "status": "local-pending",
+    "contentHash": "46b08400ef0b07cfa7e6af3b16b9bb63c6b7162eff53bc90521a0f29ff0e1272",
+    "receipt": null
+  },
+  {
+    "path": ".deploy/codex-curation/tagore-direct/analysis-01.json",
+    "batchId": "codex-tagore-20261105-01",
+    "workId": "upload-d75e43e73210ade29835d5e1",
+    "kind": "chapters",
+    "chapters": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "416fb4c7c67a5c554ba6dec66bcc6898e4055a0ffe54a5e9dd05004d100f9854",
+    "receipt": {
+      "hash": "416fb4c7c67a5c554ba6dec66bcc6898e4055a0ffe54a5e9dd05004d100f9854",
+      "workId": "upload-d75e43e73210ade29835d5e1",
+      "chapters": 27,
+      "characters": 43421,
+      "accepted": 1,
+      "rejected": 0,
+      "completedAt": 1793879844,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/tagore-direct/analysis-02.json",
+    "batchId": "codex-tagore-20261105-02",
+    "workId": "upload-d75e43e73210ade29835d5e1",
+    "kind": "chapters",
+    "chapters": [
+      27,
+      28,
+      29,
+      30
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "93d422973517d657d2ca60674e4c43906365789c67a643666547ccd8217e0ed6",
+    "receipt": {
+      "hash": "93d422973517d657d2ca60674e4c43906365789c67a643666547ccd8217e0ed6",
+      "workId": "upload-d75e43e73210ade29835d5e1",
+      "chapters": 4,
+      "characters": 40266,
+      "accepted": 8,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/tagore-direct/analysis-03.json",
+    "batchId": "codex-tagore-20261105-03",
+    "workId": "upload-d75e43e73210ade29835d5e1",
+    "kind": "chapters",
+    "chapters": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "2156a5e6409f4a029832677f73bfca4732e40b19a8f5ec7c953e67688d33621f",
+    "receipt": {
+      "hash": "2156a5e6409f4a029832677f73bfca4732e40b19a8f5ec7c953e67688d33621f",
+      "workId": "upload-d75e43e73210ade29835d5e1",
+      "chapters": 40,
+      "characters": 14798,
+      "accepted": 4,
+      "rejected": 0,
+      "completedAt": 1793880368,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/tagore-direct/analysis-04.json",
+    "batchId": "codex-tagore-20261105-04",
+    "workId": "upload-d75e43e73210ade29835d5e1",
+    "kind": "chapters",
+    "chapters": [
+      71,
+      72,
+      73
+    ],
+    "status": "local-pending",
+    "contentHash": "40ee5f3e21235985a2787e6ec60ccafc5f014ff89eb53b77fa77b45cf77ed027",
+    "receipt": null
+  },
+  {
+    "path": ".deploy/codex-curation/wang-xiaobo-01/analysis.json",
+    "batchId": "codex-wang-xiaobo-20261105-01",
+    "workId": "upload-338936b3bf05d66c3a706e0d",
+    "kind": "chapters",
+    "chapters": [
+      0,
+      1,
+      23,
+      24,
+      45
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "3b8b0c16a6bf50e102cede2c6be5476d5523541cc6a086cb88a65fea67687341",
+    "receipt": {
+      "hash": "3b8b0c16a6bf50e102cede2c6be5476d5523541cc6a086cb88a65fea67687341",
+      "workId": "upload-338936b3bf05d66c3a706e0d",
+      "chapters": 5,
+      "characters": 23872,
+      "accepted": 8,
+      "rejected": 2,
+      "completedAt": 1793864278,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/wang-xiaobo-02/analysis.json",
+    "batchId": "codex-wang-xiaobo-20261105-02",
+    "workId": "upload-338936b3bf05d66c3a706e0d",
+    "kind": "chapters",
+    "chapters": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      18,
+      19,
+      20
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "88f3d11259ea05d52bd10c7776f3f69fac71743e4e227f3eff1c7fbe8d36457c",
+    "receipt": {
+      "hash": "88f3d11259ea05d52bd10c7776f3f69fac71743e4e227f3eff1c7fbe8d36457c",
+      "workId": "upload-338936b3bf05d66c3a706e0d",
+      "chapters": 12,
+      "characters": 25347,
+      "accepted": 5,
+      "rejected": 0,
+      "completedAt": 1793873814,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/wang-xiaobo-03/analysis.json",
+    "batchId": "codex-wang-xiaobo-20261105-03",
+    "workId": "upload-338936b3bf05d66c3a706e0d",
+    "kind": "chapters",
+    "chapters": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      21,
+      22,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ],
+    "status": "cloud-confirmed",
+    "contentHash": "cb0bac16d760a83fb7c36376bf7313bfc98d885cf4fb744c5ac89a57ffbf88bf",
+    "receipt": {
+      "hash": "cb0bac16d760a83fb7c36376bf7313bfc98d885cf4fb744c5ac89a57ffbf88bf",
+      "workId": "upload-338936b3bf05d66c3a706e0d",
+      "chapters": 29,
+      "characters": 67746,
+      "accepted": 7,
+      "rejected": 0,
+      "completedAt": 1793878586,
+      "processor": "codex-direct"
+    }
+  },
+  {
+    "path": ".deploy/codex-curation/wang-xiaobo-03/synthesis.json",
+    "batchId": "codex-wang-xiaobo-20261105-synthesis",
+    "workId": "upload-338936b3bf05d66c3a706e0d",
+    "kind": "synthesis",
+    "chapters": [],
+    "status": "cloud-confirmed",
+    "contentHash": "40b37ada9abfd9b50ff1d0854badc88d09c385217ca392253f96d5f587ed44f2",
+    "receipt": {
+      "hash": "40b37ada9abfd9b50ff1d0854badc88d09c385217ca392253f96d5f587ed44f2",
+      "workId": "upload-338936b3bf05d66c3a706e0d",
+      "reductions": 4,
+      "bookComplete": true,
+      "completedAt": 1793878865,
+      "processor": "codex-direct"
+    }
+  }
+]

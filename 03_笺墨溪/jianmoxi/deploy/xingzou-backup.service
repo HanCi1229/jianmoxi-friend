@@ -1,0 +1,8 @@
+[Unit]
+Description=Xingzou daily database snapshot
+[Service]
+Type=oneshot
+User=xingzou
+Group=xingzou
+UMask=0077
+ExecStart=/opt/xingzou/venv/bin/python /opt/xingzou/deploy/backup.py

@@ -1,0 +1,18 @@
+[Unit]
+Description=Xingzou daily image collection
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=xingzou
+Group=xingzou
+WorkingDirectory=/opt/xingzou
+ExecStart=/opt/xingzou/venv/bin/python collect_large_gallery.py --target 5000 --limit 60
+TimeoutStartSec=20min
+Nice=15
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/xingzou

@@ -1,0 +1,2278 @@
+{
+  "observedAt": "2026-11-06T02:59:08.933928+00:00",
+  "services": {
+    "xingzou": {
+      "is-active": "active",
+      "is-enabled": "enabled"
+    },
+    "nginx": {
+      "is-active": "active",
+      "is-enabled": "enabled"
+    },
+    "xingzou-book-study": {
+      "is-active": "inactive",
+      "is-enabled": "disabled"
+    },
+    "xingzou-backup.timer": {
+      "is-active": "active",
+      "is-enabled": "enabled"
+    },
+    "xingzou-images.timer": {
+      "is-active": "inactive",
+      "is-enabled": "disabled"
+    },
+    "xingzou-library.timer": {
+      "is-active": "active",
+      "is-enabled": "enabled"
+    },
+    "xingzou-cert-renew.timer": {
+      "is-active": "active",
+      "is-enabled": "enabled"
+    }
+  },
+  "books": [
+    {
+      "work_id": "upload-338936b3bf05d66c3a706e0d",
+      "source_hash": "6a853e79a357a304fa01599788aae0620354c881b529ad6f3fa781aa043483bb",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-338936b3bf05d66c3a706e0d",
+        "title": "我的精神家园",
+        "author": "王小波",
+        "genre": "散文",
+        "intro": "君特·格拉斯在《铁皮鼓》里，写了一个不肯长大的人。小奥斯卡发现周围的世界太过荒诞，就暗下决心要永远做小孩子。在冥冥之中，有一种力量成全了他的决心，所以他就成了个侏儒。这个故事太过神奇，但很有…",
+        "sourceUrl": "/api/library/upload-338936b3bf05d66c3a706e0d/source"
+      },
+      "root_id": "a812d6ccce4ed7908a855445a00f6553",
+      "chapters": 46,
+      "characters": 116965,
+      "priority": 100,
+      "updated_at": 1793851781,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "done",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 46
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 48
+        },
+        {
+          "kind": "synthesis",
+          "status": "done",
+          "n": 3
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 48
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "rootStatus": "done",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 20
+        },
+        {
+          "status": "rejected",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "work_id": "upload-62d909c71506b914e0f27288",
+      "source_hash": "b75e0279f98ea5e5c1973277176812bac563d5f3772625c3f9b17790587d82c0",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-62d909c71506b914e0f27288",
+        "title": "瓦尔登湖",
+        "author": "亨利·戴维·梭罗",
+        "genre": "散文",
+        "intro": "我住在马萨诸塞州的康科德城。那里有一个瓦尔登湖，我的房子就在湖岸的森林里。房子是我亲手建的，方圆一英里内没有任何邻居，仅靠双手劳动养活自己。",
+        "sourceUrl": "/api/library/upload-62d909c71506b914e0f27288/source"
+      },
+      "root_id": "a33f369218bdc0db876546258ff1aa57",
+      "chapters": 23,
+      "characters": 195337,
+      "priority": 101,
+      "updated_at": 1793851782,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 23
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 36
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 36
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-4f7195d4a01989aea4565522",
+      "source_hash": "c7343d5bc9880236de3db4c37a07c802a3dcb24485ac0cbf00512baabfff26f0",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-4f7195d4a01989aea4565522",
+        "title": "城南旧事",
+        "author": "林海音",
+        "genre": "小说",
+        "intro": "太阳从大玻璃窗透进来，照到大白纸糊的墙上，照到三屉桌上，照到我的小床上来了。我醒了，还躺在床上，看那道太阳光里飞舞着的许多小小的、小小的尘埃。宋妈过来掸窗台，掸桌子，随着鸡毛掸子的舞动，那道…",
+        "sourceUrl": "/api/library/upload-4f7195d4a01989aea4565522/source"
+      },
+      "root_id": "b0ad47d99c7e03286f6023f1219571e4",
+      "chapters": 8,
+      "characters": 67915,
+      "priority": 102,
+      "updated_at": 1793851783,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "done",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 8
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 13
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 13
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "rootStatus": "done",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 2
+        }
+      ]
+    },
+    {
+      "work_id": "upload-dae958c9ebfaabfe855515b9",
+      "source_hash": "22b082a49113a2f832a8b921488de54f3b8a6ea711094994aa04a157f1c1a207",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-dae958c9ebfaabfe855515b9",
+        "title": "额尔古纳河右岸",
+        "author": "迟子建",
+        "genre": "小说",
+        "intro": "迟子建，女，中国作家协会第六届全委会委员，黑龙江省作家协会副主席，一级作家。1964年元宵节出生于中国的北极村——漠河，童年在黑龙江畔度过。1984年毕业于大兴安岭师范学校，1987年人北京…",
+        "sourceUrl": "/api/library/upload-dae958c9ebfaabfe855515b9/source"
+      },
+      "root_id": "0fc1967497535bc32b995733d86bedce",
+      "chapters": 19,
+      "characters": 169731,
+      "priority": 103,
+      "updated_at": 1793851781,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 19
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 31
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 31
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-cfe6e7796cd957126c1e38c0",
+      "source_hash": "651d7da4968ab380bcb81c465693ce97483dafdfa1c786e72644b7b90c2e1b80",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-cfe6e7796cd957126c1e38c0",
+        "title": "文化苦旅",
+        "author": "余秋雨",
+        "genre": "散文",
+        "intro": "我在好些年以前写过一些史论专著，记得曾有几位记者在报纸上说我写书写得轻松潇洒，其实完全不是如此。那是一种很给自己过不去的劳累活，一提笔就感觉到年岁陡增。不管是春温秋肃，还是大喜悦大悲愤，最后…",
+        "sourceUrl": "/api/library/upload-cfe6e7796cd957126c1e38c0/source"
+      },
+      "root_id": "044caac7e37b6b75b87dcbed787f3ab9",
+      "chapters": 40,
+      "characters": 187394,
+      "priority": 104,
+      "updated_at": 1793851782,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 40
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 46
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 3
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 46
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-e3ed5a2e7c187fc8312e8e57",
+      "source_hash": "afea0ae2e9f22370a99d812979861d4abf4fca743f34c7722f82414b48e0263b",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-e3ed5a2e7c187fc8312e8e57",
+        "title": "龙与少年游",
+        "author": "江南",
+        "genre": "散文",
+        "intro": "这是江南写作12年来首部集结出品的叙事散文集，讲述江南本人所见多年来的身边故事。一个作者哪能写尽世上的所有人呢？写来写去，写的还是自己和自己身边的人，无论孤独还是野心，都有自己人生某个侧面的",
+        "sourceUrl": "/api/library/upload-e3ed5a2e7c187fc8312e8e57/source"
+      },
+      "root_id": "f3edfece44c413ace252ec1ba1e1ab2c",
+      "chapters": 64,
+      "characters": 151794,
+      "priority": 105,
+      "updated_at": 1793851781,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 31
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 33
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 31
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 34
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 4
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 31
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 34
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "rootStatus": "pending",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 9
+        }
+      ]
+    },
+    {
+      "work_id": "upload-d75e43e73210ade29835d5e1",
+      "source_hash": "bb10bd8791583686aeed9811da3d5d07400e8a008a4c97c6731da9796820e80f",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-d75e43e73210ade29835d5e1",
+        "title": "泰戈尔诗选",
+        "author": "泰戈尔",
+        "genre": "诗歌",
+        "intro": "。可泰戈尔也有一段夫子自道：“我觉得我不能说我自己是一个纯粹的诗人，这是显然的。诗人在我的中间已变换了式样，同时取得了传道者的性格。我创立了一种人生哲学，而在哲学中间，又是含有强烈的情绪质素…",
+        "sourceUrl": "/api/library/upload-d75e43e73210ade29835d5e1/source"
+      },
+      "root_id": "f5b7ff7c60ddff582b6e9a4455cb7be0",
+      "chapters": 78,
+      "characters": 169289,
+      "priority": 106,
+      "updated_at": 1793851784,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 71
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 7
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 74
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 12
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 5
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 74
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 12
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "rootStatus": "pending",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 13
+        }
+      ]
+    },
+    {
+      "work_id": "upload-46945a63cb581463e6ed355e",
+      "source_hash": "45ab5cb569a80eb8a260d1f648ce9369f9a8dc865c76a204354fb2b2043fa693",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-46945a63cb581463e6ed355e",
+        "title": "季羡林读书与做人",
+        "author": "季羡林",
+        "genre": "散文",
+        "intro": "古今中外赞美读书的名人和文章，多得不可胜数。张元济先生有一句简单朴素的话：“天下第一好事，还是读书。”“天下”而又“第一”，可见他对读书重要性的认识。",
+        "sourceUrl": "/api/library/upload-46945a63cb581463e6ed355e/source"
+      },
+      "root_id": "97cd03aac9c5592d29fcad7048d21322",
+      "chapters": 20,
+      "characters": 172884,
+      "priority": 107,
+      "updated_at": 1793851782,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 20
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 29
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 29
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-37b912be1a334e2ead746eeb",
+      "source_hash": "ea84280d88091c8186c234cdc0b41281be0226bb0bce610e9e665a36c8f0a6f6",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-37b912be1a334e2ead746eeb",
+        "title": "月亮和六便士",
+        "author": "毛姆",
+        "genre": "小说",
+        "intro": "威廉·萨默赛特·毛姆（William Somerset Maugham，1874-1965），英国著名小说家和戏剧家。他出生于巴黎，父母早丧，回英国叔父家寄居，并在英国受教育。在大学他虽然攻…",
+        "sourceUrl": "/api/library/upload-37b912be1a334e2ead746eeb/source"
+      },
+      "root_id": "411d58c20bfcf1ed1e584550c990b948",
+      "chapters": 61,
+      "characters": 151940,
+      "priority": 108,
+      "updated_at": 1793851783,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 61
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 61
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 4
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 61
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-a0ab50c1704e2ef2b6363e25",
+      "source_hash": "8d888f8d2a3ffd2c74a4fd7cbe8c59b20fab2887b0e9977594e7814fcd6cc6bd",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-a0ab50c1704e2ef2b6363e25",
+        "title": "王蒙散文",
+        "author": "王蒙",
+        "genre": "散文",
+        "intro": "当然，在欧洲旅行的时候，你到处都会看到教堂，看到圣母和耶稣的画像、雕像，看到早已经成为信仰与终极关怀的象征的十字架。教堂的气氛永远是肃穆、安详的，圣像的情致永远是高贵、清洁的，进出教堂的人们…",
+        "sourceUrl": "/api/library/upload-a0ab50c1704e2ef2b6363e25/source"
+      },
+      "root_id": "014abc3607dbf45b74d3220a1b83e9f4",
+      "chapters": 17,
+      "characters": 196875,
+      "priority": 109,
+      "updated_at": 1793851782,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 17
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 31
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 31
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-827be7c0823014012322ed0e",
+      "source_hash": "c4720bb9726b099733cbe28f3d21001e36be29fa7b0a4d48c5d261edd70c1a6c",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-827be7c0823014012322ed0e",
+        "title": "林徽因经典全集",
+        "author": "林徽因",
+        "genre": "小说",
+        "intro": "①本诗第三节据作者修改后的手稿排印。一九三三年此诗初次发表时这一节为：均匀的一片静，罩下/像张软垂的幔帐。/疑问不见了，四角里/模糊，是梦在窥探？/夜像在祈祷，无声的在期望，/幽馥的虔诚在无…",
+        "sourceUrl": "/api/library/upload-827be7c0823014012322ed0e/source"
+      },
+      "root_id": "187276b2571d2d75e6838ba0398e76ed",
+      "chapters": 18,
+      "characters": 223397,
+      "priority": 110,
+      "updated_at": 1793851784,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 18
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 34
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 34
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-0fb3118feab24bb0c6f9c6ff",
+      "source_hash": "57c6c9ac8e972d34da69dd17ac855f89fddadcce7e975b411ee1d69fd1129ed5",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-0fb3118feab24bb0c6f9c6ff",
+        "title": "海子诗全集",
+        "author": "海子",
+        "genre": "诗歌",
+        "intro": "怀有宏大诗歌抱负的海子，生前虽然对自己的写作颇为自负，但对自己作品将来的命运如何可能并无估计。海子去世以后，骆一禾基于对中国文化一般形态和当时读者对诗人的接受状况的认识，曾担心过后人无法认识…",
+        "sourceUrl": "/api/library/upload-0fb3118feab24bb0c6f9c6ff/source"
+      },
+      "root_id": "cb473686ca622b138c167da53c1b5e69",
+      "chapters": 26,
+      "characters": 266565,
+      "priority": 111,
+      "updated_at": 1793851784,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 26
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 44
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 44
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-82a692cab83a3fd6d95456ee",
+      "source_hash": "685996636b97ed7be755ac0df173b8072f667d522b408bb31016796ca4cf6f77",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-82a692cab83a3fd6d95456ee",
+        "title": "活着",
+        "author": "余华",
+        "genre": "小说",
+        "intro": "一位真正的作家永远只为内心写作，只有内心才会真实地告诉他，他的自私、他的高尚是多么突出。内心让他真实地了解自己，一旦了解了自己也就了解了世界。很多年前我就明白了这个原则，可是要捍卫这个原则必…",
+        "sourceUrl": "/api/library/upload-82a692cab83a3fd6d95456ee/source"
+      },
+      "root_id": "740687a4825bbbb32e44e1679a247731",
+      "chapters": 13,
+      "characters": 97984,
+      "priority": 200,
+      "updated_at": 1793851781,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "done",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 13
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 19
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 19
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "rootStatus": "done",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 3
+        },
+        {
+          "status": "rejected",
+          "n": 17
+        }
+      ]
+    },
+    {
+      "work_id": "upload-81d55efd5eb1319258624376",
+      "source_hash": "5603f48376a6633fbd9473f47806f992082995a1c3da0705fc1b51f0c05a9216",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-81d55efd5eb1319258624376",
+        "title": "许三观卖血记",
+        "author": "余华",
+        "genre": "小说",
+        "intro": "书中的人物经常自己开口说话，有时候会让作者吓一跳，当那些恰如其分又十分美妙的话在虚构的嘴里脱口而出时，作者会突然自卑起来，心里暗想：“我可说不出这样的话。”然而，当他成为一位真正的读者，当他…",
+        "sourceUrl": "/api/library/upload-81d55efd5eb1319258624376/source"
+      },
+      "root_id": "fcaba605b6ae7bde5f24113f70529738",
+      "chapters": 35,
+      "characters": 126042,
+      "priority": 201,
+      "updated_at": 1793851781,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 7
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 28
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 7
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 31
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 3
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 7
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 31
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "rootStatus": "pending",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 1
+        }
+      ]
+    },
+    {
+      "work_id": "upload-df3b3eb8918323d0d5fe22d0",
+      "source_hash": "274fb669c450ef84ccf164722dc1ddcd9e16b746d03a97b585c84dfecec82b1f",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-df3b3eb8918323d0d5fe22d0",
+        "title": "围城",
+        "author": "钱钟书",
+        "genre": "小说",
+        "intro": "第一章红海早过了，船在印度洋面上开驶着，但是太阳依然不饶人地迟落早起，侵占去大部分的夜。夜仿佛纸浸了油变成半透明体；它给太阳拥抱住了，分不出身来，也许是给太阳陶醉了，所以夕照晚霞褪后的夜色也…",
+        "sourceUrl": "/api/library/upload-df3b3eb8918323d0d5fe22d0/source"
+      },
+      "root_id": "c84f2a96e45d3fd7e4daa0189aa80ec8",
+      "chapters": 17,
+      "characters": 216440,
+      "priority": 202,
+      "updated_at": 1793851782,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 17
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 33
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 33
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-3815ad518cf51dc7498b3a85",
+      "source_hash": "64a398bb26d8407eb5e2cd942aa0a71cd6f28fb6ba1e8c33a3d6ba2448274826",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-3815ad518cf51dc7498b3a85",
+        "title": "百年孤独",
+        "author": "加西亚·马尔克斯",
+        "genre": "小说",
+        "intro": "的研究成果提要给他，教他如何使用星盘、罗盘和六分仪。为了确保不受打扰地进行实验，何塞·阿尔卡蒂奥·布恩迪亚在宅院深处盖了一间小屋，整个漫长的雨季都把自己关在屋中。他把家庭职责完全抛在脑后，整…",
+        "sourceUrl": "/api/library/upload-3815ad518cf51dc7498b3a85/source"
+      },
+      "root_id": "6f4869309589a501db8e6113c28bb118",
+      "chapters": 22,
+      "characters": 234214,
+      "priority": 203,
+      "updated_at": 1793851782,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 22
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 42
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 42
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-87a06fe15786bdf578ad0f01",
+      "source_hash": "3314f5bd6838ce4a650a06afe5f8446fac11b74912ec623fddadecf7481039fc",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-87a06fe15786bdf578ad0f01",
+        "title": "一句顶一万句",
+        "author": "刘震云",
+        "genre": "小说",
+        "intro": "曾创作长篇小说《故乡天下黄花》《故乡相处流传》《故乡面和花朵》（四卷）、《一腔废话》《我叫刘跃进》《一句顶一万句》《我不是潘金莲》《吃瓜时代的儿女们》《一日三秋》等；中短篇小说《塔铺》《新兵…",
+        "sourceUrl": "/api/library/upload-87a06fe15786bdf578ad0f01/source"
+      },
+      "root_id": "ea0fccca29204be444eec3c938cfe6fd",
+      "chapters": 34,
+      "characters": 271225,
+      "priority": 204,
+      "updated_at": 1793851784,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 34
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 51
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 3
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 51
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-77c9ea5c0183a1d6abc98f52",
+      "source_hash": "e84f053a38e96c093879de9f1c87c1ff8bd59aa018d0eb480ab65d0d29365d58",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-77c9ea5c0183a1d6abc98f52",
+        "title": "追风筝的人",
+        "author": "卡勒德·胡赛尼",
+        "genre": "小说",
+        "intro": "我成为今天的我，是在1975年某个阴云密布的寒冷冬日，那年我十二岁。我清楚地记得当时自己趴在一堵坍塌的泥墙后面，窥视着那条小巷，旁边是结冰的小溪。许多年过去了，人们说陈年旧事可以被埋葬，然而…",
+        "sourceUrl": "/api/library/upload-77c9ea5c0183a1d6abc98f52/source"
+      },
+      "root_id": "b90b1379a79d7c71ab14f0703d5e86b9",
+      "chapters": 28,
+      "characters": 195860,
+      "priority": 205,
+      "updated_at": 1793851784,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 28
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 38
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 38
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    },
+    {
+      "work_id": "upload-ed55fa83277c2473a163e234",
+      "source_hash": "e961570ef4d385cbe5b498d25607b62927825830ac0bff65429d371b1e69bfee",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-ed55fa83277c2473a163e234",
+        "title": "记忆与印象",
+        "author": "史铁生",
+        "genre": "散文",
+        "intro": "关于往日，我能写的，只是我的记忆和印象。我无意追踪史实。我不知道追踪到哪儿才能终于追踪到史实；追踪所及，无不是记忆和印象。有位大物理学家说过：“物理学不告诉我们世界是什么，而是告诉我们关于世…",
+        "sourceUrl": "/api/library/upload-ed55fa83277c2473a163e234/source"
+      },
+      "root_id": "af91dbb0c1d97ca2b1e4da26b270a9a3",
+      "chapters": 21,
+      "characters": 77078,
+      "priority": 206,
+      "updated_at": 1793851781,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "done",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 21
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 21
+        },
+        {
+          "kind": "synthesis",
+          "status": "done",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 21
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "rootStatus": "done",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 7
+        }
+      ]
+    },
+    {
+      "work_id": "upload-bc01366d6ff455688c04b221",
+      "source_hash": "f60fd272c3838bc63a8eaa4756782a8acb0d9fc98cc61791cd2ab1f614481e25",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-bc01366d6ff455688c04b221",
+        "title": "凤凰集",
+        "author": "沈从文",
+        "genre": "小说",
+        "intro": "我不懂艺术，又不会作画，可是从小生长在湘西苗区一个小小山城中，周围数十里全是山重山，只临到城边时，西边一点才有一坝平田出现，城东南还是群峰罗列。一年四季随同节令的变换，山上草木岩石也不断变换…",
+        "sourceUrl": "/api/library/upload-bc01366d6ff455688c04b221/source"
+      },
+      "root_id": "0f5e6c4b8047f9a693a5cfc4d072a6d4",
+      "chapters": 21,
+      "characters": 101474,
+      "priority": 207,
+      "updated_at": 1793851781,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "done",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 21
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 24
+        },
+        {
+          "kind": "synthesis",
+          "status": "done",
+          "n": 2
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 24
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "rootStatus": "done",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 3
+        },
+        {
+          "status": "rejected",
+          "n": 11
+        }
+      ]
+    },
+    {
+      "work_id": "upload-7c8ea163530b0c871394e5db",
+      "source_hash": "10917d00d58040d3edbf10b9adc50e7567deb2f0aac840441fcabb5c6d639619",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-7c8ea163530b0c871394e5db",
+        "title": "龙族Ⅰ—Ⅳ及前传（七册合集）",
+        "author": "江南",
+        "genre": "网络小说",
+        "intro": "When you feel most lonely and desperate,",
+        "sourceUrl": "/api/library/upload-7c8ea163530b0c871394e5db/source"
+      },
+      "root_id": "75df2dc64ab3568e027bc6a4ddcfe693",
+      "chapters": 232,
+      "characters": 2233633,
+      "priority": 208,
+      "updated_at": 1793851787,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "done",
+          "n": 19
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 213
+        },
+        {
+          "kind": "review",
+          "status": "done",
+          "n": 31
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 350
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 15
+        },
+        {
+          "kind": "unit",
+          "status": "done",
+          "n": 31
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 350
+        }
+      ],
+      "doneChapters": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "rootStatus": "pending",
+      "quotes": [
+        {
+          "status": "accepted",
+          "n": 4
+        }
+      ]
+    },
+    {
+      "work_id": "upload-d6945dd4bb453ff7e09ea25e",
+      "source_hash": "f51216aa845882262b74bd2ef9d03b872909e26d140043e68a2cfbd1d8e10149",
+      "version": "study-v1",
+      "metadata": {
+        "id": "upload-d6945dd4bb453ff7e09ea25e",
+        "title": "龙族Ⅴ·悼亡者的归来（未完结）",
+        "author": "江南",
+        "genre": "网络小说",
+        "intro": "铁剑和利爪撕裂空气，留下霜冻和火焰的痕迹，血液刚刚飞溅出来，就被高温化作血红色的蒸汽，冲击波在长长的走廊上来来去去，早已没有任何完整的玻璃，连这座建筑物都摇摇欲坠。",
+        "sourceUrl": "/api/library/upload-d6945dd4bb453ff7e09ea25e/source"
+      },
+      "root_id": "b94d9eff05119be8d0342bc453c5f26f",
+      "chapters": 235,
+      "characters": 756616,
+      "priority": 209,
+      "updated_at": 1793851785,
+      "jobs": [
+        {
+          "kind": "book",
+          "status": "pending",
+          "n": 1
+        },
+        {
+          "kind": "chapter",
+          "status": "pending",
+          "n": 235
+        },
+        {
+          "kind": "review",
+          "status": "pending",
+          "n": 235
+        },
+        {
+          "kind": "synthesis",
+          "status": "pending",
+          "n": 15
+        },
+        {
+          "kind": "unit",
+          "status": "pending",
+          "n": 235
+        }
+      ],
+      "doneChapters": [],
+      "rootStatus": "pending",
+      "quotes": []
+    }
+  ],
+  "receipts": [
+    {
+      "key": "curated_batch:codex-wang-xiaobo-20261105-01",
+      "value": {
+        "hash": "3b8b0c16a6bf50e102cede2c6be5476d5523541cc6a086cb88a65fea67687341",
+        "workId": "upload-338936b3bf05d66c3a706e0d",
+        "chapters": 5,
+        "characters": 23872,
+        "accepted": 8,
+        "rejected": 2,
+        "completedAt": 1793864278,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-wang-xiaobo-20261105-02",
+      "value": {
+        "hash": "88f3d11259ea05d52bd10c7776f3f69fac71743e4e227f3eff1c7fbe8d36457c",
+        "workId": "upload-338936b3bf05d66c3a706e0d",
+        "chapters": 12,
+        "characters": 25347,
+        "accepted": 5,
+        "rejected": 0,
+        "completedAt": 1793873814,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-wang-xiaobo-20261105-03",
+      "value": {
+        "hash": "cb0bac16d760a83fb7c36376bf7313bfc98d885cf4fb744c5ac89a57ffbf88bf",
+        "workId": "upload-338936b3bf05d66c3a706e0d",
+        "chapters": 29,
+        "characters": 67746,
+        "accepted": 7,
+        "rejected": 0,
+        "completedAt": 1793878586,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_synthesis:codex-wang-xiaobo-20261105-synthesis",
+      "value": {
+        "hash": "40b37ada9abfd9b50ff1d0854badc88d09c385217ca392253f96d5f587ed44f2",
+        "workId": "upload-338936b3bf05d66c3a706e0d",
+        "reductions": 4,
+        "bookComplete": true,
+        "completedAt": 1793878865,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-01",
+      "value": {
+        "hash": "737b8be8b79fd5d78900cff9e95d0236fcc70780f716795688760eafabfab3e0",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 5,
+        "characters": 15984,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793878865,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-phoenix-20261105-finalchapters",
+      "value": {
+        "hash": "aba21ccbf0ee3d47f99d6feb98c42b5d5ab9f649aa7a47dd15ef58b7b4b735e5",
+        "workId": "upload-bc01366d6ff455688c04b221",
+        "chapters": 2,
+        "characters": 12866,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879036,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_synthesis:codex-phoenix-20261105-synthesis",
+      "value": {
+        "hash": "3d537587f2c31c237e6b3fa0ac270cfc67a60676795f4273444fb0242b0cf363",
+        "workId": "upload-bc01366d6ff455688c04b221",
+        "reductions": 3,
+        "bookComplete": true,
+        "completedAt": 1793879036,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-chengnan-20261105-01",
+      "value": {
+        "hash": "47460667ca7cedabcada37cd4380b0302edbea61edd7103b1816c7ee7e53a90d",
+        "workId": "upload-4f7195d4a01989aea4565522",
+        "chapters": 3,
+        "characters": 31526,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879036,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-02",
+      "value": {
+        "hash": "24ac5f5044c5b8ebcedd23240c554aa0e8330cedd77b6155a1533e1c27ae1e5f",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 2,
+        "characters": 23926,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793879036,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-tagore-20261105-01",
+      "value": {
+        "hash": "416fb4c7c67a5c554ba6dec66bcc6898e4055a0ffe54a5e9dd05004d100f9854",
+        "workId": "upload-d75e43e73210ade29835d5e1",
+        "chapters": 27,
+        "characters": 43421,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793879844,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-03",
+      "value": {
+        "hash": "ac2540e8d5c382d34bd9a0255c1db12f437dae620e2f7d2eae1aff3efbcc6633",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 14156,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879844,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-04",
+      "value": {
+        "hash": "aa740b4cb88b32a39098d23459399448db92a06d662bd449cad7d499e8e634b8",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 12529,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879844,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-05",
+      "value": {
+        "hash": "b783a11b96c604b6197664ec36117572054b3da458b40def800b8bc641be6669",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 14242,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879844,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-06",
+      "value": {
+        "hash": "58645db5fbedbe4845fd2a251f96c87dd5f9c106ca1079c0972baf3d8ca70eea",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 5861,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879844,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-07",
+      "value": {
+        "hash": "74eded41b97b6d2f6def4c9d4e7d106a021591354d60530dac7a1c69ff288dc8",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 14227,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879845,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-08",
+      "value": {
+        "hash": "0ac13bc49091f7c0014e1272d5362bee07550ff559fa26a1e2340f6697fadd35",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 10743,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879845,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-chengnan-20261105-02",
+      "value": {
+        "hash": "e0ead734feef59b883910bed8f5b47909c7e01c9dbfc49a1c997e070aae689e1",
+        "workId": "upload-4f7195d4a01989aea4565522",
+        "chapters": 5,
+        "characters": 36389,
+        "accepted": 2,
+        "rejected": 0,
+        "completedAt": 1793879845,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_synthesis:codex-chengnan-20261105-book",
+      "value": {
+        "hash": "5d6c6880f62b7075355b298d0620fdb3de37c356282928de530861a2066972de",
+        "workId": "upload-4f7195d4a01989aea4565522",
+        "reductions": 1,
+        "bookComplete": true,
+        "completedAt": 1793879845,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-memory-20261105-01",
+      "value": {
+        "hash": "e8d0c5fdb7373cbbf71a963aa0cbea1face93c819ca2ed0613d34200ea80863f",
+        "workId": "upload-ed55fa83277c2473a163e234",
+        "chapters": 4,
+        "characters": 10781,
+        "accepted": 2,
+        "rejected": 0,
+        "completedAt": 1793879845,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-memory-20261105-02",
+      "value": {
+        "hash": "9516f260ef0a3c804bface703ee7cead3e129a48a881fba817b4bdd0a6c977d1",
+        "workId": "upload-ed55fa83277c2473a163e234",
+        "chapters": 3,
+        "characters": 12111,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793879845,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-memory-20261105-03",
+      "value": {
+        "hash": "d6d4a59d3ddf61fd951f307fdb1595855ae0ee44f668a37db2009dbd27599865",
+        "workId": "upload-ed55fa83277c2473a163e234",
+        "chapters": 3,
+        "characters": 11685,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793879845,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-longshao-20261105-01",
+      "value": {
+        "hash": "a3560c0705812e9727a8dedb5e713b8108144cb2cdd29fe60ad2432dfaced319",
+        "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+        "chapters": 6,
+        "characters": 14835,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793879845,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_quote_review:codex-alive-review-20261105",
+      "value": {
+        "hash": "0bd01445a50a480f286bde6db06d00bc359f9dd75d2de8fae7c0c0f59e5b2a2e",
+        "batchId": "codex-alive-review-20261105",
+        "reviewedAt": 1793879845,
+        "changes": [
+          {
+            "oldRow": {
+              "id": "510c37ca5bc5e4ad6eda6232d70fb8e1",
+              "work_id": "upload-82a692cab83a3fd6d95456ee",
+              "source_hash": "685996636b97ed7be755ac0df173b8072f667d522b408bb31016796ca4cf6f77",
+              "chapter": 1,
+              "chapter_title": "韩文版自序",
+              "start": 248,
+              "end": 280,
+              "quote": "他们活着时一起走在尘土飞扬的道路上，死去时又一起化作雨水和泥土。",
+              "body": "{\"id\": \"510c37ca5bc5e4ad6eda6232d70fb8e1\", \"quote\": \"他们活着时一起走在尘土飞扬的道路上，死去时又一起化作雨水和泥土。\", \"quality\": \"文笔\", \"summary\": \"人与命运共生共灭，终归尘土。\", \"interpretation\": \"用尘土、雨水、泥土等自然意象比喻人与命运的亲密关系，生死与共，既有悲悯的诗意，又暗示一种坦然接受命运的哲学观，体现了余华简洁而深刻的语言风格。\", \"reason\": \"以诗意语言概括人与命运的关系，意象动人。\", \"themes\": [\"成长与告别\", \"孤独与自我\"], \"imagery\": [\"尘土飞扬的道路\", \"雨水\", \"泥土\"], \"spoiler\": false, \"start\": 248}",
+              "review": "{\"id\": \"510c37ca5bc5e4ad6eda6232d70fb8e1\", \"accept\": true, \"needsContext\": false, \"practicalAdvice\": false, \"spoiler\": false, \"readability\": 5, \"literaryValue\": 5, \"faithful\": true, \"reason\": \"句子完整，意象鲜明，独立可读，表达人与命运共生的诗意哲思。\"}",
+              "status": "accepted",
+              "created_at": 1793857833
+            },
+            "newReview": {
+              "id": "510c37ca5bc5e4ad6eda6232d70fb8e1",
+              "accept": false,
+              "needsContext": true,
+              "practicalAdvice": false,
+              "spoiler": false,
+              "readability": 3,
+              "literaryValue": 4,
+              "faithful": true,
+              "reason": "“他们”前指人与命运，独立展示容易误读成两个人相伴；需保留前文，不适合作独立卡片。",
+              "processor": "codex-direct",
+              "reviewMethod": "same-agent-second-pass",
+              "reviewBatchId": "codex-alive-review-20261105"
+            },
+            "evidence": "韩文版自序\n我不知道应该怎样来解释这一部作品，这样的任务交给作者去完成是十分困难的，但是我愿意试一试，我希望韩国的读者能够容忍我的冒险。\n这部作品的题目叫《活着》，作为一个词语，“活着”在我们中国的语言里充满了力量，它的力量不是来自于喊叫，也不是来自于进攻，而是忍受，去忍受生命赋予我们的责任，去忍受现实给予我们的幸福和苦难、无聊和平庸。作为一部作品，《活着》讲述了一个人和他的命运之间的友情，这是最为感人的友情，因为他们互相感激，同时也互相仇恨；他们谁也无法抛弃对方，同时谁也没有理由抱怨对方。他们活着时一起走在尘土飞扬的道路上，死去时又一起化作雨水和泥土。与此同时，《活着》还讲述了人如何去承受巨大的苦难，就像中国的一句成语：千钧一发。让一根头发去承受三万斤的重压，它没有断。我相信，《活着》还讲述了眼泪的宽广和丰富；讲述了绝望的不存在；讲述了人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。当然，《活着》也讲述了我们中国人这几十年是如何熬过来的。我知道，《活着》所讲述的远不止这些。文学就是这样，它讲述了作家意识到的事物，同时也讲述了作家所没有意识到的，读者就是这时候站出来发言的。\n北京，一九九六年十月十七日"
+          },
+          {
+            "oldRow": {
+              "id": "eaed169a4a234bd547d0855a73136d46",
+              "work_id": "upload-82a692cab83a3fd6d95456ee",
+              "source_hash": "685996636b97ed7be755ac0df173b8072f667d522b408bb31016796ca4cf6f77",
+              "chapter": 8,
+              "chapter_title": "活 着 · 4",
+              "start": 1360,
+              "end": 1428,
+              "quote": "家珍到了凤霞背脊上，不再嘟哝什么，突然笑起来，宽慰地说：\n“凤霞长大了。”\n家珍说完这话眼睛一红，又说：\n“凤霞要是不得那场病就好了。”",
+              "body": "{\"id\": \"eaed169a4a234bd547d0855a73136d46\", \"quote\": \"家珍到了凤霞背脊上，不再嘟哝什么，突然笑起来，宽慰地说：\\n“凤霞长大了。”\\n家珍说完这话眼睛一红，又说：\\n“凤霞要是不得那场病就好了。”\", \"quality\": \"文笔\", \"summary\": \"家珍在女儿背上感慨女儿成长和过去的病。\", \"interpretation\": \"家珍在病中被女儿背行，虽感温暖却因女儿聋哑的遗憾而心酸，展现母亲复杂情感和家庭困境中的相互扶持。\", \"reason\": \"细腻的心理描写，体现家庭温情与苦难交织。\", \"themes\": [\"爱与牵挂\", \"日常与慰藉\"], \"imagery\": [\"凤霞背脊\"], \"spoiler\": false, \"start\": 1360}",
+              "review": "{\"id\": \"eaed169a4a234bd547d0855a73136d46\", \"accept\": true, \"needsContext\": false, \"practicalAdvice\": false, \"spoiler\": false, \"readability\": 4, \"literaryValue\": 4, \"faithful\": true, \"reason\": \"家珍在女儿背上的感慨，结合对女儿聋哑的遗憾，情感细腻，有生活实感，独立可读。\"}",
+              "status": "accepted",
+              "created_at": 1793858253
+            },
+            "newReview": {
+              "id": "eaed169a4a234bd547d0855a73136d46",
+              "accept": false,
+              "needsContext": true,
+              "practicalAdvice": false,
+              "spoiler": false,
+              "readability": 3,
+              "literaryValue": 4,
+              "faithful": true,
+              "reason": "家珍、凤霞关系及“那场病”须借前文解释，普通读者无法独立理解遗憾所在。",
+              "processor": "codex-direct",
+              "reviewMethod": "same-agent-second-pass",
+              "reviewBatchId": "codex-alive-review-20261105"
+            },
+            "evidence": "是队长的屋子跑去，跑到队长屋前，我使劲喊：\n“队长，队长。”\n队长在里面答应：“谁呀？”\n我说：“是我，福贵，桶底煮烂啦。”\n队长问：“是钢铁煮成啦？”\n我说：“没煮成。”\n队长骂道：“那你叫个屁。”\n我不敢再叫了，在那里站着不知道该怎么办，那时候天都亮了，我想了想还是先送家珍去城里医院吧，家珍的病看样子不轻，这桶底煮烂的事待我从医院回来再去向队长作个交代。我先回家把凤霞叫醒，让她也去，家珍是走不动了，我年纪大了，背着家珍来去走二十多里路看来不行，只能和凤霞轮流着背她。\n我背起家珍往城里走，凤霞走在一旁，家珍在我背上说：\n“我没病，福贵，我没病。”\n我知道她是舍不得花钱治病，我说：\n“有没有病，到医院一看就知道了。”\n家珍不愿意去医院，一路上嘟嘟哝哝的。走了一段，我没力气了，就让凤霞替我。凤霞力气比我都大，背着她娘走起路来咚咚响。家珍到了凤霞背脊上，不再嘟哝什么，突然笑起来，宽慰地说：\n“凤霞长大了。”\n家珍说完这话眼睛一红，又说：\n“凤霞要是不得那场病就好了。”\n我说：“都多少年的事了，还提它干什么。”\n城里医生说家珍得了软骨病，说这种病谁也治不了，让我们把家珍背回家，能给她吃得好一点就吃得好一点，家珍的病可能会越来越重，也可能就这样了。回来的路上是凤霞背着家珍，我走在边上心里是七上八下，家珍得了谁也治不了的病，我是越想越怕，这辈子这么快就到了这里，看着家珍瘦得都没肉的脸，我想她嫁给我后没过上一天好日子。\n家珍反倒有些高兴，她在凤霞背上说：\n“治不了才好，哪有钱治病。”\n快到村口时，家珍说她好些了，要下来自己走，她说：\n“别吓着有庆了。”\n她是担心有庆看到她这副模样会害怕，做娘的心里就是想得细。她从凤霞背上下来，我们去扶她，她说自己能走，说：\n“其实也没什么病。”\n这时村里传来了锣鼓声，队长带着一队人从村口走出来，队长看到我们后高兴地挥着手喊道：\n"
+          },
+          {
+            "oldRow": {
+              "id": "8a8962ec5d0e0b139be13868f899b1ea",
+              "work_id": "upload-82a692cab83a3fd6d95456ee",
+              "source_hash": "685996636b97ed7be755ac0df173b8072f667d522b408bb31016796ca4cf6f77",
+              "chapter": 9,
+              "chapter_title": "活 着 · 5",
+              "start": 3560,
+              "end": 3604,
+              "quote": "我看着那条弯曲着通向城里的小路，听不到我儿子赤脚跑来的声音，月光照在路上，像是撒满了盐。",
+              "body": "{\"id\": \"8a8962ec5d0e0b139be13868f899b1ea\", \"quote\": \"我看着那条弯曲着通向城里的小路，听不到我儿子赤脚跑来的声音，月光照在路上，像是撒满了盐。\", \"quality\": \"文笔\", \"summary\": \"月光下的小路如撒盐，象征丧子之痛。\", \"interpretation\": \"福贵背着家珍在村口，望着儿子曾经奔跑的小路，寂静中只有月光。盐的意象既指月光惨白，又暗喻眼泪的咸涩和伤口撒盐的痛楚，将无形之痛化为可感的画面。\", \"reason\": \"以意象化文字精准传达深层悲痛，极具感染力。\", \"themes\": [\"孤独与自我\", \"爱与牵挂\"], \"imagery\": [\"月光\", \"盐\"], \"spoiler\": false, \"start\": 3560}",
+              "review": "{\"id\": \"8a8962ec5d0e0b139be13868f899b1ea\", \"accept\": true, \"needsContext\": false, \"practicalAdvice\": false, \"spoiler\": false, \"readability\": 4, \"literaryValue\": 5, \"faithful\": true, \"reason\": \"意象独特，情感沉痛而含蓄，独立成段可读，无剧透。\"}",
+              "status": "accepted",
+              "created_at": 1793858255
+            },
+            "newReview": {
+              "id": "8a8962ec5d0e0b139be13868f899b1ea",
+              "accept": false,
+              "needsContext": false,
+              "practicalAdvice": false,
+              "spoiler": true,
+              "readability": 5,
+              "literaryValue": 4,
+              "faithful": true,
+              "reason": "前文明确是父母探望有庆坟墓，旧解读也直接揭示丧子；虽文学性强，默认无剧透卡片应拒绝。",
+              "processor": "codex-direct",
+              "reviewMethod": "same-agent-second-pass",
+              "reviewBatchId": "codex-alive-review-20261105"
+            },
+            "evidence": "那地方埋着有庆，我嘴里说好，腿脚怎么也不肯往那地方去，走着走着走到了东边村口。家珍这时轻声说：\n“福贵，你别骗我了，我知道有庆死了。”\n她这么一说，我站在那里动不了，腿也开始发软。我的脖子上越来越湿，我知道那是家珍的眼泪，家珍说：\n“让我去看看有庆吧。”\n我知道骗不下去，就背着家珍往村西走，家珍低声告诉我：\n“我夜夜听着你从村西走过来，我就知道有庆死了。”\n走到了有庆坟前，家珍要我把她放下去，她扑在了有庆坟上，眼泪哗哗地流，两只手在坟上像是要摸有庆，可她一点力气都没有，只有几根指头稍稍动着。我看着家珍这副样子，心里难受得要被堵住了，我真不该把有庆偷偷埋掉，让家珍最后一眼都没见着。\n家珍一直扑到天黑，我怕夜露伤着她，硬把她背到身后。家珍让我再背她到村口去看看，到了村口，我的衣领都湿透了，家珍哭着说：\n“有庆不会在这条路上跑来了。”\n我看着那条弯曲着通向城里的小路，听不到我儿子赤脚跑来的声音，月光照在路上，像是撒满了盐。\n那天下午，我一直和这位老人待在一起，当他和那头牛歇够了，下到地里耕田时，我丝毫没有离开的想法，我像个哨兵一样在那棵树下守着他。\n那时候四周田地里庄稼人的说话声飘来飘去，最为热烈的是不远处的田埂上，两个身强力壮的男人都举着茶水桶在比赛喝水，旁边年轻人又喊又叫，他们的兴奋是他们处在局外人的位置上。福贵这边显得要冷清多了，在他身旁的水田里，两个扎着头巾的女人正在插秧，她们谈论着一个我完全陌生的男人，这个男人似乎是一个体格强壮有力的人，他可能是村里挣钱最多的男人，从她们的话里我知道他常在城里干搬运的活。一个女人直起了腰，用手背捶了捶，我听到她说：\n“他挣的钱一半用在自己女人身上，一半用在别人的女人身上。”\n这时候福贵扶着犁走到她们近旁，他插进去说：\n“做人不能忘记四条，话不要说错，床不要睡错，门槛"
+          },
+          {
+            "oldRow": {
+              "id": "ade27a642cfa61c9b1769c8ef95fc3b6",
+              "work_id": "upload-82a692cab83a3fd6d95456ee",
+              "source_hash": "685996636b97ed7be755ac0df173b8072f667d522b408bb31016796ca4cf6f77",
+              "chapter": 10,
+              "chapter_title": "活 着 · 6",
+              "start": 3389,
+              "end": 3412,
+              "quote": "一个人命再大，要是自己想死，那就怎么也活不了。",
+              "body": "{\"id\": \"ade27a642cfa61c9b1769c8ef95fc3b6\", \"quote\": \"一个人命再大，要是自己想死，那就怎么也活不了。\", \"quality\": \"哲思\", \"summary\": \"表达人对生死的自主性。\", \"interpretation\": \"这句话是福贵在春生自杀后的感慨，体现了命运与个人意志的关系：外在命数再强，也敌不过内心的绝望。它揭示了经历苦难后对生存的深刻理解。\", \"reason\": \"以简练语言道出深刻人生哲理，具有普遍意义。\", \"themes\": [\"孤独与自我\", \"成长与告别\"], \"imagery\": [], \"spoiler\": false, \"start\": 3389}",
+              "review": "{\"id\": \"ade27a642cfa61c9b1769c8ef95fc3b6\", \"accept\": true, \"needsContext\": false, \"practicalAdvice\": false, \"spoiler\": false, \"readability\": 5, \"literaryValue\": 4, \"faithful\": true, \"reason\": \"哲理深刻，独立可读，无剧透，不依赖上下文，非实用建议\"}",
+              "status": "accepted",
+              "created_at": 1793858294
+            },
+            "newReview": {
+              "id": "ade27a642cfa61c9b1769c8ef95fc3b6",
+              "accept": false,
+              "needsContext": true,
+              "practicalAdvice": false,
+              "spoiler": true,
+              "readability": 3,
+              "literaryValue": 2,
+              "faithful": false,
+              "reason": "这是福贵听闻春生自杀后的感慨；旧解读将人物绝望归结为意志必然，不能当普遍生命规律或暖心卡片。",
+              "processor": "codex-direct",
+              "reviewMethod": "same-agent-second-pass",
+              "reviewBatchId": "codex-alive-review-20261105"
+            },
+            "evidence": "\n春生抹了抹眼泪说：\n“我爹娘早死了。”\n我说：“那你更该好好活着，你想想，你走南闯北打了那么多仗，你活下来容易吗？”\n那天我和春生说了很多话，家珍坐在屋里床上全听进去了。到了天快亮的时候，春生像是有些想通了，他站起来说要走了，这时家珍在里面喊：\n“春生。”\n我们两个都怔了一下，家珍又叫了一声，春生才答应。我们走到门口，家珍在床上说：\n“春生，你要活着。”\n春生点了点头。家珍在里面哭了，她说：\n“你还欠我们一条命，你就拿自己的命来还吧。”\n春生站了一会说：\n“我知道了。”\n我把春生送到村口，春生让我站住，别送了，我就站在村口，看着春生走去。春生都被打瘸了，他低着头走得很吃力。我又放心不下，对他喊：\n“春生，你要答应我活着。”\n春生走了几步回过头来说：\n“我答应你。”\n春生后来还是没有答应我，一个多月后，我听说城里的刘县长上吊死了。一个人命再大，要是自己想死，那就怎么也活不了。我把这话对家珍说了，家珍听后难受了一天，到了夜里她说：\n“其实有庆的死不能怪春生。”\n到了田里的活一忙，我就不能常常进城去看凤霞了。好在那时是人民公社，村里人在一起干活，我用不着焦急。只是家珍还是下不了床，我起早摸黑，既不能误了田里的活，又不能让家珍饿着，人实在是累。年纪大了，要是年轻他二十岁，睡上一觉就会没事，到了那个年纪，人累了睡上几觉也补不回来，干活时手臂都抬不起来，我混在村里人中间，每天只是装装样子，他们也都知道我的难处，谁也不来说我。\n农忙时凤霞来住了几天，替我做饭烧水，侍候家珍，我轻松了很多。可是想想嫁出去的女儿就是泼出去的水，凤霞早就是二喜的人了，不能在家里待得太久。我和家珍商量了一下，怎么也得让凤霞回去了，就把凤霞赶走了。我是用手一推一推把她推出村口的，村里人见了嘻嘻笑，说没"
+          },
+          {
+            "oldRow": {
+              "id": "84d2ccc1c5d251b7e42ecc589e8a5dfc",
+              "work_id": "upload-82a692cab83a3fd6d95456ee",
+              "source_hash": "685996636b97ed7be755ac0df173b8072f667d522b408bb31016796ca4cf6f77",
+              "chapter": 11,
+              "chapter_title": "活 着 · 7",
+              "start": 855,
+              "end": 922,
+              "quote": "做人还是平常点好，争这个争那个，争来争去赔了自己的命。像我这样，说起来是越混越没出息，可寿命长，我认识的人一个挨着一个死去，我还活着。",
+              "body": "{\"id\": \"84d2ccc1c5d251b7e42ecc589e8a5dfc\", \"quote\": \"做人还是平常点好，争这个争那个，争来争去赔了自己的命。像我这样，说起来是越混越没出息，可寿命长，我认识的人一个挨着一个死去，我还活着。\", \"quality\": \"哲思\", \"summary\": \"福贵感悟平凡活着胜于争强好胜。\", \"interpretation\": \"福贵在经历亲人相继离世后，反思一生，认为争强好胜只会招致灾祸，而平常生活虽看似没出息，却能长久。这是他对命运的妥协，也是对生命韧性的认可，揭示了底层百姓在苦难中的生存哲学。\", \"reason\": \"体现了全书的生存智慧，语言质朴而深刻。\", \"themes\": [\"孤独与自我\", \"成长与告别\"], \"imagery\": [\"无\"], \"spoiler\": false, \"start\": 855}",
+              "review": "{\"id\": \"84d2ccc1c5d251b7e42ecc589e8a5dfc\", \"accept\": true, \"needsContext\": false, \"practicalAdvice\": false, \"spoiler\": false, \"readability\": 5, \"literaryValue\": 4, \"faithful\": true, \"reason\": \"观点清晰，体现生存哲学，语言质朴深刻，独立可读，无剧透。\"}",
+              "status": "accepted",
+              "created_at": 1793858321
+            },
+            "newReview": {
+              "id": "84d2ccc1c5d251b7e42ecc589e8a5dfc",
+              "accept": false,
+              "needsContext": true,
+              "practicalAdvice": false,
+              "spoiler": true,
+              "readability": 3,
+              "literaryValue": 4,
+              "faithful": false,
+              "reason": "针对龙二与春生的命运回顾，旧解读扩为争强必招灾祸；含亲友相继死亡及结局信息，需要人物语境。",
+              "processor": "codex-direct",
+              "reviewMethod": "same-agent-second-pass",
+              "reviewBatchId": "codex-alive-review-20261105"
+            },
+            "evidence": "一过又过了这些年。我还是老样子，腰还是常常疼，眼睛还是花，我耳朵倒是很灵，村里人说话，我不看也能知道是谁在说。我是有时候想想伤心，有时候想想又很踏实，家里人全是我送的葬，全是我亲手埋的，到了有一天我腿一伸，也不用担心谁了。我也想通了，轮到自己死时，安安心心死就是，不用盼着收尸的人，村里肯定会有人来埋我的，要不我人一臭，那气味谁也受不了。我不会让别人白白埋我的，我在枕头底下压了十元钱，这十元钱我饿死也不会去动它的，村里人都知道这十元钱是给替我收尸的那个人，他们也都知道我死后是要和家珍他们埋在一起的。\n这辈子想起来也是很快就过来了，过得平平常常，我爹指望我光耀祖宗，他算是看错人了，我啊，就是这样的命。年轻时靠着祖上留下的钱风光了一阵子，往后就越过越落魄了，这样反倒好，看看我身边的人，龙二和春生，他们也只是风光了一阵子，到头来命都丢了。做人还是平常点好，争这个争那个，争来争去赔了自己的命。像我这样，说起来是越混越没出息，可寿命长，我认识的人一个挨着一个死去，我还活着。\n苦根死后第二年，我买牛的钱凑够了，看看自己还得活几年，我觉得牛还是要买的。牛是半个人，它能替我干活，闲下来时我也有个伴，心里闷了就和它说说话。牵着它去水边吃草，就跟拉着个孩子似的。\n买牛那天，我把钱揣在怀里走着去新丰，那里是个很大的牛市场。路过邻近一个村庄时，看到晒场上围着一群人，走过去看看，就看到了这头牛，它趴在地上，歪着脑袋吧嗒吧嗒掉眼泪，旁边一个赤膊男人蹲在地上霍霍地磨着牛刀，围着的人在说牛刀从什么地方刺进去最好。我看到这头老牛哭得那么伤心，心里怪难受的。想想做牛真是可怜，累死累活替人干了一辈子，老了，力气小了，就要被人宰了吃掉。\n我不忍心看它被宰掉，便离开晒场继续往新丰去。走着走着心里总放不下这头牛，它知道自己要死了，脑袋底下都有一摊眼泪了。\n我越走心里越是定不下来，后来一想，干脆"
+          },
+          {
+            "oldRow": {
+              "id": "fb30bba984a807e81029c6fb5b18c81f",
+              "work_id": "upload-82a692cab83a3fd6d95456ee",
+              "source_hash": "685996636b97ed7be755ac0df173b8072f667d522b408bb31016796ca4cf6f77",
+              "chapter": 12,
+              "chapter_title": "外文版评论摘要",
+              "start": 448,
+              "end": 496,
+              "quote": "我看到广阔的土地袒露着结实的胸膛，那是召唤的姿态，就像女人召唤着她们的儿女，土地召唤着黑夜来临。",
+              "body": "{\"id\": \"fb30bba984a807e81029c6fb5b18c81f\", \"quote\": \"我看到广阔的土地袒露着结实的胸膛，那是召唤的姿态，就像女人召唤着她们的儿女，土地召唤着黑夜来临。\", \"quality\": \"文笔\", \"summary\": \"小说结尾描写土地如母亲般召唤黑夜。\", \"interpretation\": \"这是小说结尾的著名意象，被美国《明星论坛报》引用。土地被拟人化为母亲，既象征生命的归宿，也暗示福贵与土地的紧密联系，在苦难之后归于平静与接纳。\", \"reason\": \"意象优美而深沉，是小说意境的集中体现。\", \"themes\": [\"孤独与自我\", \"日常与慰藉\"], \"imagery\": [\"土地\", \"黑夜\"], \"spoiler\": false, \"start\": 448}",
+              "review": "{\"id\": \"fb30bba984a807e81029c6fb5b18c81f\", \"accept\": true, \"needsContext\": false, \"practicalAdvice\": false, \"spoiler\": false, \"readability\": 5, \"literaryValue\": 5, \"faithful\": true, \"reason\": \"意象完整优美，土地与黑夜拟人化，余韵悠长，独立可读。\"}",
+              "status": "accepted",
+              "created_at": 1793858323
+            },
+            "newReview": {
+              "id": "fb30bba984a807e81029c6fb5b18c81f",
+              "accept": false,
+              "needsContext": false,
+              "practicalAdvice": false,
+              "spoiler": false,
+              "readability": 5,
+              "literaryValue": 4,
+              "faithful": true,
+              "reason": "当前定位是外文评论摘要转引，暂不以小说正文卡片发布；可另核正文位置再建立新候选。",
+              "processor": "codex-direct",
+              "reviewMethod": "same-agent-second-pass",
+              "reviewBatchId": "codex-alive-review-20261105"
+            },
+            "evidence": "存在的英雄。当这部沉重的小说结束时，活着的意志，是福贵身上唯一不能被剥夺走的东西。（美国《时代》周刊 2003年11月9日）\n《活着》是不失朴素粗粝的史诗，斗争与生存的故事，给人留下了不可磨灭的残忍与善良的形象，在余华的笔下，人物在动物本能和人性之间苦苦挣扎。余华加诸于叙述的那种冷酷的意志，使小说超出了常轨。（美国《华盛顿邮报》2003年11月2日）\n余华没有煽情。每一个沉重的悲剧都是痛苦的。每个人都感受到孩子死去般的麻木力量。偶尔有轻松的、优美的、善良的时刻……《活着》是一次残忍的阅读。余华不遗余力地展示误导的命运如何摧毁人的生活。（美国《西雅图时报》2003年11月28日）\n余华的风格简洁而有力，直抵人心。小说的结尾令人难忘，唯一活着的老人福贵给他的老牛也取名叫福贵。叙述者看着老人和老牛在暮色苍茫中慢慢消失，留下他独自一人：“我看到广阔的土地袒露着结实的胸膛，那是召唤的姿态，就像女人召唤着她们的儿女，土地召唤着黑夜来临。”《活着》以简单的美丽和朴素的力量，同样召唤着读者。（美国《明星论坛报》2003年10月12日）\n小说在历史动荡的背景上以貌似冷漠的语调，织就了一幅人性的挂毯。其冷静的风格使读者与福贵同甘共苦，当好运垂顾他时，我们会欣然微笑，当他遭受厄运打击时，我们又会黯然垂泪。悲剧总是接踵而至，令人无法喘息，一位作家甚至因此称《活着》是“中国的《约伯书》”。（合众国际社2003年8月19）\n《活着》是一个简单的故事，叙述也很朴素。余华的力量就在于他的人物塑造和描写方式：要让读者自己去窥探那些生活与他们如此不同的人物的心灵，这并不是件容易的事。即使是小角色和风景的描写，也是寥寥数语就熟练勾勒出来了。（《亚洲书评》2003年9月6日）\n老农民福贵遇到一位游客，并由此回想起了自己的过去……这对那永恒的中国时代老"
+          },
+          {
+            "oldRow": {
+              "id": "c9cf04e795c35f5731ef8e0cff6bb2f4",
+              "work_id": "upload-82a692cab83a3fd6d95456ee",
+              "source_hash": "685996636b97ed7be755ac0df173b8072f667d522b408bb31016796ca4cf6f77",
+              "chapter": 12,
+              "chapter_title": "外文版评论摘要",
+              "start": 2443,
+              "end": 2462,
+              "quote": "我是有时候想想伤心，有时候想想又很踏实",
+              "body": "{\"id\": \"c9cf04e795c35f5731ef8e0cff6bb2f4\", \"quote\": \"我是有时候想想伤心，有时候想想又很踏实\", \"quality\": \"哲思\", \"summary\": \"福贵对自己一生的矛盾感受。\", \"interpretation\": \"奥地利《普通报》引用福贵的话，揭示他面对接踵而至的亲人死亡时复杂的心境：伤心于失去，踏实于自己仍活着并记得他们。这体现了小说对生存意义的朴素追问。\", \"reason\": \"一句话道出主人公的生存哲学，真实而深刻。\", \"themes\": [\"孤独与自我\", \"成长与告别\"], \"imagery\": [\"伤心\", \"踏实\"], \"spoiler\": false, \"start\": 2443}",
+              "review": "{\"id\": \"c9cf04e795c35f5731ef8e0cff6bb2f4\", \"accept\": true, \"needsContext\": false, \"practicalAdvice\": false, \"spoiler\": false, \"readability\": 5, \"literaryValue\": 4, \"faithful\": true, \"reason\": \"朴素对偶表达矛盾心境，哲理深邃，不依赖上下文，具普遍性。\"}",
+              "status": "accepted",
+              "created_at": 1793858323
+            },
+            "newReview": {
+              "id": "c9cf04e795c35f5731ef8e0cff6bb2f4",
+              "accept": false,
+              "needsContext": true,
+              "practicalAdvice": false,
+              "spoiler": true,
+              "readability": 3,
+              "literaryValue": 4,
+              "faithful": false,
+              "reason": "当前定位是媒体评论转引且截掉原文后续解释，踏实来自已埋葬亲人；旧解读弱化死亡语境。",
+              "processor": "codex-direct",
+              "reviewMethod": "same-agent-second-pass",
+              "reviewBatchId": "codex-alive-review-20261105"
+            },
+            "evidence": "十年的历史类似于《幸运的汉斯》的变形，因为不仅财富越来越少，人们也迷失在日常生活中。生活的智慧是否至少得到了一定程度的胜利？（瑞士《Neue Mittelland Zeitung》1999年1月19日）\n因为古老文化中令人印象深刻的语言和多彩的图画，这个感人的中国人的生活故事让人信服。在残忍的社会和政治变革的背景下，主人公的生活勇气令人惊讶：这是一部特别的小说，一部既能使年轻一代也能使年长的读者感动的震撼心灵的小说。（瑞士《Schweizer Bibliothekdienst》 1998年3月）\n人们对于电影的信赖极大地减少了阅读小说的乐趣。相反，关于语言的，优美诗篇的激情通过阅读得以保留。阅读这本小说是一项极大的成就……福贵接二连三地失去亲人，晚年只能同一头老牛度过，作者对于这种生活艰辛的描述却是用一种令人难以置信的平缓语调。“我是有时候想想伤心，有时候想想又很踏实”，这是福贵对自己的评价。读者可以把这当作余华铺设的情节和语言方面的线索。（奥地利《普通报》 1998年3月20日）\n余华以简单而强烈的笔触饱含感情又理智地讲述了有关生活和意志的一出悲喜剧式的寓言，并且成功驾驭了这种写作方法。除去作为背景的家族史，作品附带的描写中有对中国革命社会、意识蒙蔽和政治宣传的批评。（德国《基尔新闻》1998年3月12日）\n虽然余华肯定从没听说过汉斯·雅各布（1622—1676年）笔下的格林美豪森，但他对老人生命的最后四十年的描述是格林美豪森式的。曲折发展的中国历史包括人类天性的美好和攻击性，里面涉及的所有的山谷，深渊，平地，陈腐，矛盾和残忍都使得真正的作品主人公——格林美豪森的经历看起来像是出迷你戏剧……早期阅读时期还没出现电视机，人们渐渐地不能自然地大笑或哭泣，在"
+          }
+        ],
+        "coverage": "定点复核7条已accepted语录及相邻原文；未重读整部小说，不改既有章节分析。"
+      }
+    },
+    {
+      "key": "curated_batch:codex-tagore-20261105-02",
+      "value": {
+        "hash": "93d422973517d657d2ca60674e4c43906365789c67a643666547ccd8217e0ed6",
+        "workId": "upload-d75e43e73210ade29835d5e1",
+        "chapters": 4,
+        "characters": 40266,
+        "accepted": 8,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-tagore-20261105-03",
+      "value": {
+        "hash": "2156a5e6409f4a029832677f73bfca4732e40b19a8f5ec7c953e67688d33621f",
+        "workId": "upload-d75e43e73210ade29835d5e1",
+        "chapters": 40,
+        "characters": 14798,
+        "accepted": 4,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-memory-20261105-04",
+      "value": {
+        "hash": "415fd7382f0132da57d45fd151951ccafabf8a1c2640b63c4321c598d6eb2122",
+        "workId": "upload-ed55fa83277c2473a163e234",
+        "chapters": 4,
+        "characters": 16410,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-memory-20261105-05",
+      "value": {
+        "hash": "94acf7800ea2a3bcb15e5eba06b6dac8e078a03d582a091f2d2000fa2bdda644",
+        "workId": "upload-ed55fa83277c2473a163e234",
+        "chapters": 7,
+        "characters": 26091,
+        "accepted": 3,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_synthesis:codex-memory-20261105-synthesis",
+      "value": {
+        "hash": "d169bb7ef061c7818f59ee5b0bd3cca03f302be8cc5e8e9650b833c926ab9999",
+        "workId": "upload-ed55fa83277c2473a163e234",
+        "reductions": 3,
+        "bookComplete": true,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-xusanguan-20261105-01",
+      "value": {
+        "hash": "45585270e1c6646468820d2f911503df6cede10f13f0284c770f7a676982982d",
+        "workId": "upload-81d55efd5eb1319258624376",
+        "chapters": 7,
+        "characters": 16051,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-longshao-20261105-02",
+      "value": {
+        "hash": "ad1ec6b30eba0e2920629397232bfd2d0cfa6993c93daddedbe67c481b77c5fc",
+        "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+        "chapters": 6,
+        "characters": 15739,
+        "accepted": 2,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-longshao-20261105-03",
+      "value": {
+        "hash": "e25f9ce3e302f5fb4f1b12832a2488b1f97068e1b5c18039b1ec1def45a908e4",
+        "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+        "chapters": 6,
+        "characters": 21319,
+        "accepted": 2,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-longshao-20261105-04",
+      "value": {
+        "hash": "92183acb6425338ec3b3d4a5a8da09e28db00a0fb5d2abb0bb914a5daa72b42b",
+        "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+        "chapters": 6,
+        "characters": 10554,
+        "accepted": 2,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-longshao-20261105-05",
+      "value": {
+        "hash": "cebf35589b6ee30a3cc880ac2f03cf896b4c5f08515a308bfddcffcb85211e36",
+        "workId": "upload-e3ed5a2e7c187fc8312e8e57",
+        "chapters": 7,
+        "characters": 15277,
+        "accepted": 2,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-09",
+      "value": {
+        "hash": "cb2722e295c650be43638b243e4dfd0dc4e0b118a29fc9eb3ad351f503114937",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 14227,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-10",
+      "value": {
+        "hash": "0f6104f3872f57a55e0c7e1fda3aea5cf46d1145be311c4f208b6c96931d3c4f",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 6259,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-11",
+      "value": {
+        "hash": "8c58e8cc2f8dac880650cbcc3ff27490985e56f072282f6646bf90ff9111e8e7",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 14214,
+        "accepted": 0,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-12",
+      "value": {
+        "hash": "f72d029a4267cf2936893e4c27562d0b4e09fabff4af3d6eef811c364f8b8a3d",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 14274,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-13",
+      "value": {
+        "hash": "0dfc0e0957b156f5fc934c2a83e3f16d07dd4f25c69b29483fd2dac502884dfd",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 1901,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    },
+    {
+      "key": "curated_batch:codex-dragon-20261105-14",
+      "value": {
+        "hash": "3f5ecf42566dae2f865fbaf4931cca87227f45a440359d9715a597061742e486",
+        "workId": "upload-7c8ea163530b0c871394e5db",
+        "chapters": 1,
+        "characters": 14176,
+        "accepted": 1,
+        "rejected": 0,
+        "completedAt": 1793880368,
+        "processor": "codex-direct"
+      }
+    }
+  ],
+  "tables": [
+    "state",
+    "sessions",
+    "limits",
+    "catalog",
+    "image_assets",
+    "image_import_runs",
+    "library_works",
+    "library_import_runs",
+    "assistant_messages",
+    "assistant_plans",
+    "assistant_conversations",
+    "assistant_message_threads",
+    "assistant_runs",
+    "library_book_search",
+    "library_books",
+    "library_chapters",
+    "library_sources",
+    "reading_excerpts",
+    "companion_profile",
+    "companion_memories",
+    "companion_threads",
+    "companion_progress",
+    "companion_meta",
+    "companion_greetings",
+    "created_inspirations",
+    "reading_recommendation"
+  ],
+  "dataDirectories": [
+    {
+      "name": "backups",
+      "isDir": true,
+      "bytes": 4096
+    },
+    {
+      "name": "app.db",
+      "isDir": false,
+      "bytes": 1016901632
+    },
+    {
+      "name": "images",
+      "isDir": true,
+      "bytes": 4096
+    },
+    {
+      "name": "readings",
+      "isDir": true,
+      "bytes": 81
+    },
+    {
+      "name": "books",
+      "isDir": true,
+      "bytes": 61
+    },
+    {
+      "name": "knowledge.db",
+      "isDir": false,
+      "bytes": 2093944832
+    },
+    {
+      "name": "book-study.lock",
+      "isDir": false,
+      "bytes": 0
+    },
+    {
+      "name": "knowledge-before-codex-1793861125.db",
+      "isDir": false,
+      "bytes": 2092822528
+    },
+    {
+      "name": "knowledge.db-wal",
+      "isDir": false,
+      "bytes": 0
+    },
+    {
+      "name": "knowledge.db-shm",
+      "isDir": false,
+      "bytes": 32768
+    },
+    {
+      "name": "app.db-wal",
+      "isDir": false,
+      "bytes": 0
+    },
+    {
+      "name": "app.db-shm",
+      "isDir": false,
+      "bytes": 32768
+    }
+  ],
+  "configuredModel": "deepseek-v4-pro",
+  "unauthenticatedQuotesHTTP": "401",
+  "tlsHTTP": "200",
+  "additionalReadOnlyObservations": {
+    "healthz": "Not verified: direct request without expected Host did not succeed; homepage HTTPS 200 and unauthenticated quotes 401 verified separately.",
+    "tableRows": {
+      "library_works": 1228,
+      "library_books": 228,
+      "library_chapters": 79344,
+      "image_assets": 3214
+    },
+    "directoryDiskUsage": {
+      "books": "779M",
+      "images": "335M",
+      "readings": "460K",
+      "backups": "3.2G"
+    },
+    "dailyBackupCoverage": [
+      "app.db",
+      "images"
+    ],
+    "dailyBackupMissing": [
+      "knowledge.db",
+      "books",
+      "readings"
+    ],
+    "notes": "Counts include non-display records. No production mutations or new analysis performed during handoff."
+  }
+}

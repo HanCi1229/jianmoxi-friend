@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="笺墨溪是一款 AI 阅读与创作应用。这份产品作品集展示书库检索、原文校验与灵感卡交付。">
+<meta name="theme-color" content="#f4efe5">
+<title>笺墨溪 · AI 阅读与创作作品集</title>
+<style>
+:root{color-scheme:light;--paper:#f4efe5;--white:#fffdf7;--ink:#25362f;--muted:#52655a;--line:#cfcdbd;--accent:#a53c2d;--dark:#223c32;--green:#e7efdf;--radius:12px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.75 system-ui,"Microsoft YaHei",sans-serif}
+body,button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-underline-offset:4px}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+h1,h2,h3,p{margin:0}
+h1,h2,.quote{font-family:"Noto Serif SC","Songti SC",SimSun,serif}
+.shell{width:min(1100px,calc(100% - 64px));margin-inline:auto}
+.mast{border-bottom:1px solid var(--line)}
+.mast .shell,.foot .shell{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:68px}
+.brand{font-weight:800;letter-spacing:.1em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.seal{width:27px;height:27px;display:grid;place-items:center;background:var(--accent);color:white;border-radius:4px;font:17px/1 SimSun,serif}
+nav{display:flex;gap:24px;font-size:14px;color:var(--muted)}
+nav a{text-decoration:none}
+nav a:hover{text-decoration:underline}
+.hero{padding:75px 0 68px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.eyebrow{display:flex;align-items:center;gap:11px;color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.13em}
+.eyebrow::before{content:"";width:25px;height:1px;background:currentColor}
+h1{font-size:clamp(54px,8.5vw,112px);font-weight:800;line-height:1.05;letter-spacing:.04em;margin:16px 0 9px}
+.hero h2{font-size:clamp(24px,3.1vw,38px);line-height:1.35;font-weight:700}
+.hero-copy>p{max-width:34em;margin-top:18px;color:var(--muted)}
+.button-row{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:27px}
+.primary{display:inline-flex;align-items:center;gap:14px;background:var(--dark);color:white;padding:10px 17px;border-radius:5px;text-decoration:none;font-weight:700}
+.primary:hover{background:#345747}
+.text-link{font-weight:700;font-size:14px}
+.visual{background:#e6e8d5;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 18px 45px #28352915;margin:0}
+.visual svg{display:block;width:100%;height:auto}
+.visual figcaption{display:flex;justify-content:space-between;gap:12px;padding:10px 15px;font-size:12px;color:var(--muted);border-top:1px solid #b9beaa}
+section{padding:48px 0;border-top:1px solid var(--line);scroll-margin-top:24px}
+.section-head{display:grid;grid-template-columns:1.05fr 1fr;gap:32px;align-items:end;margin-bottom:26px}
+.section-head h2{font-size:clamp(28px,4.2vw,48px);line-height:1.2;margin-top:8px}
+.section-head>p{color:var(--muted)}
+.flow{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.flow li,.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--white);padding:20px}
+.flow span{display:block;font:700 13px/1.5 ui-monospace,monospace;color:var(--accent);margin-bottom:10px}
+.flow h3,.card h3{font-size:18px}
+.flow p,.card p{color:var(--muted);font-size:14px;margin-top:5px}
+.flow .gate{background:var(--green);border-color:#aebca8}
+.stage{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stage .card{padding:23px}
+.tag{display:inline-block;font-size:12px;letter-spacing:.05em;font-weight:800;color:var(--accent);margin-bottom:8px}
+.source{padding:13px 0 13px 14px;margin:12px 0;border-left:2px solid #a4ac93;font-family:SimSun,serif;font-size:17px}
+.choices{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.choices button{cursor:pointer;background:var(--white);border:1px solid #87958a;color:var(--ink);border-radius:5px;padding:6px 11px;font-weight:700;font-size:14px}
+.choices button[aria-pressed=true]{background:var(--dark);color:white;border-color:var(--dark)}
+.result{background:#edf2e7;border-color:#aab8a0}
+.result[data-state=rejected]{background:#f8ebe4;border-color:#c7a394}
+.result .quote{font-size:clamp(20px,3vw,29px);line-height:1.45;margin:14px 0;color:var(--ink)}
+.caption{margin-top:11px;color:var(--muted);font-size:13px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.foot{background:var(--dark);color:#f5f0e4;font-size:14px}
+@media(max-width:760px){
+ .shell{width:calc(100% - 36px)}
+ .mast .shell{min-height:60px}
+ nav{gap:12px;font-size:13px}
+ .hero{grid-template-columns:1fr;gap:29px;padding:41px 0 38px}
+ .section-head,.stage{grid-template-columns:1fr;gap:12px}
+ section{padding:34px 0}
+ .flow{grid-template-columns:1fr 1fr}
+ .flow li,.card{padding:14px}
+ .checks{grid-template-columns:1fr}
+}
+@media(max-width:365px){nav{gap:7px;font-size:12px}.flow{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="mast" id="top">
+  <div class="shell">
+    <a class="brand" href="#top"><span class="seal" aria-hidden="true">笺</span>笺墨溪</a>
+    <nav aria-label="作品集导航"><a href="#flow">产品链路</a><a href="#demo">交互演示</a><a href="#delivery">项目交付</a></nav>
+  </div>
+</header>
+<main>
+  <div class="hero shell">
+    <div class="hero-copy">
+      <div class="eyebrow">个人产品案例 · AI READING &amp; WRITING</div>
+      <h1>笺墨溪</h1>
+      <h2>让读过的文字，留得下出处</h2>
+      <p>连接文学阅读、灵感收藏与写作的 AI 应用。用户告诉小溪想从哪本书里找什么，系统把选中的原文和解读做成可回溯的灵感卡。</p>
+      <div class="button-row"><a class="primary" href="#demo">体验原文核验 <span aria-hidden="true">↓</span></a><a class="text-link" href="https://github.com/HanCi1229/jianmoxi-portfolio#readme">项目介绍 ↗</a></div>
+    </div>
+    <figure class="visual">
+      <svg viewBox="0 0 560 380" role="img" aria-label="纸页间的溪流插画">
+        <defs>
+          <linearGradient id="sky" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#f3ead0"/><stop offset="1" stop-color="#c6d4be"/></linearGradient>
+          <linearGradient id="water" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#a8c3ae"/><stop offset="1" stop-color="#dce2c9"/></linearGradient>
+          <pattern id="papergrain" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M0 5h2m3-4h1" stroke="#314838" opacity=".08"/></pattern>
+        </defs>
+        <path fill="url(#sky)" d="M0 0h560v380H0z"/>
+        <circle cx="405" cy="93" r="45" fill="#e9b889" opacity=".9"/>
+        <path d="M0 203 83 138l44 20 77-86 53 42 40-17 103 101 51-55 109 39v90H0z" fill="#a0af98"/>
+        <path d="m0 216 91-28 58 10 69-39 48 27 55 15 70-42 63 30 106-30v105H0z" fill="#788f76"/>
+        <path d="M0 225c124 18 225-18 323-18 97 0 164 31 237 11v162H0z" fill="url(#water)"/>
+        <path d="M0 238c92 24 219-12 255 10s-128 40-72 65 189 17 238 37H0z" fill="#e1e4ca"/>
+        <path d="M560 249c-126-7-192-20-238 3s101 35 65 60-142 28-140 68h313z" fill="#759a81"/>
+        <path d="M180 286c83-15 158-15 217-10m-98 45c62-6 97-5 161 0M94 237c30 4 58 2 97-4" fill="none" stroke="#f4f3df" opacity=".8" stroke-width="2"/>
+        <path d="M0 328c51 5 70 9 115 7 82-5 131-2 165 20 40-24 106-24 180-17 38 3 68-1 100-10v52H0z" fill="#f7f1df"/>
+        <path d="M0 346c89 17 177-15 280 20 105-34 185-4 280-20M280 356v24" fill="none" stroke="#c0b499" stroke-width="1.5"/>
+        <path d="M0 0h560v380H0z" fill="url(#papergrain)"/>
+      </svg>
+      <figcaption><span>笺墨溪 · 作品集封面插画</span><span>01 / 阅读与创作</span></figcaption>
+    </figure>
+  </div>
+
+  <section id="flow">
+    <div class="shell">
+      <div class="section-head">
+        <div><div class="eyebrow">01 · 产品链路</div><h2>从一句需求，到一张卡</h2></div>
+        <p>以「从指定书里找与日常有关的文字」为例。模型负责文学筛选和解读，程序负责确认文字与出处。</p>
+      </div>
+      <ol class="flow">
+        <li><span>01 / REQUEST</span><h3>理解意图</h3><p>识别指定作品与主题，区分书籍摘录和用户明确要求的原创。</p></li>
+        <li><span>02 / RETRIEVE</span><h3>检索与选句</h3><p>召回书库原文片段，由模型选择相关摘句并生成解读。</p></li>
+        <li class="gate"><span>03 / VERIFY</span><h3>核验原文</h3><p>核对摘句是否属于对应原文。作者、作品与章节取自书库记录。</p></li>
+        <li><span>04 / DELIVER</span><h3>保存灵感</h3><p>保存前复核原文，写入卡片及来源。校验失败时返回重试信息。</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="demo">
+    <div class="shell">
+      <div class="section-head">
+        <div><div class="eyebrow">02 · 交互演示</div><h2>选得好，也要引得准</h2></div>
+        <p>切换两种候选结果，观察同一条请求在原文一致和文字被改写时，会得到怎样的交付反馈。</p>
+      </div>
+      <div class="stage">
+        <div class="card">
+          <div class="tag">演示输入</div>
+          <h3>从《溪边手记》里做一张日常灵感卡</h3>
+          <blockquote class="source" id="source">风从半开的窗里进来。我听见檐下的水，一滴一滴落进午后。</blockquote>
+          <div class="choices" aria-label="切换核验样例">
+            <button type="button" data-example="exact" aria-pressed="true">原文一致</button>
+            <button type="button" data-example="rewritten" aria-pressed="false">候选被改写</button>
+          </div>
+        </div>
+        <div class="card result" id="result" data-state="accepted" role="status">
+          <div class="tag" id="verdict">核验通过 · 可保存</div>
+          <h3 id="card-title">日常灵感卡</h3>
+          <p class="quote" id="quote">我听见檐下的水，一滴一滴落进午后。</p>
+          <p id="explanation">出处 · 《溪边手记》示例段。把一个抽象的午后写成听得见的声音。</p>
+        </div>
+      </div>
+      <p class="caption">《溪边手记》为作品集自拟示例。此处展示核验逻辑，演示在当前页面内运行。</p>
+    </div>
+  </section>
+
+  <section id="delivery">
+    <div class="shell">
+      <div class="section-head">
+        <div><div class="eyebrow">03 · 项目交付</div><h2>从交互设计走到可用功能</h2></div>
+        <p>项目覆盖产品定位、交互设计、前后端接入与发布迭代。以下是作品集聚焦的两个具体交付点。</p>
+      </div>
+      <div class="checks">
+        <article class="card"><div class="tag">质量约束</div><h3>原文和解读分别呈现</h3><p>摘录保留来源，解读作为生成内容单独展示。保存前检查原文是否发生变化，避免旧摘录失去出处。</p></article>
+        <article class="card"><div class="tag">工程交付</div><h3>私有 Web 与 Android 安装包</h3><p>项目具备云端 Web 部署与 Android 安装包。已有验证记录覆盖登录、阅读、收藏、写作保存和页面恢复。</p></article>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="foot"><div class="shell"><span>笺墨溪 · AI 产品作品集</span><a href="https://github.com/HanCi1229/jianmoxi-portfolio">GitHub 项目 ↗</a></div></footer>
+<script>
+const source = document.querySelector('#source').textContent.trim();
+const examples = {
+  exact: '我听见檐下的水，一滴一滴落进午后。',
+  rewritten: '我听见窗外的雨，一滴一滴落进黄昏。'
+};
+const buttons = document.querySelectorAll('[data-example]');
+const result = document.querySelector('#result');
+const verdict = document.querySelector('#verdict');
+const title = document.querySelector('#card-title');
+const quote = document.querySelector('#quote');
+const explanation = document.querySelector('#explanation');
+for (const button of buttons) {
+  button.addEventListener('click', () => {
+    const candidate = examples[button.dataset.example];
+    const accepted = source.includes(candidate);
+    for (const choice of buttons) choice.setAttribute('aria-pressed', String(choice === button));
+    result.dataset.state = accepted ? 'accepted' : 'rejected';
+    verdict.textContent = accepted ? '核验通过 · 可保存' : '核验未通过 · 拦截保存';
+    title.textContent = accepted ? '日常灵感卡' : '候选与原文不一致';
+    quote.textContent = candidate;
+    explanation.textContent = accepted
+      ? '出处 · 《溪边手记》示例段。把一个抽象的午后写成听得见的声音。'
+      : '原文是「檐下的水」和「午后」。系统会要求重新选择摘句。';
+  });
+}
+</script>
+</body>
+</html>

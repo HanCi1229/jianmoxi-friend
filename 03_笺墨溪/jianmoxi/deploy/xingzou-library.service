@@ -1,0 +1,18 @@
+[Unit]
+Description=Xingzou curated reading library collection
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=xingzou
+Group=xingzou
+WorkingDirectory=/opt/xingzou
+ExecStart=/opt/xingzou/venv/bin/python collect_readings.py --seeds data/library-seeds.json --folder /var/lib/xingzou/readings --db /var/lib/xingzou/app.db --limit 12 --workers 1
+TimeoutStartSec=20min
+Nice=15
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/xingzou

@@ -1,0 +1,23 @@
+[Unit]
+Description=Xingzou literary writing service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=xingzou
+Group=xingzou
+WorkingDirectory=/opt/xingzou
+EnvironmentFile=/etc/xingzou/cloud.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/xingzou/venv/bin/gunicorn --bind 127.0.0.1:8765 --workers 1 --threads 4 --timeout 90 --access-logfile - --error-logfile - cloud_app:create_app()
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/xingzou
+
+[Install]
+WantedBy=multi-user.target

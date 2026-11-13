@@ -1,0 +1,26 @@
+.env*
+!.env.example
+__pycache__/
+*.pyc
+
+.venv/
+.deploy/
+*.db*
+
+android-build-tools/
+android/build/
+releases/
+
+# Local tools, caches, platform metadata and signing credentials
+.pytest_cache/
+node_modules/
+.DS_Store
+._*
+*.jks
+*.keystore
+*.pem
+*.key
+id_ed25519*
+known_hosts
+*.apk
+*.aab

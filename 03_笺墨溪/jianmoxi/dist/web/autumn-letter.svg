@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360">
+<defs>
+  <linearGradient id="paper" x2="1" y2="1"><stop stop-color="#e9be83"/><stop offset="1" stop-color="#a8472c"/></linearGradient>
+  <pattern id="linen" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M0 1h6M1 0v6" stroke="#fff3dc" stroke-opacity=".17" stroke-width=".6"/></pattern>
+  <pattern id="perfs" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.7" fill="#a85e3e"/></pattern>
+  <path id="leaf" d="M0 75 9 29-22 43-18 29-49 16-36 8-53-15-25-13-20-25-5-7 0-55 12-31 19-37 24-10 46-21 42-5 59 2 36 20 42 29 15 27 9 76Z"/>
+</defs>
+<rect width="900" height="360" fill="url(#paper)"/><rect width="900" height="360" fill="url(#linen)"/>
+<path d="M-30 310C190 62 417 36 912 114M-40 334C210 99 478 64 950 157" fill="none" stroke="#fce2b3" stroke-width="1.5" opacity=".6"/>
+<g transform="translate(470 196) rotate(-11)"><rect x="-210" y="-111" width="422" height="228" rx="6" fill="#6f321e" opacity=".22" transform="translate(8 10)"/><rect x="-210" y="-111" width="422" height="228" rx="6" fill="#f7dfb9"/><path d="M-210 115 0-21 212 115M-210-109 0 40 212-109" fill="none" stroke="#ba8159" stroke-width="2"/><path d="M-208-109 0 40 210-109" fill="#ffebc9" stroke="#ba8159" stroke-width="2"/><circle cy="40" r="25" fill="#a64734"/><circle cy="40" r="18" fill="none" stroke="#e1a282"/><path d="m-7 44 7-16 7 16m-11-5h8" fill="none" stroke="#f1c1a1" stroke-width="1.4"/></g>
+<g transform="translate(650 53) rotate(9)"><rect width="137" height="175" fill="#fae7c8"/><rect width="137" height="175" fill="none" stroke="url(#perfs)" stroke-width="9"/><rect x="13" y="13" width="111" height="149" fill="#b25432"/><path d="M15 125q39-51 109-65M15 138q63-42 109-47" fill="none" stroke="#eac797" opacity=".5"/><use href="#leaf" transform="translate(68 72) rotate(-13) scale(.64)" fill="#ffd79e"/><text x="68" y="145" text-anchor="middle" font-family="Georgia,serif" font-size="16" letter-spacing="3" fill="#ffe5bc">POST</text></g>
+<g transform="translate(149 219) rotate(-38)"><use href="#leaf" fill="#993c2b"/><path d="M3 70 0-42M1 21l-32-30M3 18 34-5" fill="none" stroke="#f0bd85" opacity=".65"/></g>
+<use href="#leaf" transform="translate(245 90) rotate(41) scale(.48)" fill="#c56336"/><use href="#leaf" transform="translate(809 261) rotate(43) scale(.5)" fill="#edb66c"/>
+<g transform="translate(622 279) rotate(-10)" fill="none" stroke="#743a2b" stroke-width="1.8" opacity=".7"><circle r="39"/><circle r="32"/><path d="M42-10q24-13 47 0t46 0m-93 10q24-13 47 0t46 0m-93 10q24-13 47 0t46 0"/></g>
+</svg>

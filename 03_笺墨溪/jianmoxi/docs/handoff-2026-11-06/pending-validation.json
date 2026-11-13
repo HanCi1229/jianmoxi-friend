@@ -1,0 +1,58 @@
+[
+  {
+    "file": ".deploy/codex-curation/dragon-direct/analysis-15.json",
+    "valid": true,
+    "chapters": 1,
+    "characters": 7537,
+    "quotes": 0,
+    "liveImportVerified": false
+  },
+  {
+    "file": ".deploy/codex-curation/dragon-direct/analysis-16.json",
+    "valid": true,
+    "chapters": 1,
+    "characters": 14281,
+    "quotes": 0,
+    "liveImportVerified": false
+  },
+  {
+    "file": ".deploy/codex-curation/fiction-direct/xusanguan-02.json",
+    "valid": true,
+    "chapters": 6,
+    "characters": 17181,
+    "quotes": 0,
+    "liveImportVerified": false
+  },
+  {
+    "file": ".deploy/codex-curation/fiction-direct/xusanguan-03.json",
+    "valid": true,
+    "chapters": 7,
+    "characters": 15995,
+    "quotes": 0,
+    "liveImportVerified": false
+  },
+  {
+    "file": ".deploy/codex-curation/prose-direct/longshao-06.json",
+    "valid": true,
+    "chapters": 7,
+    "characters": 10331,
+    "quotes": 1,
+    "liveImportVerified": false
+  },
+  {
+    "file": ".deploy/codex-curation/prose-direct/longshao-07.json",
+    "valid": true,
+    "chapters": 9,
+    "characters": 19360,
+    "quotes": 0,
+    "liveImportVerified": false
+  },
+  {
+    "file": ".deploy/codex-curation/tagore-direct/analysis-04.json",
+    "valid": true,
+    "chapters": 3,
+    "characters": 36304,
+    "quotes": 8,
+    "liveImportVerified": false
+  }
+]

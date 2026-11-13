@@ -1,0 +1,1090 @@
+{
+  "provider": "Cornell Movie-Dialogs Corpus",
+  "sourceUrl": "https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html",
+  "archiveUrl": "https://www.cs.cornell.edu/~cristian/data/cornell_movie_dialogs_corpus.zip",
+  "archiveSha256": "3bde8a571f615201bc2d2453e22878090719638592f774720eddec739de8c900",
+  "citation": "Cristian Danescu-Niculescu-Mizil and Lillian Lee, ACL 2011.",
+  "selection": "Short dialogue excerpts, automatically filtered; not verified against final film subtitles.",
+  "items": [
+    {
+      "id": "L598287",
+      "movieId": "m565",
+      "characterId": "u8329",
+      "character": "JEANNE",
+      "title": "the messenger",
+      "year": "2009/I",
+      "quote": "It's not time yet.  My mission is not over yet.  There is still more I must do before I can really -- finally -- go home."
+    },
+    {
+      "id": "L306776",
+      "movieId": "m102",
+      "characterId": "u1520",
+      "character": "MILES",
+      "title": "intolerable cruelty",
+      "year": "2003",
+      "quote": "No ma'am. I have been asleep all my life up to this moment. Marylin, will you marry me?"
+    },
+    {
+      "id": "L649638",
+      "movieId": "m603",
+      "characterId": "u8880",
+      "character": "ROWAN",
+      "title": "the witching hour",
+      "year": "1996",
+      "quote": "Is it more or less crazy than dying and coming back to life with hands that can see...?  God, Michael --- what am I...?"
+    },
+    {
+      "id": "L135484",
+      "movieId": "m299",
+      "characterId": "u4525",
+      "character": "DANTE",
+      "title": "clerks.",
+      "year": "1994",
+      "quote": "She went home, she's getting ready, and we're going out."
+    },
+    {
+      "id": "L268308",
+      "movieId": "m82",
+      "characterId": "u1240",
+      "character": "HAROLD",
+      "title": "happy birthday, wanda june",
+      "year": "1971",
+      "quote": "She's right, Norbert--go home. WOODLY I haven't said all I have to say."
+    },
+    {
+      "id": "L51555",
+      "movieId": "m249",
+      "characterId": "u3781",
+      "character": "FRANK",
+      "title": "as good as it gets",
+      "year": "1997",
+      "quote": "Yes. And tomorrow? I have a high maintenance selling painter coming through... So I'm out. Can you take him?"
+    },
+    {
+      "id": "L10753",
+      "movieId": "m233",
+      "characterId": "u3532",
+      "character": "CLAUDIA",
+      "title": "l'avventura",
+      "year": "1960",
+      "quote": "I'm beginning to have my doubts. It couldn't be that they're in love?"
+    },
+    {
+      "id": "L143936",
+      "movieId": "m305",
+      "characterId": "u4620",
+      "character": "DRAGLINE",
+      "title": "cool hand luke",
+      "year": "1967",
+      "quote": "Mister Cool Hand here is the soft heart in our Loan Department. Next!"
+    },
+    {
+      "id": "L64962",
+      "movieId": "m28",
+      "characterId": "u473",
+      "character": "RODERICK",
+      "title": "barry lyndon",
+      "year": "1975",
+      "quote": "By loving you, with no hope of possessing you."
+    },
+    {
+      "id": "L617799",
+      "movieId": "m577",
+      "characterId": "u8513",
+      "character": "PARIS",
+      "title": "tomorrow never dies",
+      "year": "1997",
+      "quote": "It's on the boat. He's holding a press conference tomorrow."
+    },
+    {
+      "id": "L45847",
+      "movieId": "m245",
+      "characterId": "u3718",
+      "character": "BARBATUS",
+      "title": "antz",
+      "year": "1998",
+      "quote": "Don't make my mistake, kid... don't...be a grunt...your whole life..."
+    },
+    {
+      "id": "L547978",
+      "movieId": "m532",
+      "characterId": "u7877",
+      "character": "WALT",
+      "title": "state and main",
+      "year": "2000",
+      "quote": "Because he understood.  That was her life's blood on the stage."
+    },
+    {
+      "id": "L119229",
+      "movieId": "m42",
+      "characterId": "u669",
+      "character": "STRASSER",
+      "title": "casablanca",
+      "year": "1942",
+      "quote": "My dear Mademoiselle, perhaps you have already observed that in Casablanca, human life is cheap. Good night, Mademoiselle."
+    },
+    {
+      "id": "L373818",
+      "movieId": "m434",
+      "characterId": "u6532",
+      "character": "CHARLIE",
+      "title": "halloween iii: season of the witch",
+      "year": "1982",
+      "quote": "You're not supposed to like it. What gets me is your attitude. Listen... tomorrow you show up."
+    },
+    {
+      "id": "L500851",
+      "movieId": "m513",
+      "characterId": "u7588",
+      "character": "GEORGE",
+      "title": "shampoo",
+      "year": "1975",
+      "quote": "Right now -- I'm at the epitome of my life. Right now I feel so good I'm afraid something's gonna happen."
+    },
+    {
+      "id": "L554051",
+      "movieId": "m537",
+      "characterId": "u7942",
+      "character": "TIM",
+      "title": "suburbia",
+      "year": "1996",
+      "quote": "Go ahead! They love you just about as much as I do."
+    },
+    {
+      "id": "L300287",
+      "movieId": "m99",
+      "characterId": "u1462",
+      "character": "CHATTAR LAL",
+      "title": "indiana jones and the temple of doom",
+      "year": "1984",
+      "quote": "I would say you look rather lost.  But then I cannot imagine where in the world the three of you would look at home..."
+    },
+    {
+      "id": "L485702",
+      "movieId": "m172",
+      "characterId": "u2637",
+      "character": "CINDY",
+      "title": "scary movie 2",
+      "year": "2001",
+      "quote": "Yeah, I know, I just love having a guy for a friend."
+    },
+    {
+      "id": "L624643",
+      "movieId": "m222",
+      "characterId": "u3352",
+      "character": "RHONDA",
+      "title": "tremors",
+      "year": "1990",
+      "quote": "Thanks.  God, I hope they're not screwed up.  I might have to bag the whole semester. Anyway, sorry to bother you."
+    },
+    {
+      "id": "L19031",
+      "movieId": "m12",
+      "characterId": "u178",
+      "character": "COMMISSIONER",
+      "title": "airplane ii: the sequel",
+      "year": "1982",
+      "quote": "Some southern plantation owner falls in love with this poor..."
+    },
+    {
+      "id": "L564999",
+      "movieId": "m545",
+      "characterId": "u8049",
+      "character": "SAM",
+      "title": "the sweet hereafter",
+      "year": "1997",
+      "quote": "Nicole, tomorrow Mr. Stephens wants you to make your deposition at the courthouse.  I thought I'd take you over."
+    },
+    {
+      "id": "L379418",
+      "movieId": "m134",
+      "characterId": "u2068",
+      "character": "CHRISTOPH",
+      "title": "metropolis",
+      "year": "1927",
+      "quote": "-- If your life's so good up there Gena, what are you doing down here?"
+    },
+    {
+      "id": "L367897",
+      "movieId": "m429",
+      "characterId": "u6462",
+      "character": "PHILLIPPE",
+      "title": "the man in the iron mask",
+      "year": "1998/I",
+      "quote": "All this time... I was a lost secret.  But you were hiding all your loyalty, all your love.  You were the Man in the Iron Mask."
+    },
+    {
+      "id": "L9918",
+      "movieId": "m232",
+      "characterId": "u3521",
+      "character": "CATFISH",
+      "title": "the abyss",
+      "year": "1989",
+      "quote": "That's cause we love freezin' our butts off out here sooo much, boss."
+    },
+    {
+      "id": "L618507",
+      "movieId": "m577",
+      "characterId": "u8506",
+      "character": "HARMSWAY",
+      "title": "tomorrow never dies",
+      "year": "1997",
+      "quote": "...As the advertising says: Tomorrow never lies."
+    },
+    {
+      "id": "L55977",
+      "movieId": "m22",
+      "characterId": "u362",
+      "character": "AUSTIN",
+      "title": "austin powers: international man of mystery",
+      "year": "1997",
+      "quote": "If it's a lie, goddamn her. It it's the truth, goddamn me.  God, I hope that's witty. How's your mum?"
+    },
+    {
+      "id": "L576399",
+      "movieId": "m554",
+      "characterId": "u8171",
+      "character": "PENDERGAST",
+      "title": "the relic",
+      "year": "1997",
+      "quote": "This isn't an animal, Vince.  I've been on this case four months, remember?  I've learned a few things."
+    },
+    {
+      "id": "L232478",
+      "movieId": "m69",
+      "characterId": "u1066",
+      "character": "YOUNG WASHINGTON",
+      "title": "george washington",
+      "year": "2000",
+      "quote": "I'm lost in ecstasy!  And dost thou love, Thou charming maid?"
+    },
+    {
+      "id": "L48570",
+      "movieId": "m247",
+      "characterId": "u3754",
+      "character": "KURTZ'S WIFE",
+      "title": "apocalypse now",
+      "year": "1979",
+      "quote": "I'll never get over it -- But I'll always remember him..."
+    },
+    {
+      "id": "L619863",
+      "movieId": "m578",
+      "characterId": "u8532",
+      "character": "PAT",
+      "title": "to sleep with anger",
+      "year": "1990",
+      "quote": "I don't know if we could take one in with Rhonda and me at home alone at times."
+    },
+    {
+      "id": "L315321",
+      "movieId": "m106",
+      "characterId": "u1614",
+      "character": "JEZZIE",
+      "title": "jacob's ladder",
+      "year": "1990/I",
+      "quote": "It is tomorrow. Four A.M. How come you're so late?"
+    },
+    {
+      "id": "L184341",
+      "movieId": "m334",
+      "characterId": "u5049",
+      "character": "CLIFTON",
+      "title": "the english patient",
+      "year": "1996",
+      "quote": "Sweetheart, you know we can't go home, there might be a war."
+    },
+    {
+      "id": "L150229",
+      "movieId": "m312",
+      "characterId": "u4717",
+      "character": "SEBASTIAN",
+      "title": "cruel intentions",
+      "year": "1999",
+      "quote": "Then what's wrong? I love you Annette. It's not like you have a husband, unless your married to Jesus."
+    },
+    {
+      "id": "L122054",
+      "movieId": "m43",
+      "characterId": "u676",
+      "character": "CHUCK",
+      "title": "cast away",
+      "year": "2000",
+      "quote": "The failures they remember.  It's the successes they forget."
+    },
+    {
+      "id": "L218161",
+      "movieId": "m352",
+      "characterId": "u5305",
+      "character": "ANNE",
+      "title": "the fisher king",
+      "year": "1991",
+      "quote": "Ya know, I'm thinkin' -- with another income coming in, I would love to get a bigger place."
+    },
+    {
+      "id": "L536218",
+      "movieId": "m194",
+      "characterId": "u2958",
+      "character": "KIRK",
+      "title": "star trek iv: the voyage home",
+      "year": "1986",
+      "quote": "He means our chances of getting home are not very good. You might have lived a longer life if you'd stayed where you belong."
+    },
+    {
+      "id": "L598634",
+      "movieId": "m565",
+      "characterId": "u8328",
+      "character": "JEAN MIDI",
+      "title": "the messenger",
+      "year": "2009/I",
+      "quote": "Do you not know that suicide is a very grievous sin?  No one is allowed to destroy the life that God created!"
+    },
+    {
+      "id": "L337778",
+      "movieId": "m416",
+      "characterId": "u6230",
+      "character": "TED",
+      "title": "kramer vs. kramer",
+      "year": "1979",
+      "quote": "Good Christ, Joanna, just get the hell out of my life."
+    },
+    {
+      "id": "L118865",
+      "movieId": "m42",
+      "characterId": "u664",
+      "character": "ILSA",
+      "title": "casablanca",
+      "year": "1942",
+      "quote": "It's the Gestapo. They say they expect to be in Paris tomorrow."
+    },
+    {
+      "id": "L162739",
+      "movieId": "m49",
+      "characterId": "u768",
+      "character": "LEX",
+      "title": "detroit rock city",
+      "year": "1999",
+      "quote": "I have never heard a girl squeeze cheese in my entire life."
+    },
+    {
+      "id": "L439392",
+      "movieId": "m469",
+      "characterId": "u7017",
+      "character": "CHARLIE",
+      "title": "peggy sue got married",
+      "year": "1986",
+      "quote": ". Peggy Sue, I love you, and I need you Peggy Sue..."
+    },
+    {
+      "id": "L267115",
+      "movieId": "m382",
+      "characterId": "u5783",
+      "character": "WENDY",
+      "title": "happy campers",
+      "year": "2001",
+      "quote": "Yes!  God yes!  I would tell her that I love her!  To not let anyone take away her dreams..!"
+    },
+    {
+      "id": "L232928",
+      "movieId": "m69",
+      "characterId": "u1054",
+      "character": "HAMILTON",
+      "title": "george washington",
+      "year": "2000",
+      "quote": "George, remember that night when we were drinking with Arnold?"
+    },
+    {
+      "id": "L396779",
+      "movieId": "m446",
+      "characterId": "u6696",
+      "character": "BROWN",
+      "title": "mrs brown",
+      "year": "1997",
+      "quote": "Good.  She's a good girl.  Aren't you? Yeah, she's a lovely girl.  And you know the Queen's riding tomorrow?"
+    },
+    {
+      "id": "L31865",
+      "movieId": "m17",
+      "characterId": "u276",
+      "character": "JACK",
+      "title": "an american werewolf in london",
+      "year": "1981",
+      "quote": "David, tomorrow night is the full moon. You'll change, you'll become..."
+    },
+    {
+      "id": "L14908",
+      "movieId": "m235",
+      "characterId": "u3568",
+      "character": "GRANDFATHER",
+      "title": "a hard day's night",
+      "year": "1964",
+      "quote": "... Oh, I'm all heart, Ma'am, all heart ... Well, I let ..."
+    },
+    {
+      "id": "L140014",
+      "movieId": "m302",
+      "characterId": "u4575",
+      "character": "ANNIE",
+      "title": "collateral",
+      "year": "2004",
+      "quote": "Like you, I'm good at it.  But at this exact moment in time...like I gotta sumo wrestler on my shoulders until tomorrow morning."
+    },
+    {
+      "id": "L215500",
+      "movieId": "m349",
+      "characterId": "u5281",
+      "character": "KIMBERLY",
+      "title": "final destination 2",
+      "year": "2003",
+      "quote": "I was dead.  And came back to life. An EEG machine.  Where's Eugene?"
+    },
+    {
+      "id": "L53430",
+      "movieId": "m251",
+      "characterId": "u3810",
+      "character": "KATKA",
+      "title": "asylum",
+      "year": "2005",
+      "quote": "Doug I can't, I've got to be at work by eight. You promised to take me home."
+    },
+    {
+      "id": "L74578",
+      "movieId": "m262",
+      "characterId": "u3944",
+      "character": "BRUCE",
+      "title": "batman",
+      "year": "1989",
+      "quote": "He'll be ready when you do. Remember what happened at the apartment."
+    },
+    {
+      "id": "L392762",
+      "movieId": "m139",
+      "characterId": "u2135",
+      "character": "EMMA",
+      "title": "mr. smith goes to washington",
+      "year": "1939",
+      "quote": "This isn't a home, it's the crossroads of the world!"
+    },
+    {
+      "id": "L149107",
+      "movieId": "m311",
+      "characterId": "u4699",
+      "character": "SKULL COWBOY",
+      "title": "the crow",
+      "year": "1994",
+      "quote": "Having fun yet?  No?  I'll give you a hint.  Remember whatshername?"
+    },
+    {
+      "id": "L149737",
+      "movieId": "m312",
+      "characterId": "u4716",
+      "character": "RONALD",
+      "title": "cruel intentions",
+      "year": "1999",
+      "quote": "It's based on the life of Doctor Martin Luther King."
+    },
+    {
+      "id": "L470702",
+      "movieId": "m491",
+      "characterId": "u7265",
+      "character": "APOLLO",
+      "title": "rocky",
+      "year": "1976",
+      "quote": "Man, I rearranged his face with that right -- The people love what's happenin' tonight."
+    },
+    {
+      "id": "L296041",
+      "movieId": "m396",
+      "characterId": "u5979",
+      "character": "HOLLAND",
+      "title": "i walked with a zombie",
+      "year": "1943",
+      "quote": "No, thank you.  Tomorrow's time enough for you to begin work."
+    },
+    {
+      "id": "L51491",
+      "movieId": "m249",
+      "characterId": "u3784",
+      "character": "MELVIN",
+      "title": "as good as it gets",
+      "year": "1997",
+      "quote": "You waiting for me to say something?  What sort of thing do you want? Look, I'll be at the restaurant tomorrow."
+    },
+    {
+      "id": "L267054",
+      "movieId": "m382",
+      "characterId": "u5781",
+      "character": "PIXEL",
+      "title": "happy campers",
+      "year": "2001",
+      "quote": "Don't forget, when you get home, O.B.'s. They're created by a female gynecologist."
+    },
+    {
+      "id": "L73098",
+      "movieId": "m260",
+      "characterId": "u3920",
+      "character": "BARBARA",
+      "title": "batman and robin",
+      "year": "1949",
+      "quote": "I came to give you your freedom, a chance to live the life you choose. The same gift you gave me."
+    },
+    {
+      "id": "L337973",
+      "movieId": "m416",
+      "characterId": "u6226",
+      "character": "SHAUNESSY",
+      "title": "kramer vs. kramer",
+      "year": "1979",
+      "quote": "Whom you've seen twice in a year? Mrs. Kramer, your ex-husband, wasn't he the longest personal relationship in your life?"
+    },
+    {
+      "id": "L458548",
+      "movieId": "m166",
+      "characterId": "u2563",
+      "character": "JAKE",
+      "title": "raging bull",
+      "year": "1980",
+      "quote": "No, take her home. I wanna be alone for a while. Everybody go."
+    },
+    {
+      "id": "L554939",
+      "movieId": "m539",
+      "characterId": "u7965",
+      "character": "NORMA",
+      "title": "sunset blvd.",
+      "year": "1950",
+      "quote": "They will love it every place.  Read it.  Read the scene just before she has him killed!"
+    },
+    {
+      "id": "L205409",
+      "movieId": "m346",
+      "characterId": "u5228",
+      "character": "OWENS",
+      "title": "fantastic voyage",
+      "year": "1966",
+      "quote": "Remember -- we can't take more than five minutes to get out."
+    },
+    {
+      "id": "L403548",
+      "movieId": "m450",
+      "characterId": "u6760",
+      "character": "VADA",
+      "title": "my girl 2",
+      "year": "1994",
+      "quote": "Well, I hope he's not watching me all the time."
+    },
+    {
+      "id": "L151377",
+      "movieId": "m314",
+      "characterId": "u4729",
+      "character": "FRIDA",
+      "title": "the curse",
+      "year": "1987",
+      "quote": "We... he walked me home and... we said goodnight. Um, he kissed me goodnight and that was it."
+    },
+    {
+      "id": "L118218",
+      "movieId": "m41",
+      "characterId": "u646",
+      "character": "EVAN",
+      "title": "the butterfly effect",
+      "year": "2004",
+      "quote": "Do you remember when I was a kid and I had those blackouts?"
+    },
+    {
+      "id": "L133794",
+      "movieId": "m298",
+      "characterId": "u4500",
+      "character": "BERNSTEIN",
+      "title": "citizen kane",
+      "year": "1941",
+      "quote": "Not to me.  But you will let that cop go home with Mr. Kane, won't you?"
+    },
+    {
+      "id": "L193514",
+      "movieId": "m338",
+      "characterId": "u5112",
+      "character": "ZIRA",
+      "title": "escape from the planet of the apes",
+      "year": "1971",
+      "quote": "I should.  I've been doing it half my life to Humans."
+    },
+    {
+      "id": "L535619",
+      "movieId": "m194",
+      "characterId": "u2958",
+      "character": "KIRK",
+      "title": "star trek iv: the voyage home",
+      "year": "1986",
+      "quote": "Home in on the strongest signal. Descend from orbit."
+    },
+    {
+      "id": "L536609",
+      "movieId": "m195",
+      "characterId": "u2971",
+      "character": "ANIJ",
+      "title": "star trek: insurrection",
+      "year": "1998",
+      "quote": "Then you must spend your life answering questions."
+    },
+    {
+      "id": "L14651",
+      "movieId": "m234",
+      "characterId": "u3555",
+      "character": "MARTHA",
+      "title": "agnes of god",
+      "year": "1985",
+      "quote": "Tomorrow... tomorrow, I'll get it by tomorrow. I will."
+    },
+    {
+      "id": "L306136",
+      "movieId": "m399",
+      "characterId": "u6012",
+      "character": "LESTAT",
+      "title": "interview with the vampire: the vampire chronicles",
+      "year": "1994",
+      "quote": "You know I love the dark. But there's no dark anymore."
+    },
+    {
+      "id": "L411003",
+      "movieId": "m458",
+      "characterId": "u6860",
+      "character": "JOSIE",
+      "title": "never been kissed",
+      "year": "1999",
+      "quote": "For your information, I am very happy. Deliriously happy. I lead a very happy life!"
+    },
+    {
+      "id": "L271849",
+      "movieId": "m383",
+      "characterId": "u5800",
+      "character": "VERONICA",
+      "title": "heathers",
+      "year": "1989",
+      "quote": "Hey now, if you were happy every day of your life, you wouldn't be a human being, you'd be a game show host."
+    },
+    {
+      "id": "L456646",
+      "movieId": "m164",
+      "characterId": "u2532",
+      "character": "COULMIER",
+      "title": "quills",
+      "year": "2000",
+      "quote": "But we also fall in love; we build cities, we compose symphonies, and we endure. Why not put that in your books as well?"
+    },
+    {
+      "id": "L243934",
+      "movieId": "m368",
+      "characterId": "u5524",
+      "character": "LEVENE",
+      "title": "glengarry glen ross",
+      "year": "1992",
+      "quote": "I'll give you thirty on them now, I'll bring the rest tomorrow.  I've got it at the hotel.  John?  We do that, for chrissake?"
+    },
+    {
+      "id": "L29542",
+      "movieId": "m239",
+      "characterId": "u3635",
+      "character": "WOODWARD",
+      "title": "all the president's men",
+      "year": "1976",
+      "quote": "Then tomorrow's grand jury indictments will just be bullshit."
+    },
+    {
+      "id": "L58655",
+      "movieId": "m252",
+      "characterId": "u3820",
+      "character": "LANDON",
+      "title": "a walk to remember",
+      "year": "2002",
+      "quote": "No. Thanks. Gotta keep my wits for the drive home."
+    },
+    {
+      "id": "L438803",
+      "movieId": "m469",
+      "characterId": "u7025",
+      "character": "PEGGY",
+      "title": "peggy sue got married",
+      "year": "1986",
+      "quote": "She did? I love her so much, and I haven't seen her in such a long time. And Grandpa Barney. Is he all, right?"
+    },
+    {
+      "id": "L28774",
+      "movieId": "m238",
+      "characterId": "u3599",
+      "character": "ADDISON",
+      "title": "all about eve",
+      "year": "1950",
+      "quote": "Heart to heart? Woman to woman? Including a casual reference to the part of \"Cora\" - and your hopes of playing it."
+    },
+    {
+      "id": "L222022",
+      "movieId": "m62",
+      "characterId": "u955",
+      "character": "FRANCES",
+      "title": "frances",
+      "year": "1982",
+      "quote": "Harry? Oh Harry, I knew you'd come. I love you, Harry. I love... Take me home, Harry."
+    },
+    {
+      "id": "L64969",
+      "movieId": "m28",
+      "characterId": "u461",
+      "character": "COUNTESS",
+      "title": "barry lyndon",
+      "year": "1975",
+      "quote": "But you deceive me nonetheless if I believe you, for it will not be in your power to love me when you love me no longer."
+    },
+    {
+      "id": "L37258",
+      "movieId": "m20",
+      "characterId": "u337",
+      "character": "KIMBALL",
+      "title": "american psycho",
+      "year": "2000",
+      "quote": "Do you remember where you were on the night of Paul's disappearance?  Which was on the twentieth of December?"
+    },
+    {
+      "id": "L151373",
+      "movieId": "m314",
+      "characterId": "u4733",
+      "character": "LLOYD",
+      "title": "the curse",
+      "year": "1987",
+      "quote": "Did he come home with you? Did you go to his apartment?"
+    },
+    {
+      "id": "L148806",
+      "movieId": "m46",
+      "characterId": "u730",
+      "character": "JANI",
+      "title": "croupier",
+      "year": "1998",
+      "quote": "I'm asking you, as a...friend. You'd be saving the life of a friend."
+    },
+    {
+      "id": "L445304",
+      "movieId": "m161",
+      "characterId": "u2493",
+      "character": "MRS. SCHUYLER",
+      "title": "platinum blonde",
+      "year": "1931",
+      "quote": "To engage in a brawl! A cheap, common brawl, in my own home! \"I wear the pants!\" The pants ! Not even the trousers!"
+    },
+    {
+      "id": "L141720",
+      "movieId": "m303",
+      "characterId": "u4592",
+      "character": "JERRY",
+      "title": "conspiracy theory",
+      "year": "1997",
+      "quote": "I love her so bad.  She just... wrecks me.  I would die for her."
+    },
+    {
+      "id": "L219108",
+      "movieId": "m354",
+      "characterId": "u5334",
+      "character": "DONNA",
+      "title": "five feet high and rising",
+      "year": "2000",
+      "quote": "For once in your life have some \trespect for me, don't even curse at me or nothin'."
+    },
+    {
+      "id": "L36978",
+      "movieId": "m20",
+      "characterId": "u327",
+      "character": "BATEMAN",
+      "title": "american psycho",
+      "year": "2000",
+      "quote": "He led what I suppose was an orderly life. He... ate a balanced diet."
+    },
+    {
+      "id": "L131280",
+      "movieId": "m44",
+      "characterId": "u689",
+      "character": "ANGELA",
+      "title": "the cider house rules",
+      "year": "1999",
+      "quote": "This is *your* life story, Wilbur! You just changed the dates!"
+    },
+    {
+      "id": "L479618",
+      "movieId": "m498",
+      "characterId": "u7367",
+      "character": "MAGGIE",
+      "title": "runaway bride",
+      "year": "1999",
+      "quote": "Nervous?  Not at all!  No.  I've never been more certain in my life.  Except -- I am having all kinds of weird dreams."
+    },
+    {
+      "id": "L502646",
+      "movieId": "m514",
+      "characterId": "u7614",
+      "character": "JACK",
+      "title": "the shining",
+      "year": "1980",
+      "quote": "I had... I had the most terrible nightmare I ever had.  It's the most horrible dream I ever had."
+    },
+    {
+      "id": "L255824",
+      "movieId": "m79",
+      "characterId": "u1215",
+      "character": "ROY",
+      "title": "the grifters",
+      "year": "1990",
+      "quote": "Yes or no. They're both easier at home. Okay?"
+    },
+    {
+      "id": "L634439",
+      "movieId": "m590",
+      "characterId": "u8702",
+      "character": "MEGAN",
+      "title": "unbreakable",
+      "year": "2000",
+      "quote": "It means we're probably to tired to remember."
+    },
+    {
+      "id": "L53866",
+      "movieId": "m251",
+      "characterId": "u3803",
+      "character": "DOUG",
+      "title": "asylum",
+      "year": "2005",
+      "quote": "Yeah, we'd better keep them for now, I'll try and get some glasses for tomorrow night."
+    },
+    {
+      "id": "L609426",
+      "movieId": "m570",
+      "characterId": "u8409",
+      "character": "JAEGER",
+      "title": "three kings",
+      "year": "1999",
+      "quote": "I'd like to go home alive with a couple of Iraqi scalps hanging from my belt."
+    },
+    {
+      "id": "L629954",
+      "movieId": "m587",
+      "characterId": "u8657",
+      "character": "COLE",
+      "title": "twelve monkeys",
+      "year": "1995",
+      "quote": "I'm...\"mentally divergent\".  I would love to believe that."
+    },
+    {
+      "id": "L420114",
+      "movieId": "m150",
+      "characterId": "u2332",
+      "character": "HUNT",
+      "title": "nixon",
+      "year": "1995",
+      "quote": "Dogs ... Season starts tomorrow.  It keeps me calm.  I don't like going back into the same building four times."
+    },
+    {
+      "id": "L395859",
+      "movieId": "m140",
+      "characterId": "u2173",
+      "character": "LONGFELLOW",
+      "title": "mr. deeds goes to town",
+      "year": "1936",
+      "quote": "All my life, I've wanted somebody to talk to. Back in Mandrake Falls, I always used to talk to a girl."
+    },
+    {
+      "id": "L74666",
+      "movieId": "m262",
+      "characterId": "u3956",
+      "character": "VICKI",
+      "title": "batman",
+      "year": "1989",
+      "quote": "I don't, but... I do. It's just... I love you, Bruce. I don't want you to..."
+    },
+    {
+      "id": "L646911",
+      "movieId": "m227",
+      "characterId": "u3443",
+      "character": "HEATHER",
+      "title": "new nightmare",
+      "year": "1994",
+      "quote": "Tell you what.  I'm gonna go get Rex for you right now.  You know home isn't far from here, right?"
+    },
+    {
+      "id": "L389469",
+      "movieId": "m136",
+      "characterId": "u2096",
+      "character": "BOBBY CLOWES",
+      "title": "mobsters",
+      "year": "1991",
+      "quote": "I remember reading a poem in college. \"Sicily. Poor, noble isle...\"."
+    },
+    {
+      "id": "L258010",
+      "movieId": "m376",
+      "characterId": "u5678",
+      "character": "GRACE",
+      "title": "the horse whisperer",
+      "year": "1998",
+      "quote": "I'm not coming back! That's it! I want to go home!"
+    },
+    {
+      "id": "L253261",
+      "movieId": "m78",
+      "characterId": "u1184",
+      "character": "BARON",
+      "title": "grand hotel",
+      "year": "1932",
+      "quote": "Unfortunately no -- to bad -- tomorrow though."
+    },
+    {
+      "id": "L564428",
+      "movieId": "m545",
+      "characterId": "u8046",
+      "character": "NICOLE",
+      "title": "the sweet hereafter",
+      "year": "1997",
+      "quote": "Just the way Dolores gets so excited about bringing the kids to check out the animals.  It's like the biggest thing in her life."
+    },
+    {
+      "id": "L355087",
+      "movieId": "m424",
+      "characterId": "u6365",
+      "character": "DOROTHEA",
+      "title": "lord of illusions",
+      "year": "1995",
+      "quote": "Come to the show with me. Tonight I want you to see him with an audience.  They love him."
+    },
+    {
+      "id": "L131365",
+      "movieId": "m44",
+      "characterId": "u691",
+      "character": "CANDY",
+      "title": "the cider house rules",
+      "year": "1999",
+      "quote": "She *did* love him!  How many women have you known?"
+    },
+    {
+      "id": "L502523",
+      "movieId": "m514",
+      "characterId": "u7614",
+      "character": "JACK",
+      "title": "the shining",
+      "year": "1980",
+      "quote": "I love it.  I really do.  I've never been this happy, or comfortable anywhere."
+    },
+    {
+      "id": "L352838",
+      "movieId": "m122",
+      "characterId": "u1859",
+      "character": "LOGAN",
+      "title": "logan's run",
+      "year": "1976",
+      "quote": "I had to. I did kill... for the first time in my life I killed."
+    },
+    {
+      "id": "L112438",
+      "movieId": "m284",
+      "characterId": "u4253",
+      "character": "CAPT. BARNEY",
+      "title": "bringing out the dead",
+      "year": "1999",
+      "quote": "I'll fire you tomorrow. Hell, better than that, I'll forward you some sick time. A week, two weeks off-- how about that?"
+    },
+    {
+      "id": "L552113",
+      "movieId": "m536",
+      "characterId": "u7919",
+      "character": "GENERAL JACK D. RIPPER",
+      "title": "dr. strangelove or: how i learned to stop worrying and love the bomb",
+      "year": "1964",
+      "quote": "I hope not.  Now, as soon as you do what I told you, have Plan-R radioed to the Wing."
+    },
+    {
+      "id": "L533457",
+      "movieId": "m190",
+      "characterId": "u2895",
+      "character": "STOSH",
+      "title": "stalag 17",
+      "year": "1953",
+      "quote": "There's a time in every man's life when he wants to be alone! So go away!"
+    },
+    {
+      "id": "L226697",
+      "movieId": "m361",
+      "characterId": "u5433",
+      "character": "STEVEN",
+      "title": "jason goes to hell: the final friday",
+      "year": "1993",
+      "quote": "I mean, how can you go through life without never having made a prank call?"
+    },
+    {
+      "id": "L246814",
+      "movieId": "m370",
+      "characterId": "u5562",
+      "character": "CLAY",
+      "title": "gods and monsters",
+      "year": "1998",
+      "quote": "I better get you home before you catch your death from pneumonia."
+    },
+    {
+      "id": "L643111",
+      "movieId": "m597",
+      "characterId": "u8799",
+      "character": "COX",
+      "title": "virtuosity",
+      "year": "1995",
+      "quote": "She saved your life, Parker. She didn't have to, but she did."
+    },
+    {
+      "id": "L79036",
+      "movieId": "m265",
+      "characterId": "u3980",
+      "character": "BARBARA",
+      "title": "beetle juice",
+      "year": "1988",
+      "quote": "Oh, Adam, don't tease her.  You never got an A in science in your life!"
+    },
+    {
+      "id": "L520643",
+      "movieId": "m522",
+      "characterId": "u7712",
+      "character": "JERRY",
+      "title": "some like it hot",
+      "year": "1959",
+      "quote": "Because I lost a filling in my back tooth. I gotta go to the dentist tomorrow."
+    },
+    {
+      "id": "L566372",
+      "movieId": "m202",
+      "characterId": "u3085",
+      "character": "LISA",
+      "title": "swingers",
+      "year": "1996",
+      "quote": "Do you ever perform out here? I'd love to see you."
+    },
+    {
+      "id": "L603001",
+      "movieId": "m569",
+      "characterId": "u8400",
+      "character": "NICK",
+      "title": "the thin man",
+      "year": "1934",
+      "quote": "I tell you again, I don't want any part of it.  Now you take Dorothy home and..."
+    },
+    {
+      "id": "L103350",
+      "movieId": "m38",
+      "characterId": "u601",
+      "character": "BOB",
+      "title": "bottle rocket",
+      "year": "1996",
+      "quote": "You'll probably have them the rest of your life."
+    },
+    {
+      "id": "L48314",
+      "movieId": "m247",
+      "characterId": "u3760",
+      "character": "ROXANNE",
+      "title": "apocalypse now",
+      "year": "1979",
+      "quote": "Do you miss your home, Captain? Have you someone there?"
+    }
+  ]
+}

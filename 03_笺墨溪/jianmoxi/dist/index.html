@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN" class="editorial notebook">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2ec">
+  <link rel="icon" type="image/svg+xml" href="/assets/jianmoxi-icon.svg">
+  <title>笺墨溪 · 把生活写下来</title>
+  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="refinements.css?v=10">
+  <link id="editorial-style" rel="stylesheet" href="/editorial.css?v=20261104-1">
+  <link id="notebook-style" rel="stylesheet" href="/notebook.css?v=20261104-1">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#inspiration"><span class="brand-mark">笺墨溪</span><small>把生活写下来</small></a>
+    <button class="new-writing" data-action="new">＋ 写一篇</button>
+    <nav aria-label="主导航" id="desktop-nav"></nav>
+    <div class="sidebar-bottom"><span class="tiny-label">留一点时间，给自己。</span><button class="profile" data-page="journal"><span class="avatar">我</span><span>我的写作生活<small>一页一页，慢慢来</small></span></button></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><a class="mobile-brand" href="#inspiration">笺墨溪</a><div class="breadcrumb" id="breadcrumb">发现灵感</div><div class="top-tools"><span class="preview-label"></span><button class="editorial-chat-entry" type="button" data-editorial-chat aria-label="打开 AI 对话"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 3v-3H3V6a2 2 0 0 1 2-2Z"/><path d="M8 9h8M8 13h5"/></svg><span>AI 对话</span></button></div></header>
+    <main id="main"></main>
+    <footer class="page-footer"><span>笺墨溪 · 为每一个想写下来的瞬间</span><span>生活本身，就是来处。</span></footer>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="底部导航"></nav>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="dialog"><div id="dialog-body"></div></dialog>
+  <script src="app.js?v=6"></script>
+  
+  <script src="live-feed.js?v=11"></script>
+  <script src="ai-client.js?v=1"></script>
+  <script src="refinements.js?v=10"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "popular-longzu",
+    "title": "龙族（1—4合集）",
+    "author": "江南",
+    "genre": "流行小说",
+    "access": "external",
+    "intro": "一封来自卡塞尔学院的录取信，将路明非带进屠龙者的世界。青春的孤独、伙伴的羁绊与危险的身世一同展开。",
+    "themes": [
+      "青春幻想",
+      "成长",
+      "友情"
+    ],
+    "seriesOrder": [
+      "火之晨曦",
+      "悼亡者之瞳",
+      "黑月之潮（上、中、下）",
+      "奥丁之渊"
+    ],
+    "seriesLabel": "合集阅读顺序",
+    "readingUrl": "https://www.qidian.com/book/1011945842/",
+    "readingPlatform": "起点中文网",
+    "sourceUrl": "https://www.qidian.com/book/1011945842/",
+    "sourceName": "起点中文网",
+    "collection": "",
+    "collectionOrder": 0,
+    "body": [],
+    "retrievedAt": "2026-11-03",
+    "coverStyle": "typography",
+    "catalogNote": "书目与导读；全文在正版平台阅读。"
+  },
+  {
+    "id": "popular-daomu",
+    "title": "盗墓笔记",
+    "author": "南派三叔",
+    "genre": "流行小说",
+    "access": "external",
+    "intro": "吴邪沿着家族留下的线索，与张起灵、王胖子踏入古墓深处。地下奇观之外，真正难解的是秘密背后的人。",
+    "themes": [
+      "悬疑冒险",
+      "谜团",
+      "伙伴"
+    ],
+    "seriesOrder": [
+      "七星鲁王",
+      "怒海潜沙",
+      "秦岭神树",
+      "云顶天宫",
+      "蛇沼鬼城",
+      "谜海归巢",
+      "阴山古楼",
+      "邛笼石影",
+      "大结局"
+    ],
+    "seriesLabel": "原作篇章顺序",
+    "readingUrl": "https://www.qidian.com/book/68223/",
+    "readingPlatform": "起点中文网",
+    "sourceUrl": "https://www.qidian.com/book/68223/",
+    "sourceName": "起点中文网",
+    "collection": "",
+    "collectionOrder": 1,
+    "body": [],
+    "retrievedAt": "2026-11-03",
+    "coverStyle": "typography",
+    "catalogNote": "书目与导读；全文在正版平台阅读。"
+  },
+  {
+    "id": "popular-guimi",
+    "title": "诡秘之主",
+    "author": "爱潜水的乌贼",
+    "genre": "流行小说",
+    "access": "external",
+    "intro": "在蒸汽工业与神秘力量交织的城市里，克莱恩逐步接近非凡世界，也寻找自己来到这里的原因。",
+    "themes": [
+      "奇幻",
+      "悬疑",
+      "世界构建"
+    ],
+    "seriesOrder": [],
+    "seriesLabel": "原作篇章顺序",
+    "readingUrl": "https://www.qidian.com/book/1010868264/",
+    "readingPlatform": "起点中文网",
+    "sourceUrl": "https://www.qidian.com/book/1010868264/",
+    "sourceName": "起点中文网",
+    "collection": "",
+    "collectionOrder": 2,
+    "body": [],
+    "retrievedAt": "2026-11-03",
+    "coverStyle": "typography",
+    "catalogNote": "书目与导读；全文在正版平台阅读。"
+  },
+  {
+    "id": "popular-quanzhi",
+    "title": "全职高手",
+    "author": "蝴蝶蓝",
+    "genre": "流行小说",
+    "access": "external",
+    "intro": "离开职业战队的叶修从网吧重新出发，集结新的伙伴，再次走向荣耀赛场。写给竞技、协作与不肯放下的热爱。",
+    "themes": [
+      "电竞",
+      "群像",
+      "热爱"
+    ],
+    "seriesOrder": [],
+    "seriesLabel": "原作篇章顺序",
+    "readingUrl": "https://www.qidian.com/book/1887208/",
+    "readingPlatform": "起点中文网",
+    "sourceUrl": "https://www.qidian.com/book/1887208/",
+    "sourceName": "起点中文网",
+    "collection": "",
+    "collectionOrder": 3,
+    "body": [],
+    "retrievedAt": "2026-11-03",
+    "coverStyle": "typography",
+    "catalogNote": "书目与导读；全文在正版平台阅读。"
+  },
+  {
+    "id": "popular-qingyunian",
+    "title": "庆余年",
+    "author": "猫腻",
+    "genre": "流行小说",
+    "access": "external",
+    "intro": "范闲从海边小城走入京都，在家族、朝堂与江湖之间，追索自己的身世，也寻找能由自己选择的人生。",
+    "themes": [
+      "架空历史",
+      "权谋",
+      "成长"
+    ],
+    "seriesOrder": [],
+    "seriesLabel": "原作篇章顺序",
+    "readingUrl": "https://www.qidian.com/book/114559/",
+    "readingPlatform": "起点中文网",
+    "sourceUrl": "https://www.qidian.com/book/114559/",
+    "sourceName": "起点中文网",
+    "collection": "",
+    "collectionOrder": 4,
+    "body": [],
+    "retrievedAt": "2026-11-03",
+    "coverStyle": "typography",
+    "catalogNote": "书目与导读；全文在正版平台阅读。"
+  }
+]

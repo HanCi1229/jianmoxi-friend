@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360">
+<defs>
+  <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#142e32"/><stop offset=".7" stop-color="#456260"/><stop offset="1" stop-color="#9aab99"/></linearGradient>
+  <linearGradient id="fog"><stop stop-color="#e8e2c7" stop-opacity="0"/><stop offset=".52" stop-color="#e8e2c7" stop-opacity=".49"/><stop offset="1" stop-color="#e8e2c7" stop-opacity="0"/></linearGradient>
+  <pattern id="rain" width="37" height="46" patternUnits="userSpaceOnUse"><path d="m9 0-8 20m31 7-6 17" stroke="#d6e7dc" stroke-opacity=".25" stroke-width=".8"/></pattern>
+  <g id="roof"><path d="M-82 13Q-40 9-16-7L0-21 16-7Q40 9 82 13l-8 8H-74Z" fill="#182b2c"/><path d="M-79 12Q-42 14-11-2M80 12Q42 14 11-2M-68 20H68" fill="none" stroke="#bb9b68" stroke-width="1.6"/><path d="M-48 21v34m29-34v34m38-34v34m29-34v34" stroke="#1a3432" stroke-width="7"/><path d="M-51 55H51" stroke="#a4865e" stroke-width="3"/><path d="M-14 27H14V52H-14Z" fill="#d1a768" opacity=".82"/></g>
+</defs>
+<rect width="900" height="360" fill="url(#sky)"/><circle cx="661" cy="88" r="57" fill="#e7d9ad" opacity=".82"/>
+<path d="M0 223 92 118l33 25 77-70 67 88 37-35 67 62 76-40 80 51 71-24 56 34 115-84 129 74v161H0Z" fill="#6d8278"/>
+<path d="m0 247 110-61 40 4 77-60 65 85 59-41 53 47 74-40 69 43 66-31 57 40 139-112 91 63v176H0Z" fill="#476662"/>
+<path d="M0 246q180-69 347 1t553-7v52q-311-60-495-5T0 285Z" fill="url(#fog)"/>
+<path d="M0 306q220-30 381-12t277-4q107-33 242-5v75H0Z" fill="#254645"/>
+<path d="M0 322q232-36 428-12t472-4M324 333q193 15 314-5" fill="none" stroke="#b9c3a9" stroke-opacity=".42" stroke-width="2"/>
+<g transform="translate(597 162)"><path d="M-61 126H62l30 17H-97Z" fill="#172f30"/><use href="#roof" transform="translate(0 70) scale(1.13)"/><use href="#roof" transform="translate(0 28) scale(.9)"/><use href="#roof" transform="translate(0 -5) scale(.67)"/><path d="M0-29v14" stroke="#b9a17b" stroke-width="2"/><path d="M-57 111v12m114-12v12" stroke="#d9a668" stroke-width="7"/></g>
+<path d="M46 359 82 247l5-57m-8 63-29-35m38 21 35-38m-41 69 50-35M867 361l-34-112-5-61m8 76 42-32m-49-1-26-35" fill="none" stroke="#183334" stroke-width="4"/>
+<rect width="900" height="360" fill="url(#rain)"/>
+<rect x="739" y="78" width="28" height="47" rx="2" fill="#a94d3e" transform="rotate(5 753 101)"/><path d="M745 85h15v32h-15zm2 10h11m-11 11h11m-6-19v28" fill="none" stroke="#efd9b1" opacity=".9"/>
+</svg>
