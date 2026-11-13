@@ -44,7 +44,8 @@
   const SCENES = {
     'moon-garden':   { name: '月海花园', lines: ['夜色尚静，世界正在继续', '窗边的灯还亮着', '她在翻你摘过的句子'] },
     'wind-plain':    { name: '风眠浮原', lines: ['风从纸外吹过', '白昼很长，足够慢慢写', '远处的草光一明一暗'] },
-    'cloud-terminal':{ name: '云上列车终点站', lines: ['列车停在这里，不催你走', '远方的微光收拢了一点', '归来时总有位置留着'] }
+    'cloud-terminal':{ name: '云上列车终点站', lines: ['列车停在这里，不催你走', '远方的微光收拢了一点', '归来时总有位置留着'] },
+    'summer-cicada': { name: '夏日蝉鸣', lines: ['庭院里的光慢慢移过窗沿', '蝉声把白昼拉得很长', '她把没写完的那页压在书下'] }
   };
   function dayPart() {
     const h = new Date().getHours();
@@ -57,7 +58,6 @@
     $$('.scene-bg').forEach(el => el.classList.toggle('is-active', el.dataset.scene === key));
     $$('.scene-choice').forEach(el => el.classList.toggle('on', el.dataset.scene === key));
     $('#homeStatus').textContent = SCENES[key].name + ' · ' + dayPart() + ' · ' + rand(SCENES[key].lines);
-    $('#herLabel').innerHTML = rand(SCENES[key].lines) + '<br><small>静息档 · 不弹窗 · 不催促</small>';
     if (persist) save();
   }
 

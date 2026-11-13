@@ -8,11 +8,12 @@
 </head>
 <body data-module="home" data-scene="moon-garden" data-tab="article" data-mode="companion">
 
-<!-- 场景层 0：只用静帧 + CSS 环境呼吸，不使用视频背景 -->
+<!-- 场景层 0：带角色的静帧背景 + CSS 环境呼吸，不使用视频背景；角色画在底图里，不另设锚位/剪影 -->
 <div id="sceneLayer" aria-hidden="true">
   <div class="scene-bg is-active" data-scene="moon-garden"></div>
   <div class="scene-bg" data-scene="wind-plain"></div>
   <div class="scene-bg" data-scene="cloud-terminal"></div>
+  <div class="scene-bg" data-scene="summer-cicada"></div>
   <div class="scene-scrim"></div>
   <div id="ambient">
     <span class="mote" style="--x:18%;--y:26%;--d:0s;--t:5s"></span>
@@ -23,13 +24,6 @@
     <span class="mote" style="--x:8%;--y:58%;--d:2.1s;--t:4.4s"></span>
   </div>
 </div>
-
-<!-- 身体层 2：位置锚，跨模块不重载、不改变坐标 -->
-<div id="herAnchor" aria-hidden="true">
-  <div class="glow"></div>
-  <div class="sil"><i class="hr"></i><i class="hd"></i><i class="bd"></i></div>
-</div>
-<div id="herLabel">她在窗边翻旧摘句<br><small>静息档 · 不弹窗 · 不催促</small></div>
 
 <!-- 常驻壳 -->
 <nav id="entry" aria-label="一级入口">
@@ -147,6 +141,7 @@
   <button class="scene-choice" data-scene="moon-garden"><b>月海花园</b><small>主居所 · 长期生活</small></button>
   <button class="scene-choice" data-scene="wind-plain"><b>风眠浮原</b><small>白昼共处</small></button>
   <button class="scene-choice" data-scene="cloud-terminal"><b>云上列车终点站</b><small>离开与归来</small></button>
+  <button class="scene-choice" data-scene="summer-cicada"><b>夏日蝉鸣</b><small>庭院 · 白昼</small></button>
 </div>
 
 <!-- 电话：双向语音 -->
