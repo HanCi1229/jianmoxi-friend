@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>笺墨溪-Friend · 三层共在｜前端展示 1440×900</title>
+<style>
+:root{--z:1;--ink:#2C2C2A;--ink2:#5F5E5A;--ink3:#888780;--line:rgba(44,44,42,.14);--purple:#534AB7;--purple50:#EEEDFE;--purple200:#AFA9EC;--paper:#FFFFFF;--soft:#F7F6F2;--amber:#C08A3E}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E8E7E1;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.toolbar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);padding:13px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.toolbar b{font-size:14px;font-weight:500;margin-right:12px}
+button{font:inherit;font-size:13px;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 13px;cursor:pointer}
+button:hover{border-color:var(--purple);color:var(--purple)}
+button.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+.toolbar .hint{font-size:12px;color:var(--ink3);margin-left:auto}
+#canvas{zoom:var(--z);padding:36px 32px 90px;width:max-content}
+.rules{width:1440px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 30px;margin-bottom:26px}
+.rules h3{font-size:13px;font-weight:500;color:var(--purple);margin-bottom:5px}
+.rules p{font-size:13px;color:var(--ink2);line-height:1.8}
+code{font-family:ui-monospace,Consolas,monospace;font-size:12px;background:var(--soft);padding:1px 5px;border-radius:4px}
+.head{width:1440px;display:flex;align-items:baseline;gap:14px;margin:30px 0 12px;scroll-margin-top:72px}
+.head:first-of-type{margin-top:0}
+.head h2{font-size:18px;font-weight:500}
+.head span{font-size:13px;color:var(--ink3)}
+.artboard{width:1440px;height:900px;position:relative;overflow:hidden;background:var(--purple50);border:1px solid var(--line)}
+/* 场景层 */
+.scene{position:absolute;inset:0;z-index:0}
+.moon{position:absolute;right:180px;top:180px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.55)}
+.hill{position:absolute;border-radius:50% 50% 0 0;background:rgba(175,169,236,.28)}
+/* 身体层：固定锚位，跨屏不变 */
+.anchor{position:absolute;right:96px;bottom:150px;width:150px;height:230px;z-index:2}
+.sil{position:absolute;left:34px;bottom:0;width:82px;height:190px;animation:breathe 5s ease-in-out infinite}
+.sil .hd{position:absolute;left:20px;top:0;width:44px;height:52px;border-radius:50% 50% 46% 46%;background:rgba(83,74,183,.42)}
+.sil .hr{position:absolute;left:12px;top:6px;width:64px;height:62px;border-radius:50% 50% 30% 30%;background:rgba(83,74,183,.20)}
+.sil .bd{position:absolute;left:8px;top:48px;width:68px;height:142px;border-radius:36px 36px 12px 12px;background:rgba(83,74,183,.34)}
+.glow{position:absolute;left:0;top:26px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 70%);animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translateY(0);opacity:.72}50%{transform:translateY(-4px);opacity:.95}}
+@media (prefers-reduced-motion:reduce){.sil,.glow{animation:none}}
+.herlabel{position:absolute;right:262px;bottom:180px;text-align:right;font-size:14px;color:var(--ink2);line-height:1.8;z-index:2}
+.herlabel span{color:var(--ink3);font-size:13px}
+/* 纸面层 */
+.paper{position:absolute;z-index:3;background:#FFFFFF;border-radius:20px;box-shadow:0 26px 70px rgba(44,44,42,.12);overflow:hidden}
+.ptools{height:56px;display:flex;align-items:center;gap:22px;padding:0 40px;font-size:13px;color:var(--ink2);border-bottom:1px solid rgba(44,44,42,.07)}
+.ptools .on{color:var(--purple);border-bottom:2px solid var(--purple);padding-bottom:4px}
+.ptools .r{margin-left:auto;display:flex;gap:18px;color:var(--ink3)}
+.doc{font-size:19px;line-height:2.1;color:var(--ink)}
+.doc-meta{font-size:13px;color:var(--ink3)}
+.doc-title{font-size:28px;font-weight:500}
+.stuck{display:inline-block;background:#E6F1FB;border-radius:6px;padding:4px 10px}
+/* 共时层：贴句子的信号，不进侧栏 */
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--purple);margin-left:8px;vertical-align:middle;animation:breathe 3.5s ease-in-out infinite}
+.say{position:absolute;z-index:5;width:352px;background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.8;box-shadow:0 12px 32px rgba(44,44,42,.10)}
+.say .k{font-size:12px;color:var(--purple);margin-bottom:8px}
+.say .acts{font-size:12px;color:var(--purple);margin-top:12px}
+.say.disagree .k{color:var(--amber)}
+.gaze{position:absolute;z-index:4;border-top:1px dashed rgba(83,74,183,.35);transform-origin:0 50%;pointer-events:none}
+/* 首页控件（沿用已定版式，不增不删） */
+.entry{position:absolute;left:96px;top:56px;display:flex;align-items:baseline;gap:24px;z-index:5}
+.return{position:absolute;left:240px;bottom:136px;display:flex;align-items:baseline;gap:16px;font-size:14px;color:var(--ink2);z-index:5}
+.return .m{font-size:13px;color:var(--ink3)}
+.return .go{font-size:13px;color:var(--purple)}
+.inputbar{position:absolute;left:240px;bottom:48px;width:960px;height:72px;display:flex;align-items:center;gap:18px;padding:0 20px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:12px;z-index:5;font-size:15px;color:var(--ink3)}
+.chip{border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:13px;color:var(--ink2);background:rgba(255,255,255,.6)}
+.send{width:36px;height:36px;border-radius:50%;background:var(--purple);color:#fff;display:grid;place-items:center;font-size:16px}
+/* 标注层 */
+.notes{position:absolute;inset:0;pointer-events:none;z-index:9}
+.outline{position:absolute;border:1px dashed var(--purple200)}
+.tag{position:absolute;top:-10px;left:10px;background:var(--purple50);color:var(--purple);font-size:12px;padding:1px 8px;border-radius:4px;white-space:nowrap}
+.dim{position:absolute;color:var(--purple);font-size:12px;background:rgba(255,255,255,.88);padding:2px 7px;border-radius:4px;white-space:nowrap}
+.no-notes .notes{display:none}
+.desc{width:1440px;background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:16px 22px;font-size:13px;color:var(--ink2);line-height:1.9}
+.desc b{color:var(--ink);font-weight:500}
+.desc em{font-style:normal;color:var(--purple)}
+/* 位置连续条 */
+.cont{width:1440px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:24px}
+.cont .txt{width:430px;font-size:13px;color:var(--ink2);line-height:1.9}
+.three{display:flex;gap:16px}
+.mini{position:relative;width:290px;height:150px;background:var(--purple50);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.mini .lbl{position:absolute;left:12px;top:10px;font-size:12px;color:var(--ink2)}
+.mini .blk{position:absolute;left:16px;top:36px;width:196px;height:96px;background:#fff;border-radius:5px;opacity:.92}
+.mini .a{position:absolute;right:16px;bottom:14px;width:16px;height:26px;border-radius:8px 8px 3px 3px;background:rgba(83,74,183,.5)}
+.mini .cap{position:absolute;left:12px;bottom:8px;font-size:11px;color:var(--purple)}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <b>三层共在 · 前端展示 1440×900</b>
+  <button onclick="go('f1')">首页</button>
+  <button onclick="go('f2')">陪伴</button>
+  <button onclick="go('f3')">阅读</button>
+  <button onclick="go('f4')">沉浸</button>
+  <span style="width:12px"></span>
+  <button class="on" onclick="setZoom(1)">1:1</button>
+  <button onclick="fit()">适配宽度</button>
+  <button id="bn" class="on" onclick="toggleNotes()">尺寸标注</button>
+  <span class="hint">按钮不增不删 · 不新增一级入口 · 人物仍 CANDIDATE，用剪影占位</span>
+</div>
+
+<div id="canvas">
+<div class="rules">
+  <div><h3>① 位置锚，不是浮窗</h3><p>她画在<b>场景层</b>里，固定在 <code>right 96 / bottom 150</code> 的 150×230 槽位；首页→陪伴→阅读坐标不变，切模块不重载、不抢焦点。</p></div>
+  <div><h3>② 遮挡关系决定「住在世界里」</h3><p>层级 <code>场景 0 → 她 2 → 纸面 3</code>。纸面自然遮住她的一部分，所以她是环境里的人，不是浮在软件上的桌宠窗。</p></div>
+  <div><h3>③ 右侧 240px 是她的领地</h3><p>所有纸面右侧留 ≥240px 场景留白，首页聊天框右缘也停在 1200。这条留白约束让位置锚在三屏都成立。</p></div>
+  <div><h3>④ 共时信号贴在句子上</h3><p>句末一个 7px 圆点，展开才是一行便签；<b>不定时建议／攀谈／批注</b>全部绑具体句子，点得回出处，不往侧栏堆卡片。</p></div>
+  <div><h3>⑤ 强度三档，不弹窗不出声</h3><p>静息＝场景 3–5 秒微动；共时＝句旁圆点＋视线；对话＝常驻聊天框。reduced-motion 时全部降级为静态。</p></div>
+  <div><h3>⑥ 沉浸模式零出现</h3><p>纯白满屏、零浮层。陪伴越满，沉浸越空，落差本身就是「两种打扰权限」的视觉说明；正文实底 <code>≥4.5:1</code>，不用 backdrop-blur。</p></div>
+</div>
+
+<!-- 01 首页 -->
+<div class="head" id="f1"><h2>01 首页 · 桌面大屏</h2><span>身体层：静息档｜跨日层：归来一行｜版式沿用已定稿，不改按钮</span></div>
+<div class="artboard">
+  <div class="scene"><div class="moon"></div><div class="hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div><div class="hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div></div>
+  <div class="entry"><div style="font-size:14px;color:var(--purple);border-bottom:2px solid var(--purple);padding-bottom:6px">聊天</div><div style="font-size:14px;color:var(--ink3)">写作</div></div>
+  <div class="anchor"><div class="glow"></div><div class="sil"><div class="hr"></div><div class="hd"></div><div class="bd"></div></div></div>
+  <div class="herlabel">她在窗边翻旧摘句<br><span>静息档 · 不弹窗 · 不催促</span></div>
+  <div class="return"><span>你停在《故都的秋》第 3 段</span><span class="m">昨天 23:41 · 离开 19 小时</span><span class="go">点回原文 →</span></div>
+  <div class="inputbar"><span style="font-size:18px;color:var(--ink2)">≡</span><span style="flex:1">想说点什么……</span><span style="font-size:18px;color:var(--ink2)">＋</span><span class="chip">语音</span><span class="chip">电话</span><span class="send">↑</span></div>
+  <div class="notes">
+    <div class="dim" style="left:24px;top:24px">无顶栏 · 安全边距 96</div>
+    <div class="outline" style="right:96px;bottom:150px;width:150px;height:230px"><span class="tag">① 位置锚 · 跨屏不变</span></div>
+    <div class="outline" style="left:240px;top:744px;width:560px;height:24px"><span class="tag">③ 跨日层 · 归来一行</span></div>
+    <div class="outline" style="left:240px;top:780px;width:960px;height:72px"><span class="tag">常驻聊天框 960×72 · 右缘 1200</span></div>
+    <div class="dim" style="right:24px;top:24px">右侧 240px 不铺控件</div>
+  </div>
+</div>
+<div class="desc"><b>前端要点：</b>首页只加身体层（剪影＋呼吸光点），位置落在已有那行「她在窗边翻旧摘句」下方，<em>不改已认可的排布、不增按钮</em>。归来仍是跨日层唯一的可见形态。</div>
+
+<!-- 02 陪伴 -->
+<div class="head" id="f2"><h2>02 文章创作 · 陪伴模式</h2><span>三层齐：她在同一锚位｜视线落到当前句｜不定时的一句贴在句旁</span></div>
+<div class="artboard">
+  <div class="scene"><div class="moon" style="opacity:.7"></div><div class="hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div><div class="hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div></div>
+  <div class="anchor"><div class="glow"></div><div class="sil"><div class="hr"></div><div class="hd"></div><div class="bd"></div></div></div>
+  <div class="gaze" style="left:760px;top:452px;width:520px;transform:rotate(21deg)"></div>
+  <div class="say" style="left:790px;top:296px"><div class="k">② 不定时的一句 · 绑在第 2 段末</div>「可是」或许可以留着，后面那段已经替它作了回答。<div class="acts">展开 · 忽略 · 点回出处 ↗</div></div>
+  <div class="say disagree" style="left:790px;top:470px"><div class="k">② 她会不同意 · 攀谈</div>我不太同意这一段「来得静」——你昨天写的那句更静。<div class="acts">《故都的秋》第 3 段 ↗ · 展开</div></div>
+  <div class="paper" style="left:96px;top:96px;width:1008px;height:708px">
+    <div class="ptools"><span>写作 › 文章创作</span><span style="color:var(--ink3)">沉浸</span><span class="on">陪伴</span><span class="r"><span>字号 A− A＋</span><span>自动保存</span><span>完成标记</span><span>导出</span><span>场景切换 ▾</span><span>语音输入</span><span>电话</span></span></div>
+    <div style="padding:48px 130px 0">
+      <div class="doc-title">故都的秋</div>
+      <div class="doc-meta" style="margin-top:10px">草稿 · 最后编辑 23:41 · 切换模式不丢光标</div>
+      <div class="doc" style="margin-top:36px">秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。<br>我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这「秋」<span class="dot"></span><br><span class="stuck">可是这秋，来得 ▏ 上次卡住的那句</span></div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="outline" style="left:96px;top:96px;width:1008px;height:708px"><span class="tag">实底纸面 1008×708 · 三条横栏全取消</span></div>
+    <div class="outline" style="right:96px;bottom:150px;width:150px;height:230px"><span class="tag">① 同一锚位</span></div>
+    <div class="outline" style="left:1104px;top:96px;width:240px;height:708px"><span class="tag">③ 右侧场景留白 240</span></div>
+    <div class="dim" style="left:24px;bottom:16px">跨日层仍在首页归来一行，此处不另设入口</div>
+    <div class="dim" style="right:24px;top:24px">虚线＝视线示意，实现时由微动效替代，不画实线</div>
+  </div>
+</div>
+<div class="desc"><b>前端要点：</b>共时层不再是右侧一整列 AI 卡片，而是<em>句末圆点 → 展开一行 → 点回出处</em>；「她会不同意」用另一种语气色，仍不代笔。两条便签都在纸面之外，正文不被盖住。实时检测、不定时建议、攀谈三条原判断原样保留。</div>
+
+<!-- 03 阅读 -->
+<div class="head" id="f3"><h2>03 阅读</h2><span>位置连续｜选中句才出「摘录」｜一言原样保留、出处可点回</span></div>
+<div class="artboard">
+  <div class="scene"><div class="moon" style="opacity:.45"></div><div class="hill" style="right:-160px;bottom:-220px;width:900px;height:520px;opacity:.6"></div><div class="hill" style="left:-220px;bottom:-300px;width:780px;height:520px;opacity:.6"></div></div>
+  <div class="anchor"><div class="glow"></div><div class="sil" style="opacity:.7"><div class="hr"></div><div class="hd"></div><div class="bd"></div></div></div>
+  <div class="herlabel">她仍在窗边<br><span>静息档 · 跨模块不消失</span></div>
+  <div class="paper" style="left:96px;top:96px;width:1104px;height:708px">
+    <div class="ptools"><span>写作 › 阅读</span><span style="color:var(--ink3)">书库</span><span class="on">正文</span><span class="r"><span>分类</span><span>收藏</span><span>读后感</span><span>场景切换 ▾</span><span>语音输入</span><span>电话</span></span></div>
+    <div style="display:flex;height:652px">
+      <div style="width:224px;border-right:1px solid rgba(44,44,42,.07);padding:32px 24px;font-size:14px;color:var(--ink3);line-height:2.6">作品<br>作者<br>主题分类<br>语录库<br><span style="color:var(--purple)">阅读断点</span></div>
+      <div style="flex:1;padding:40px 60px">
+        <div class="doc-title" style="font-size:24px">故都的秋</div>
+        <div class="doc-meta" style="margin-top:8px">郁达夫 · 一九三四年</div>
+        <div class="doc" style="margin-top:30px;font-size:18px">秋天，无论在什么地方的秋天，总是好的；<br><span style="background:#F4F1E4;padding:2px 4px">可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。<span class="dot"></span></span></div>
+        <div class="say" style="position:relative;left:0;top:26px;width:420px;box-shadow:none;background:#FAF9F5"><div class="k">1 摘录 · 只在选中时出现</div>带书名／作者／章节，点一下跳回原文。<div class="acts">摘录 · 点回原文 ↗</div></div>
+        <div style="margin-top:36px;border-top:1px solid var(--line);padding-top:22px;font-size:15px;color:var(--ink2);line-height:2">6 一言 · 原样保留<br><span style="color:var(--ink3);font-size:13px">文学／古诗文／影视，每条带署名、作品名、UUID，出处可点回</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="outline" style="right:96px;bottom:150px;width:150px;height:230px"><span class="tag">① 锚位不变 · 位置连续</span></div>
+    <div class="outline" style="left:96px;top:96px;width:1104px;height:708px"><span class="tag">纸面右缘 1200 · 右侧仍留 240</span></div>
+    <div class="dim" style="left:24px;top:24px">场景更淡一层，避免与正文抢对比</div>
+  </div>
+</div>
+<div class="desc"><b>前端要点：</b>阅读屏保持同一锚位与同一右侧留白，证明她「不是陪伴模式专属」。摘录与一言都只在选中／内容处出现，<em>不新开页面、不新加入口</em>。</div>
+
+<!-- 04 沉浸 -->
+<div class="head" id="f4"><h2>04 文章创作 · 沉浸模式</h2><span>纯白满屏｜零浮层｜她不出现 —— 与第 02 屏形成落差</span></div>
+<div class="artboard" style="background:#FFFFFF">
+  <div class="ptools" style="position:relative;z-index:3;border-bottom:1px solid rgba(44,44,42,.07)"><span>写作 › 文章创作</span><span class="on">沉浸</span><span style="color:var(--ink3)">陪伴</span><span class="r"><span>字号 A− A＋</span><span>自动保存</span><span>完成标记</span><span>导出</span></span></div>
+  <div style="padding:88px 0 0;width:800px;margin:0 auto">
+    <div class="doc-title">故都的秋</div>
+    <div class="doc-meta" style="margin-top:10px">草稿 · 自动保存</div>
+    <div class="doc" style="margin-top:44px">秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。<br>我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这「秋」，这故都的秋味。<br>可是这秋，来得 ▏</div>
+  </div>
+  <div class="notes">
+    <div class="dim" style="left:24px;top:24px">场景层 0 · 身体层 0 · 共时层 0</div>
+    <div class="outline" style="left:320px;top:64px;width:800px;height:700px"><span class="tag">正文 800 居中 · 无侧栏</span></div>
+    <div class="dim" style="right:24px;bottom:16px">此处右侧不给场景留白</div>
+  </div>
+</div>
+<div class="desc"><b>前端要点：</b>同一份稿子，只切「打扰权限」：陪伴屏三层全开、沉浸屏三层全关。切换不重载、不丢光标；<em>视觉落差由背景与留白承担，不加动效提示</em>。</div>
+
+<!-- 位置连续性 -->
+<div class="head"><h2>位置连续性 · 三屏同一个锚</h2><span>切模块时她不消失、不移动、不重新入场</span></div>
+<div class="cont">
+  <div class="txt"><b>为什么不用浮窗桌宠</b><br>浮窗永远在纸面之上，视觉上是「软件加了个挂件」；锚位在纸面之下，纸面会自然遮住她，才是「她本来就在那个世界里」。桌宠的新鲜感衰减，靠的是位置与遮挡关系补回来。<br><span style="color:var(--ink3)">人物仍 CANDIDATE：先用剪影与局部动作，不着正式形象。</span></div>
+  <div class="three">
+    <div class="mini"><div class="lbl">首页</div><div class="blk" style="left:40px;top:70px;width:180px;height:52px"></div><div class="a"></div><div class="cap">right 96 / bottom 150</div></div>
+    <div class="mini"><div class="lbl">陪伴</div><div class="blk"></div><div class="a"></div><div class="cap">同一坐标 · 被纸面遮一部分</div></div>
+    <div class="mini"><div class="lbl">阅读</div><div class="blk" style="left:12px;top:36px;width:212px"></div><div class="a"></div><div class="cap">同一坐标 · 静息档</div></div>
+  </div>
+</div>
+
+</div>
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function setZoom(v){document.documentElement.style.setProperty('--z',v)}
+function fit(){var w=document.documentElement.clientWidth-64;setZoom(Math.min(1,w/1440))}
+function toggleNotes(){var c=document.getElementById('canvas');c.classList.toggle('no-notes');document.getElementById('bn').classList.toggle('on')}
+</script>
+</body>
+</html>

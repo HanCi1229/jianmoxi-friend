@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>笺墨溪 · Friend　文字创作世界</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body data-module="home" data-scene="moon-garden" data-tab="article" data-mode="companion">
+
+<!-- 场景层 0：只用静帧 + CSS 环境呼吸，不使用视频背景 -->
+<div id="sceneLayer" aria-hidden="true">
+  <div class="scene-bg is-active" data-scene="moon-garden"></div>
+  <div class="scene-bg" data-scene="wind-plain"></div>
+  <div class="scene-bg" data-scene="cloud-terminal"></div>
+  <div class="scene-scrim"></div>
+  <div id="ambient">
+    <span class="mote" style="--x:18%;--y:26%;--d:0s;--t:5s"></span>
+    <span class="mote" style="--x:72%;--y:18%;--d:1.4s;--t:4.2s"></span>
+    <span class="mote" style="--x:86%;--y:52%;--d:2.6s;--t:5.6s"></span>
+    <span class="mote" style="--x:34%;--y:74%;--d:.7s;--t:4.8s"></span>
+    <span class="mote" style="--x:58%;--y:38%;--d:3.2s;--t:5.2s"></span>
+    <span class="mote" style="--x:8%;--y:58%;--d:2.1s;--t:4.4s"></span>
+  </div>
+</div>
+
+<!-- 身体层 2：位置锚，跨模块不重载、不改变坐标 -->
+<div id="herAnchor" aria-hidden="true">
+  <div class="glow"></div>
+  <div class="sil"><i class="hr"></i><i class="hd"></i><i class="bd"></i></div>
+</div>
+<div id="herLabel">她在窗边翻旧摘句<br><small>静息档 · 不弹窗 · 不催促</small></div>
+
+<!-- 常驻壳 -->
+<nav id="entry" aria-label="一级入口">
+  <button data-go="home" class="on">桌面</button>
+  <button data-go="chat">聊天</button>
+  <button data-go="writing">写作</button>
+</nav>
+<div id="globalTools">
+  <button id="btnScene" title="场景切换">场景切换 ▾</button>
+  <button id="btnVoice" title="语音输入">语音输入</button>
+  <button id="btnCall" title="电话">电话</button>
+</div>
+
+<!-- 01 首页 · 桌面大屏 -->
+<section class="view" id="view-home">
+  <div id="returnLine">
+    <span id="returnText">你停在《故都的秋》第 3 段</span>
+    <small id="returnMeta"></small>
+    <a id="returnGo" href="#">点回原文 →</a>
+  </div>
+  <div id="homeStatus">月海花园 · 夜色尚静</div>
+  <div class="inputbar" id="homeBar">
+    <button class="ic" id="homeHistory" title="对话记录">≡</button>
+    <input id="homeInput" placeholder="想说点什么……" autocomplete="off">
+    <button class="ic" id="homeAttach" title="上下文">＋</button>
+    <button class="send" id="homeSend" title="发送">↑</button>
+  </div>
+  <div id="homeReply" hidden></div>
+</section>
+
+<!-- 02 聊天模块 -->
+<section class="view" id="view-chat">
+  <div class="chat-paper">
+    <div class="chat-head"><span>对话</span><small>历史收在 ≡ 里 · 用完退回桌面</small></div>
+    <div id="chatLog" class="chat-log"></div>
+    <div class="inputbar">
+      <button class="ic" id="chatHistory" title="对话记录">≡</button>
+      <input id="chatInput" placeholder="想说点什么……" autocomplete="off">
+      <button class="ic" id="chatAttach" title="上下文">＋</button>
+      <button class="send" id="chatSend" title="发送">↑</button>
+    </div>
+  </div>
+</section>
+
+<!-- 03 写作模块 -->
+<section class="view" id="view-writing">
+  <div class="paper" id="paper">
+    <div class="paper-tools">
+      <span class="crumb">写作</span>
+      <button data-tab="article" class="on">文章创作</button>
+      <button data-tab="reading">阅读</button>
+      <span class="sep"></span>
+      <button data-mode="immersive">沉浸</button>
+      <button data-mode="companion" class="on">陪伴</button>
+      <span class="r">
+        <button id="btnFontDown">A−</button><button id="btnFontUp">A＋</button>
+        <span id="saveState">自动保存</span>
+        <button id="btnDone">完成标记</button>
+        <button id="btnExport">导出</button>
+      </span>
+    </div>
+
+    <!-- 文章创作 -->
+    <div class="tab" id="tab-article">
+      <div class="doc-wrap">
+        <input id="docTitle" value="故都的秋" aria-label="文章标题">
+        <div class="doc-meta"><span id="docMeta">草稿 · 同一份稿子，切换不丢光标</span></div>
+        <div id="editor" contenteditable="true" spellcheck="false" aria-label="正文"></div>
+      </div>
+      <!-- 共时层：贴在当前段，不写进正文 -->
+      <div id="syncLayer">
+        <button id="syncDot" class="sync-dot" title="她有一句，点开看看" hidden></button>
+        <div id="sayCard" class="say" hidden>
+          <div class="k" id="sayK">不定时的一句</div>
+          <div class="t" id="sayT"></div>
+          <div class="acts">
+            <a href="#" id="sayExpand">展开</a> · <a href="#" id="sayIgnore">忽略</a> · <a href="#" id="saySource">点回出处 ↗</a>
+          </div>
+        </div>
+      </div>
+      <div id="companionFooter">
+        建议来源：阅读摘录／写作切入点／一言（文学 · 古诗文 · 影视）· 每条都能点回出处
+      </div>
+    </div>
+
+    <!-- 阅读 -->
+    <div class="tab" id="tab-reading" hidden>
+      <aside class="shelf">
+        <div class="shelf-head">书库</div>
+        <input id="shelfSearch" placeholder="搜索作品 / 作者 / 正文">
+        <div id="shelfList" class="shelf-list"></div>
+        <div class="shelf-foot">逐字语录库 · 原文位置可回查</div>
+      </aside>
+      <div class="reader" id="reader">
+        <h2 id="readTitle">故都的秋</h2>
+        <div class="read-meta" id="readMeta"></div>
+        <div id="readBody"></div>
+        <div class="reader-section">
+          <div class="sec-title">摘录</div>
+          <div id="excerptList" class="cards"></div>
+        </div>
+        <div class="reader-section">
+          <div class="sec-title">一言 · 原样保留</div>
+          <div id="quoteList" class="cards"></div>
+        </div>
+      </div>
+      <button id="btnExcerpt" class="float-excerpt" hidden>摘录</button>
+    </div>
+  </div>
+</section>
+
+<!-- 场景切换抽屉 -->
+<div id="sceneDrawer" class="drawer" hidden>
+  <div class="drawer-head">切换场景 <button id="drawerClose">×</button></div>
+  <button class="scene-choice" data-scene="moon-garden"><b>月海花园</b><small>主居所 · 长期生活</small></button>
+  <button class="scene-choice" data-scene="wind-plain"><b>风眠浮原</b><small>白昼共处</small></button>
+  <button class="scene-choice" data-scene="cloud-terminal"><b>云上列车终点站</b><small>离开与归来</small></button>
+</div>
+
+<!-- 电话：双向语音 -->
+<div id="callPanel" class="call" hidden>
+  <div class="call-head"><span id="callState">通话中</span><button id="callHang">挂断</button></div>
+  <div class="call-body"><div class="call-orb"></div><p id="callText">按住下方说话，她会出声回答。</p></div>
+  <button id="callTalk">按住说话</button>
+</div>
+
+<div id="toast" role="status"></div>
+<script src="./app.js" defer></script>
+</body>
+</html>

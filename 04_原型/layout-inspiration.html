@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>笺墨溪-Friend · 前端布局灵感板</title>
+<style>
+:root{--z:1;--ink:#111111;--ink2:#787774;--ink3:#A6A39C;--line:#EAEAEA;--canvas:#F1EFE8;--warm:#F7F6F3;--accent:#534AB7;--block:#E9E7E1;--bar:#CFCBC2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--canvas);font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink)}
+.toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:13px 24px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.toolbar b{font-size:14px;font-weight:500;margin-right:12px}
+button{font:inherit;font-size:13px;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:hover{border-color:var(--accent);color:var(--accent)}
+#canvas{zoom:var(--z);padding:32px 0 100px;width:960px;margin:0 auto}
+.hero{margin-bottom:28px}
+.hero h1{font-size:28px;font-weight:500;letter-spacing:-.02em}
+.hero p{font-size:14px;color:var(--ink2);margin-top:10px;line-height:1.7}
+.tokens{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;margin-bottom:44px}
+.tokens h3{font-size:13px;font-weight:500;color:var(--accent);margin-bottom:7px}
+.tokens p{font-size:13px;color:var(--ink2);line-height:1.8}
+.tokens code{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--ink);background:var(--warm);padding:1px 5px;border-radius:4px}
+section{margin-bottom:44px;scroll-margin-top:76px}
+.shead{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+.shead h2{font-size:18px;font-weight:500}
+.shead span{font-size:12px;color:var(--ink3)}
+.board{width:960px;height:540px;position:relative;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.notes{background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:16px 20px;font-size:13px;color:var(--ink2);line-height:1.9}
+.notes b{color:var(--ink);font-weight:500}
+.notes em{font-style:normal;color:var(--accent)}
+.blk{position:absolute;background:var(--block);border-radius:4px}
+.ln{position:absolute;height:8px;background:var(--bar);border-radius:4px}
+.ln.dark{background:#B7B2A8}
+.acc{position:absolute;background:var(--accent);border-radius:4px}
+.dim{position:absolute;font-size:12px;color:var(--accent);background:rgba(255,255,255,.9);padding:2px 7px;border-radius:4px}
+.frame{position:absolute;border:1px dashed #AFA9EC}
+.serif{font-family:Georgia,"Songti SC","SimSun",serif}
+.darkboard{background:#14141A}
+.darkboard .blk{background:#2A2A33}
+.darkboard .ln{background:#454550}
+.darkboard .dim{background:rgba(20,20,26,.9);color:#AFA9EC}
+.darkboard .frame{border-color:#5D5A86}
+.routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:24px}
+.route{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.route h3{font-size:15px;font-weight:500;margin-bottom:8px}
+.route p{font-size:13px;color:var(--ink2);line-height:1.8}
+.bad{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-size:13px;color:var(--ink2);line-height:1.9}
+.bad b{color:var(--ink);font-weight:500}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <b>前端布局灵感板</b>
+  <button onclick="go('s1')">01 无横栏</button>
+  <button onclick="go('s2')">02 中央窄栏</button>
+  <button onclick="go('s3')">03 左主右辅</button>
+  <button onclick="go('s4')">04 编辑式</button>
+  <button onclick="go('s5')">05 输入即首屏</button>
+  <button onclick="go('s6')">06 三栏层级</button>
+  <button onclick="fit()">适配宽度</button>
+  <button onclick="setZoom(1)">1:1</button>
+</div>
+
+<div id="canvas">
+<div class="hero">
+  <h1>前端设计层面 · 六种布局范式</h1>
+  <p>只谈版式、栅格、留白、字号层级与视觉语言，不谈交互逻辑与按钮去留。参考：Cursor、Linear、Claude / Anthropic、Perplexity、Notion、v0、Lovable、Replit，以及 2026 AI Minimalism 与编辑式反向路线。每张 960×540，默认 1:1。</p>
+</div>
+
+<div class="tokens">
+  <div><h3>Type 字号阶梯</h3><p>固定阶梯 <code>12 / 14 / 16 / 20 / 28 / 40</code>，不出现随意中间值；正文 <code>19px / 1.6–2.1</code>；标题左对齐、字距收紧；最多两种字重；衬线只用于大标题。</p></div>
+  <div><h3>Space 间距</h3><p>组件内 <code>8 / 16 / 24 / 32 / 48</code>，区块间 <code>60 / 80 / 100</code>，安全边距 <code>96</code>；留白是版式主体，不是剩余空间。</p></div>
+  <div><h3>Measure 栏宽</h3><p>长文 <code>640</code>／图文组合 <code>960</code>／宽版 <code>1280</code>；每行控制在 <code>65ch</code> 内；正文栏不随窗口拉满。</p></div>
+  <div><h3>Color 表面</h3><p>暖白 <code>#F7F6F3</code>、白 <code>#FFFFFF</code>、细线 <code>1px #EAEAEA</code>、文字 <code>#111111 / #787774</code>；<b>单一强调色</b>，只用在链接与一处高亮。</p></div>
+  <div><h3>Surface 分层</h3><p>只做三层：背景 / 抬起的卡 / 分隔线。靠底色一档之差和留白分层，不堆阴影、不叠卡片（嵌套 ≤ 2 层）。</p></div>
+  <div><h3>Motion 动效</h3><p><code>150–300ms</code>、只动 transform 与 opacity、一个动效概念、尊重 <code>prefers-reduced-motion</code>；无无限循环装饰动画。</p></div>
+</div>
+
+<section id="s1">
+  <div class="shead"><h2>01 产品即首屏 · 无顶部横栏</h2><span>Cursor / Claude / Perplexity</span></div>
+  <div class="board darkboard">
+    <div class="blk" style="left:0;top:0;width:960px;height:540px;background:#1B1B23;border-radius:0"></div>
+    <div class="blk" style="left:96px;top:96px;width:420px;height:250px;background:#23232D"></div>
+    <div class="ln" style="left:124px;top:132px;width:250px;height:16px"></div>
+    <div class="ln" style="left:124px;top:166px;width:330px"></div>
+    <div class="ln" style="left:124px;top:188px;width:300px"></div>
+    <div class="acc" style="left:124px;top:230px;width:200px;height:10px"></div>
+    <div class="ln" style="left:124px;top:264px;width:280px"></div>
+    <div class="blk" style="left:240px;top:428px;width:480px;height:56px;background:#2F2F3B;border-radius:12px"></div>
+    <div class="ln" style="left:268px;top:450px;width:220px;height:10px"></div>
+    <div class="acc" style="left:672px;top:440px;width:32px;height:32px;border-radius:50%"></div>
+    <div class="frame" style="left:96px;top:96px;width:420px;height:250px"></div>
+    <div class="dim" style="left:104px;top:74px">内容从 96px 安全边距起</div>
+    <div class="dim" style="left:248px;top:492px">唯一浮层：底部输入 480×56</div>
+    <div class="dim" style="right:24px;top:24px">顶部 0 横栏 · 0 导航</div>
+  </div>
+  <div class="notes"><b>版式：</b>整屏就是产品本体，没有一条贯穿的导航栏；控件浮在角落或底部，不占顶部通栏。<b>视觉：</b>暗底 + 一处强调色，层级靠字号差与留白，不靠边框。<br><em>对应我们的首页</em>：顶栏已去掉，剩下的问题只是「归来卡放哪、输入条多宽」。</div>
+</section>
+
+<section id="s2">
+  <div class="shead"><h2>02 中央窄栏 + 巨量留白</h2><span>AI Minimalism · Claude / OpenAI / iA Writer</span></div>
+  <div class="board" style="background:var(--warm)">
+    <div class="frame" style="left:160px;top:60px;width:640px;height:420px"></div>
+    <div class="dim" style="left:168px;top:38px">640px 阅读栏</div>
+    <div class="ln dark" style="left:160px;top:96px;width:300px;height:24px"></div>
+    <div class="ln" style="left:160px;top:140px;width:120px;height:8px"></div>
+    <div class="ln dark" style="left:160px;top:200px;width:620px;height:8px"></div>
+    <div class="ln dark" style="left:160px;top:226px;width:600px"></div>
+    <div class="ln dark" style="left:160px;top:252px;width:620px"></div>
+    <div class="ln dark" style="left:160px;top:278px;width:430px"></div>
+    <div class="acc" style="left:160px;top:320px;width:150px;height:14px;opacity:.25"></div>
+    <div class="ln dark" style="left:160px;top:356px;width:610px"></div>
+    <div class="dim" style="left:24px;top:250px">左侧留白 160</div>
+    <div class="dim" style="right:24px;top:250px">右侧留白 160</div>
+    <div class="dim" style="left:24px;bottom:24px">无侧栏 · 无工具栏 · 无卡片</div>
+  </div>
+  <div class="notes"><b>版式：</b>正文栏 640–720px 居中，四周留白 ≥ 96px，全屏只有文字。<b>视觉：</b>暖白底、近黑字、灰次级字，标题左对齐、两种字重；连工具栏都可以收起。<br><em>对应沉浸模式</em>：我们现稿是 800px 栏，可对照 640 的「更窄更静」一档。</div>
+</section>
+
+<section id="s3">
+  <div class="shead"><h2>03 左主右辅 · 细线分栏</h2><span>Cursor / Replit / 编辑器类</span></div>
+  <div class="board">
+    <div style="position:absolute;left:672px;top:0;width:288px;height:540px;background:var(--warm)"></div>
+    <div style="position:absolute;left:672px;top:0;width:1px;height:540px;background:var(--line)"></div>
+    <div class="frame" style="left:0;top:0;width:672px;height:540px"></div>
+    <div class="frame" style="left:672px;top:0;width:288px;height:540px"></div>
+    <div class="dim" style="left:16px;top:16px">主区 70% = 672</div>
+    <div class="dim" style="left:688px;top:16px">辅区 30% = 288</div>
+    <div class="ln" style="left:48px;top:48px;width:200px;height:8px"></div>
+    <div class="ln dark" style="left:48px;top:120px;width:560px;height:8px"></div>
+    <div class="ln dark" style="left:48px;top:146px;width:540px"></div>
+    <div class="ln dark" style="left:48px;top:172px;width:560px"></div>
+    <div class="acc" style="left:48px;top:212px;width:180px;height:12px;opacity:.22"></div>
+    <div class="ln dark" style="left:48px;top:248px;width:500px"></div>
+    <div class="blk" style="left:700px;top:64px;width:232px;height:120px"></div>
+    <div class="blk" style="left:700px;top:204px;width:232px;height:88px;background:#fff;border:1px solid var(--line)"></div>
+    <div class="blk" style="left:700px;top:452px;width:232px;height:44px;background:#fff;border:1px solid var(--line);border-radius:8px"></div>
+    <div class="dim" style="left:700px;top:312px">辅区只放一块批注卡</div>
+    <div class="dim" style="left:24px;bottom:20px">1px 细线分区，不用阴影</div>
+  </div>
+  <div class="notes"><b>版式：</b>70/30 分栏，分隔靠 1px 细线与辅区一档底色差（#FFF → #F7F6F3），不靠卡片投影。<b>视觉：</b>主区永远完整，浮层不压正文；辅区元素少且尺寸统一。<br><em>对应陪伴模式</em>：现稿 1008 / 432 正是这个比例，差别只在辅区的密度。</div>
+</section>
+
+<section id="s4">
+  <div class="shead"><h2>04 不对称编辑式 40 / 60</h2><span>Anthropic / Notion / PostHog · 反科技感路线</span></div>
+  <div class="board" style="background:#FBF9F4">
+    <div class="frame" style="left:48px;top:80px;width:384px;height:380px"></div>
+    <div class="dim" style="left:56px;top:58px">文字 40%</div>
+    <div class="serif" style="position:absolute;left:64px;top:132px;font-size:40px;line-height:1.25;color:#1A1A17">你停在<br>那句话里</div>
+    <div class="ln" style="left:64px;top:264px;width:300px;height:8px"></div>
+    <div class="ln" style="left:64px;top:288px;width:250px"></div>
+    <div class="acc" style="left:64px;top:340px;width:132px;height:36px;border-radius:6px"></div>
+    <div class="blk" style="left:456px;top:80px;width:456px;height:380px;background:#E8E4DA;border-radius:6px"></div>
+    <div style="position:absolute;left:700px;top:190px;width:150px;height:150px;border-radius:50%;background:#F5F1E7"></div>
+    <div class="dim" style="left:464px;top:58px">场景 / 视觉 60%</div>
+    <div class="dim" style="left:64px;bottom:24px">暖白 + 衬线大标题 + 单一强调色，零渐变零发光</div>
+  </div>
+  <div class="notes"><b>版式：</b>左右不等宽（40/60），打破「三张等宽卡」的模板感；文字左对齐，大标题用衬线，行距松。<b>视觉：</b>奶油底、近黑字、一处强调色，情绪靠排版而非特效。<br><em>对应首页归来</em>：归来卡可以是文字块，场景是留白里的另一半，不必做成浮层卡片。</div>
+</section>
+
+<section id="s5">
+  <div class="shead"><h2>05 输入框即首屏</h2><span>Perplexity / Lovable / v0</span></div>
+  <div class="board" style="background:#fff">
+    <div class="ln dark" style="left:400px;top:96px;width:160px;height:12px"></div>
+    <div class="blk" style="left:180px;top:196px;width:600px;height:72px;background:#fff;border:1px solid #D8D5CE;border-radius:14px"></div>
+    <div class="ln" style="left:212px;top:224px;width:240px;height:10px"></div>
+    <div class="acc" style="left:716px;top:216px;width:36px;height:36px;border-radius:10px"></div>
+    <div class="frame" style="left:180px;top:196px;width:600px;height:72px"></div>
+    <div class="dim" style="left:188px;top:174px">主视觉 600×72 · 唯一主角</div>
+    <div class="ln" style="left:280px;top:312px;width:400px;height:8px"></div>
+    <div class="ln" style="left:310px;top:340px;width:340px"></div>
+    <div class="ln" style="left:295px;top:368px;width:370px"></div>
+    <div class="dim" style="left:280px;top:290px">下面只放 3–4 条示例，不加卡片</div>
+    <div class="dim" style="left:24px;bottom:24px">首屏其余区域全部留白</div>
+  </div>
+  <div class="notes"><b>版式：</b>一个真实输入框就是全部主视觉，居中、宽 600 左右；下方 3–4 条示例文字，不做卡片墙。<b>视觉：</b>每屏只有一个主行动点，其余按钮退成文字或线框。<br><em>对应常驻聊天框</em>：现稿 960×72 在底部；这一版是把它抬成画面中心的另一种排版可能。</div>
+</section>
+
+<section id="s6">
+  <div class="shead"><h2>06 三栏层级 · 靠底色不靠边框</h2><span>Linear / Cody / 工作台类</span></div>
+  <div class="board">
+    <div style="position:absolute;left:0;top:0;width:200px;height:540px;background:var(--warm)"></div>
+    <div style="position:absolute;left:760px;top:0;width:200px;height:540px;background:var(--warm)"></div>
+    <div class="frame" style="left:0;top:0;width:200px;height:540px"></div>
+    <div class="frame" style="left:200px;top:0;width:560px;height:540px"></div>
+    <div class="frame" style="left:760px;top:0;width:200px;height:540px"></div>
+    <div class="dim" style="left:12px;top:12px">导航 200</div>
+    <div class="dim" style="left:212px;top:12px">主内容 560</div>
+    <div class="dim" style="left:772px;top:12px">上下文 200</div>
+    <div class="ln dark" style="left:24px;top:64px;width:120px;height:8px"></div>
+    <div class="ln" style="left:24px;top:104px;width:150px"></div>
+    <div class="ln" style="left:24px;top:132px;width:140px"></div>
+    <div class="ln" style="left:24px;top:160px;width:120px"></div>
+    <div class="ln dark" style="left:240px;top:72px;width:300px;height:18px"></div>
+    <div class="ln dark" style="left:240px;top:150px;width:480px;height:8px"></div>
+    <div class="ln dark" style="left:240px;top:176px;width:460px"></div>
+    <div class="acc" style="left:240px;top:212px;width:220px;height:14px;opacity:.2"></div>
+    <div class="ln dark" style="left:240px;top:250px;width:470px"></div>
+    <div class="blk" style="left:784px;top:72px;width:152px;height:96px;background:#fff;border:1px solid var(--line)"></div>
+    <div class="blk" style="left:784px;top:188px;width:152px;height:70px;background:#fff;border:1px solid var(--line)"></div>
+    <div class="dim" style="left:224px;bottom:16px">三档底色分层：白 / 暖白 / 白，不加第三条竖线</div>
+  </div>
+  <div class="notes"><b>版式：</b>窄导航 200 + 主内容 + 窄上下文 200，主区留白最大。<b>视觉：</b>层级靠两档底色差和栏宽差，边框只出现 1px；卡片不嵌套。<br><em>对应阅读</em>：现稿是 320 / 1120 两栏；三栏是另一种信息密度，可作对照。</div>
+</section>
+
+<div class="routes">
+  <div class="route"><h3>A · 暗色科技（Linear / Cursor）</h3><p>暗底为设计起点、单一霓虹强调、等宽字体点缀、bento 尺寸表达层级。工具感强，长时间读文字略费眼。</p></div>
+  <div class="route"><h3>B · 暖白编辑（Anthropic / Notion / Claude）</h3><p>奶油底、衬线标题、巨量留白、几乎无装饰。2026 被视作反模板路线，更贴长文与陪伴气质。<br><b>两条只是待选，不定，等你挑。</b></p></div>
+</div>
+<div class="bad"><b>反模板清单（Anti-slop）</b>：紫色渐变＋暗 mesh 背景、三张等宽功能卡、默认 Inter、全站发光与无限漂浮、卡片嵌套超过两层、每屏多个同等强度按钮、装饰性视差堆叠加。这些是「一眼看出是 AI 做的」主要来源。</div>
+
+</div>
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function setZoom(v){document.documentElement.style.setProperty('--z',v)}
+function fit(){setZoom(Math.min(1,Math.max(.35,(window.innerWidth-48)/960)))}
+</script>
+</body>
+</html>

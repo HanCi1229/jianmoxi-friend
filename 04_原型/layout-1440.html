@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>笺墨溪-Friend · 排版设计稿 1440×900</title>
+<style>
+:root{--z:1;--ink:#2C2C2A;--ink2:#5F5E5A;--ink3:#888780;--line:rgba(44,44,42,.14);--purple:#534AB7;--purple50:#EEEDFE;--purple200:#AFA9EC;--paper:#FFFFFF;--surface:#F1EFE8;--soft:#F7F6F2;--info:#185FA5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E8E7E1;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.toolbar{position:sticky;top:0;z-index:20;background:#FFFFFF;border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.toolbar .brand{font-size:14px;font-weight:500;margin-right:16px}
+.toolbar .sep{width:1px;height:20px;background:var(--line);margin:0 8px}
+button{font-family:inherit;font-size:13px;color:var(--ink2);background:#FFFFFF;border:1px solid var(--line);border-radius:8px;padding:7px 14px;cursor:pointer}
+button:hover{border-color:var(--purple);color:var(--purple)}
+button.on{background:var(--purple);border-color:var(--purple);color:#FFFFFF}
+.toolbar .hint{font-size:12px;color:var(--ink3);margin-left:auto}
+#canvas{zoom:var(--z);padding:40px 32px 80px}
+.board-head{width:1440px;display:flex;align-items:baseline;gap:14px;margin:36px 0 12px}
+.board-head:first-child{margin-top:0}
+.board-head h2{font-size:18px;font-weight:500}
+.board-head span{font-size:13px;color:var(--ink3)}
+.artboard{width:1440px;height:900px;position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
+.notes{position:absolute;inset:0;pointer-events:none}
+.outline{position:absolute;border:1px dashed var(--purple200)}
+.tag{position:absolute;top:-10px;left:10px;background:var(--purple50);color:var(--purple);font-size:12px;padding:1px 8px;border-radius:4px;white-space:nowrap}
+.dim{position:absolute;color:var(--purple);font-size:12px;background:rgba(255,255,255,.86);padding:2px 7px;border-radius:4px;white-space:nowrap}
+.no-notes .notes{display:none}
+.topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid rgba(44,44,42,.10);position:relative;z-index:2}
+.crumb{font-size:16px;font-weight:500}
+.crumb em{font-style:normal;color:var(--ink3);font-weight:400;margin:0 8px}
+.topbar .tools{display:flex;gap:10px;align-items:center}
+.chip{font-size:13px;color:var(--ink2);border:1px solid var(--line);border-radius:8px;padding:7px 14px;background:rgba(255,255,255,.7)}
+.chip.on{background:var(--purple);border-color:var(--purple);color:#fff}
+.chip.ghost{background:transparent}
+.round{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink2);background:rgba(255,255,255,.7)}
+.statusbar{height:48px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 48px;font-size:13px;color:var(--ink3);background:var(--paper)}
+.btn-primary{background:var(--purple);color:#fff;border:1px solid var(--purple);border-radius:10px;padding:12px 24px;font-size:15px}
+.link{color:var(--info);font-size:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px}
+.muted{color:var(--ink3)}
+/* 三层共在：身体层（位置锚）· 共时层（贴句信号）· 跨日层（归来） */
+.scene{position:absolute;inset:0;z-index:0}
+.moon{position:absolute;right:180px;top:180px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.55)}
+.hill{position:absolute;border-radius:50% 50% 0 0;background:rgba(175,169,236,.28)}
+.anchor{position:absolute;right:96px;bottom:150px;width:150px;height:230px;z-index:2}
+.glow{position:absolute;left:0;top:26px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,0) 70%);animation:breathe 5s ease-in-out infinite}
+.sil{position:absolute;left:34px;bottom:0;width:82px;height:190px;animation:breathe 5s ease-in-out infinite}
+.sil .hr{position:absolute;left:12px;top:6px;width:64px;height:62px;border-radius:50% 50% 30% 30%;background:rgba(83,74,183,.20)}
+.sil .hd{position:absolute;left:20px;top:0;width:44px;height:52px;border-radius:50% 50% 46% 46%;background:rgba(83,74,183,.42)}
+.sil .bd{position:absolute;left:8px;top:48px;width:68px;height:142px;border-radius:36px 36px 12px 12px;background:rgba(83,74,183,.34)}
+@keyframes breathe{0%,100%{transform:translateY(0);opacity:.72}50%{transform:translateY(-4px);opacity:.95}}
+@media (prefers-reduced-motion:reduce){.sil,.glow,.dot{animation:none}}
+.herlabel{position:absolute;right:262px;bottom:180px;text-align:right;font-size:14px;color:var(--ink2);line-height:1.8;z-index:2}
+.herlabel .muted{font-size:13px}
+.paper{position:absolute;z-index:3;background:#FFFFFF;border-radius:20px;box-shadow:0 26px 70px rgba(44,44,42,.12);overflow:hidden}
+.ptools{height:56px;display:flex;align-items:center;gap:22px;padding:0 40px;font-size:13px;color:var(--ink2);border-bottom:1px solid rgba(44,44,42,.07)}
+.ptools .on{color:var(--purple);border-bottom:2px solid var(--purple);padding-bottom:4px}
+.ptools .r{margin-left:auto;display:flex;gap:18px;color:var(--ink3)}
+.doc{font-size:19px;line-height:2.1}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--purple);margin-left:8px;vertical-align:middle;animation:breathe 3.5s ease-in-out infinite}
+.say{position:absolute;z-index:5;width:352px;background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.8;box-shadow:0 12px 32px rgba(44,44,42,.10)}
+.say .k{font-size:12px;color:var(--purple);margin-bottom:8px}
+.say .acts{font-size:12px;color:var(--purple);margin-top:12px}
+.say.disagree{width:352px}
+.say.disagree .k{color:#C08A3E}
+.gaze{position:absolute;z-index:4;border-top:1px dashed rgba(83,74,183,.35);transform-origin:0 50%;pointer-events:none}
+.talkmini{position:absolute;right:96px;bottom:48px;width:240px;height:44px;z-index:5;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;gap:10px;padding:0 14px;font-size:13px;color:var(--ink3)}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <span class="brand">笺墨溪-Friend · 排版设计稿</span>
+  <span class="sep"></span>
+  <button onclick="go('b1')">首页</button>
+  <button onclick="go('b2')">陪伴模式</button>
+  <button onclick="go('b3')">阅读</button>
+  <button onclick="go('b4')">沉浸模式</button>
+  <span class="sep"></span>
+  <button id="btn1" class="on" onclick="setZoom(1)">1:1 原尺寸</button>
+  <button id="btnFit" onclick="fit()">适配宽度</button>
+  <button id="btnNotes" class="on" onclick="toggleNotes()">尺寸标注</button>
+  <span class="hint" id="zoomLabel">1:1　·　1440 × 900 / 张　·　三层共在已落入主稿，按钮不增不删</span>
+</div>
+
+<div id="canvas">
+
+<div class="board-head" id="b1"><h2>01 首页 · 桌面大屏</h2><span>常驻壳｜左上轻入口｜归来一行｜常驻聊天框｜身体层：静息档</span></div>
+<div class="artboard">
+  <div class="scene" style="background:var(--purple50)"><div class="moon"></div><div class="hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div><div class="hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div></div>
+  <div class="anchor"><div class="glow"></div><div class="sil"><div class="hr"></div><div class="hd"></div><div class="bd"></div></div></div>
+  <div style="position:absolute;left:96px;top:56px;display:flex;align-items:baseline;gap:24px">
+    <div style="font-size:14px;color:var(--purple);border-bottom:2px solid var(--purple);padding-bottom:6px">聊天</div>
+    <div style="font-size:14px;color:var(--ink3)">写作</div>
+  </div>
+  <div style="position:absolute;left:240px;bottom:136px;display:flex;align-items:baseline;gap:16px;font-size:14px;color:var(--ink2)">
+    <span>你停在《故都的秋》第 3 段</span>
+    <span class="muted" style="font-size:13px">昨天 23:41 · 离开 19 小时</span>
+    <span class="link" style="font-size:13px">点回原文 →</span>
+  </div>
+  <div class="herlabel">她在窗边翻旧摘句<br><span class="muted">静息档 · 不弹窗 · 不催促</span></div>
+  <div class="card" style="position:absolute;left:240px;bottom:48px;width:960px;height:72px;display:flex;align-items:center;gap:18px;padding:0 20px">
+    <div style="font-size:18px;color:var(--ink2)">≡</div>
+    <div style="flex:1;font-size:15px;color:var(--ink3)">想说点什么……</div>
+    <div style="font-size:18px;color:var(--ink2)">＋</div>
+    <span class="chip ghost">语音</span><span class="chip ghost">电话</span>
+    <div class="round" style="background:var(--purple);color:#fff;border-color:var(--purple)">↑</div>
+  </div>
+  <div class="notes">
+    <div class="dim" style="left:24px;top:24px">1440 × 900　·　安全边距 96px　·　无顶栏</div>
+    <div class="outline" style="left:96px;top:48px;width:150px;height:32px"><span class="tag">一级入口 · 左上轻文字</span></div>
+    <div class="outline" style="left:240px;top:744px;width:560px;height:24px"><span class="tag">归来一行 · 距输入条 16</span></div>
+    <div class="outline" style="left:240px;top:780px;width:960px;height:72px"><span class="tag">常驻聊天框 960 × 72　·　距底 48px</span></div>
+    <div class="outline" style="right:96px;bottom:150px;width:150px;height:230px"><span class="tag">位置锚 · 三屏同一坐标</span></div>
+    <div class="dim" style="right:24px;top:24px">中部与右侧整片留给场景</div>
+    <div class="dim" style="right:24px;bottom:16px">场景层常驻 · 层级：场景 0 → 她 2 → 纸面 3</div>
+  </div>
+</div>
+
+<div class="board-head" id="b2"><h2>02 文章创作 · 陪伴模式</h2><span>三层齐｜场景整屏｜句旁共时｜同一锚位｜三条横栏全取消</span></div>
+<div class="artboard">
+  <div class="scene" style="background:var(--purple50)"><div class="moon" style="opacity:.7"></div><div class="hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div><div class="hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div></div>
+  <div class="anchor"><div class="glow"></div><div class="sil"><div class="hr"></div><div class="hd"></div><div class="bd"></div></div></div>
+  <div class="gaze" style="left:760px;top:452px;width:520px;transform:rotate(21deg)"></div>
+  <div style="position:absolute;right:96px;top:112px;width:240px;text-align:right;font-size:14px;color:var(--ink2);line-height:1.8;z-index:2">月海花园 · 夜色尚静<br><span class="muted" style="font-size:13px">她在看你的稿子</span></div>
+
+  <div class="say" style="left:1000px;top:264px;width:300px"><div class="k">不定时的一句 · 绑在第 2 段末</div>「可是」或许可以留着，后面那段已经替它作了回答。<div class="acts">展开　·　忽略　·　点回出处 ↗</div></div>
+
+  <div class="paper" style="left:96px;top:96px;width:1008px;height:708px">
+    <div class="ptools"><span>写作 › 文章创作</span><span style="color:var(--ink3)">沉浸</span><span class="on">陪伴</span><span class="r"><span>字号 A− A＋</span><span>自动保存</span><span>完成标记</span><span>导出</span><span>场景切换 ▾</span><span>语音输入</span><span>电话</span></span></div>
+    <div style="padding:48px 130px 0">
+      <div style="font-size:28px;font-weight:500">故都的秋</div>
+      <div style="font-size:13px;color:var(--ink3);margin-top:10px">草稿 · 最后编辑 23:41 · 陪伴模式 · 同一份稿子，切换不丢光标</div>
+      <div class="doc" style="margin-top:36px">
+        秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。<br>
+        我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这「秋」<span class="dot"></span><br>
+        <span style="display:inline-block;margin-top:24px;background:#E6F1FB;border-radius:6px;padding:4px 10px">可是这秋，来得<span style="color:var(--ink3);font-size:14px">　▏上次卡住的那句</span></span>
+      </div>
+      <div style="margin-top:96px;padding-left:16px;border-left:2px solid rgba(192,138,62,.55);font-size:15px;line-height:1.9;color:var(--ink2)">
+        <span style="color:#C08A3E;font-size:12px">她会不同意 · 攀谈</span><br>
+        我不太同意这一段「来得静」——你昨天写的那句更静。<br>
+        <span style="font-size:12px;color:var(--ink3)">《故都的秋》第 3 段 ↗　·　展开</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="talkmini"><span style="flex:1">想说点什么……</span><span style="color:var(--ink2)">收起 ▾</span></div>
+  <div style="position:absolute;left:96px;bottom:52px;font-size:12px;color:var(--ink3);line-height:1.8;z-index:5">建议来源：阅读摘录／写作切入点／一言（文学 · 古诗文 · 影视）· 每条都能点回出处<br>已自动保存 23:41 · 1,284 字 · 陪伴开启 · AI 实时检测</div>
+  <div class="notes">
+    <div class="outline" style="left:96px;top:96px;width:1008px;height:708px"><span class="tag">实底纸面 1008 × 708 · 正文 ≥4.5:1</span></div>
+    <div class="outline" style="left:1104px;top:96px;width:240px;height:708px"><span class="tag">右侧场景留白 240 · 她的领地</span></div>
+    <div class="outline" style="right:96px;bottom:150px;width:150px;height:230px"><span class="tag">① 位置锚 · 与首页同坐标</span></div>
+    <div class="outline" style="left:1000px;top:264px;width:300px;height:132px"><span class="tag">② 共时层 · 句旁信号展开</span></div>
+    <div class="dim" style="left:24px;top:24px">顶栏 0 · 工具栏 0 · 底栏 0 · 三条横栏全取消</div>
+    <div class="dim" style="right:24px;top:24px">虚线＝视线示意，实现时由微动效替代</div>
+    <div class="dim" style="left:24px;bottom:16px">跨日层仍在首页归来一行，此处不另设入口</div>
+  </div>
+</div>
+
+<div class="board-head" id="b3"><h2>03 阅读</h2><span>书库｜选中摘录｜一言原样保留｜位置锚连续、静息档</span></div>
+<div class="artboard">
+  <div class="scene" style="background:var(--purple50)"><div class="moon" style="opacity:.45"></div><div class="hill" style="right:-160px;bottom:-220px;width:900px;height:520px;opacity:.6"></div><div class="hill" style="left:-220px;bottom:-300px;width:780px;height:520px;opacity:.6"></div></div>
+  <div class="anchor"><div class="glow"></div><div class="sil" style="opacity:.7"><div class="hr"></div><div class="hd"></div><div class="bd"></div></div></div>
+  <div class="herlabel" style="bottom:400px">她仍在窗边<br><span class="muted">静息档 · 跨模块不消失</span></div>
+  <div class="paper" style="left:96px;top:96px;width:1104px;height:708px">
+    <div class="ptools"><span>写作 › 阅读</span><span style="color:var(--ink3)">书库</span><span class="on">正文</span><span class="r"><span style="color:var(--ink2)">搜索作品 / 作者 / 正文</span><span>收藏</span><span>读后感</span></span></div>
+    <div style="display:flex;height:652px">
+      <div style="width:320px;border-right:1px solid var(--line);background:var(--soft);padding:32px 24px">
+        <div style="font-size:13px;color:var(--ink3);letter-spacing:1px">书库</div>
+        <div style="margin-top:20px;font-size:15px;line-height:2.4">主题分类<br>全部作品<br>我的收藏<br>读后感<br>阅读断点</div>
+        <div style="margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;line-height:2.1;color:var(--ink2)">郁达夫 · 故都的秋<br>朱自清 · 背影<br>鲁迅 · 秋夜</div>
+      </div>
+      <div style="width:784px;padding:40px 60px;background:#fff">
+        <div style="font-size:28px;font-weight:500">故都的秋</div>
+        <div style="font-size:14px;color:var(--ink3);margin-top:10px">郁达夫 · 散文 · 第 3 段</div>
+        <div style="margin-top:30px;font-size:18px;line-height:2.2">
+          秋天，无论在什么地方的秋天，总是好的；<br>
+          <span style="background:#F4F1E4;padding:2px 4px">可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。<span class="dot"></span></span>
+        </div>
+        <div style="margin-top:20px;display:flex;align-items:center;gap:14px">
+          <span style="background:#E6F1FB;border-radius:6px;padding:8px 12px;font-size:18px">可是啊，北国的秋……</span>
+          <span class="chip" style="background:#fff">摘录</span>
+          <span style="font-size:13px;color:var(--ink3)">选中一句才出现</span>
+        </div>
+        <div style="display:flex;gap:16px;margin-top:40px">
+          <div class="card" style="flex:1;padding:20px 22px">
+            <div style="font-size:13px;color:var(--purple);font-weight:500">摘录卡</div>
+            <div style="font-size:15px;margin-top:10px;line-height:1.7">「可是啊，北国的秋，却特别地来得清……」</div>
+            <div style="font-size:13px;color:var(--ink3);margin-top:12px">《故都的秋》· 郁达夫 · 第 3 段　<span class="link">点回原文 →</span></div>
+          </div>
+          <div class="card" style="flex:1;padding:20px 22px">
+            <div style="font-size:13px;color:var(--purple);font-weight:500">一言（保留原样）</div>
+            <div style="font-size:15px;margin-top:10px;line-height:1.7">文学 / 古诗文 / 影视，每批各一条</div>
+            <div style="font-size:13px;color:var(--ink3);margin-top:12px">正文 · 署名 · 作品名 · UUID · 出处可点回</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="outline" style="left:96px;top:96px;width:1104px;height:708px"><span class="tag">纸面右缘 1200 · 右侧仍留 240</span></div>
+    <div class="outline" style="left:96px;top:152px;width:320px;height:652px"><span class="tag">侧栏 320px（不变）</span></div>
+    <div class="outline" style="right:96px;bottom:150px;width:150px;height:230px"><span class="tag">① 位置锚 · 与首页同坐标</span></div>
+    <div class="dim" style="left:24px;top:24px">顶栏 64 → 0，按钮收进纸面一行</div>
+    <div class="dim" style="right:24px;bottom:16px">正文 1120 → 784，为位置锚让出 240</div>
+    <div class="dim" style="left:24px;bottom:16px">摘录与一言并排，不新开灵感页</div>
+  </div>
+</div>
+
+<div class="board-head" id="b4"><h2>04 文章创作 · 沉浸模式</h2><span>类 WPS｜满宽纯编辑｜三层全关｜与第 02 屏形成落差</span></div>
+<div class="artboard">
+  <div class="topbar">
+    <div class="crumb">写作 <em>›</em> 文章创作</div>
+    <div class="tools"><span class="chip">字号 A− A＋</span><span class="chip">自动保存</span><span class="chip">完成标记</span><span class="chip">导出</span><span class="chip">搜索</span><span class="chip">文章列表 / 回收站</span><span style="width:16px"></span><span class="chip on">沉浸</span><span class="chip ghost">陪伴</span></div>
+  </div>
+  <div style="height:48px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:28px;padding:0 48px;font-size:13px;color:var(--ink2)"><span style="color:var(--ink);font-weight:500">草稿</span><span>已完成</span><span>回收站</span><span style="margin-left:auto;color:var(--ink3)">标题 / 正文搜索 · 草稿筛选 · 恢复</span></div>
+  <div style="height:740px;background:#fff;padding:72px 0 0;position:relative">
+    <div style="width:800px;margin:0 auto">
+      <div style="font-size:28px;font-weight:500">故都的秋</div>
+      <div style="font-size:13px;color:var(--ink3);margin-top:10px">草稿 · 已自动保存</div>
+      <div style="margin-top:52px;font-size:19px;line-height:2.1">
+        秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。<br><br>
+        我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这「秋」，这故都的秋味。
+      </div>
+      <div style="margin-top:28px;font-size:19px">可是这秋，来得<span style="color:var(--ink3);font-size:14px">　▏</span></div>
+    </div>
+    <div style="position:absolute;right:96px;top:96px;font-size:13px;color:var(--ink3);text-align:right;line-height:1.9">陪伴关闭<br>无建议 · 无批注 · 无搭话口</div>
+  </div>
+  <div class="statusbar"><span>1,284 字 · 已自动保存 23:41</span><span>沉浸模式</span></div>
+  <div class="notes">
+    <div class="outline" style="left:320px;top:112px;width:800px;height:700px"><span class="tag">正文栏 800px 居中</span></div>
+    <div class="dim" style="left:24px;top:80px">顶栏 64px　二级条 48px　底栏 48px</div>
+    <div class="dim" style="right:24px;bottom:56px">身体层 / 共时层 / 跨日层 全关 · 零浮层</div>
+  </div>
+</div>
+
+</div>
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function setZoom(v){document.documentElement.style.setProperty('--z',v);document.getElementById('zoomLabel').textContent=(v===1?'1:1　·　1440 × 900 / 张　·　默认不缩放，可横向滚动':Math.round(v*100)+'%　·　适配预览宽度');document.getElementById('btn1').classList.toggle('on',v===1)}
+function fit(){var w=window.innerWidth-72;setZoom(Math.min(1,Math.max(.3,w/1440)))}
+function toggleNotes(){var b=document.body.classList.toggle('no-notes');document.getElementById('btnNotes').classList.toggle('on',!b)}
+</script>
+</body>
+</html>

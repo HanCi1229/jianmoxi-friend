@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>笺墨溪-Friend · 陪伴模式｜场景作全屏背景 1440×900</title>
+<style>
+:root{--z:1;--ink:#2C2C2A;--ink2:#5F5E5A;--ink3:#888780;--line:rgba(44,44,42,.14);--purple:#534AB7;--purple50:#EEEDFE;--purple200:#AFA9EC;--paper:#FFFFFF;--soft:#F7F6F2;--info:#185FA5}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E8E7E1;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:13px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.toolbar b{font-size:14px;font-weight:500;margin-right:12px}
+button{font:inherit;font-size:13px;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 13px;cursor:pointer}
+button:hover{border-color:var(--purple);color:var(--purple)}
+button.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+.toolbar .hint{font-size:12px;color:var(--ink3);margin-left:auto}
+#canvas{zoom:var(--z);padding:36px 32px 90px}
+.rules{width:1440px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 30px;margin-bottom:30px}
+.rules h3{font-size:13px;font-weight:500;color:var(--purple);margin-bottom:5px}
+.rules p{font-size:13px;color:var(--ink2);line-height:1.8}
+.rules code{font-family:ui-monospace,Consolas,monospace;font-size:12px;background:var(--soft);padding:1px 5px;border-radius:4px}
+.head{width:1440px;display:flex;align-items:baseline;gap:14px;margin:32px 0 12px;scroll-margin-top:72px}
+.head:first-of-type{margin-top:0}
+.head h2{font-size:18px;font-weight:500}
+.head span{font-size:13px;color:var(--ink3)}
+.artboard{width:1440px;height:900px;position:relative;overflow:hidden;background:var(--purple50);border:1px solid var(--line)}
+.bg{position:absolute;inset:0}
+.moon{position:absolute;right:180px;top:180px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.55)}
+.hill{position:absolute;border-radius:50% 50% 0 0;background:rgba(175,169,236,.28)}
+.paper{position:absolute;background:#FFFFFF;border-radius:20px;box-shadow:0 26px 70px rgba(44,44,42,.12);overflow:hidden}
+.paper-tools{height:56px;display:flex;align-items:center;gap:22px;padding:0 40px;font-size:13px;color:var(--ink2);border-bottom:1px solid rgba(44,44,42,.07)}
+.paper-tools .on{color:var(--purple);border-bottom:2px solid var(--purple);padding-bottom:4px}
+.paper-tools .right{margin-left:auto;display:flex;gap:18px;color:var(--ink3)}
+.doc-title{font-size:28px;font-weight:500}
+.doc-meta{font-size:13px;color:var(--ink3);margin-top:10px}
+.doc-body{font-size:19px;line-height:2.1;color:var(--ink)}
+.stuck{display:inline-block;margin-top:24px;background:#E6F1FB;border-radius:6px;padding:6px 10px;font-size:19px}
+.stuck span{color:var(--ink3);font-size:14px}
+.mini{background:rgba(255,255,255,.90);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.mini .k{font-size:12px;color:var(--purple)}
+.mini .v{font-size:14px;line-height:1.7;margin-top:8px}
+.mini .s{font-size:12px;color:var(--ink3);margin-top:12px}
+.talk{background:rgba(255,255,255,.90);border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;padding:12px 14px;gap:10px;font-size:13px;color:var(--ink3)}
+.edge{font-size:13px;color:var(--ink2);line-height:1.8}
+.status{position:absolute;font-size:12px;color:var(--ink3)}
+.notes{position:absolute;inset:0;pointer-events:none}
+.outline{position:absolute;border:1px dashed var(--purple200)}
+.tag{position:absolute;top:-10px;left:10px;background:var(--purple50);color:var(--purple);font-size:12px;padding:1px 8px;border-radius:4px;white-space:nowrap}
+.dim{position:absolute;color:var(--purple);font-size:12px;background:rgba(255,255,255,.88);padding:2px 7px;border-radius:4px;white-space:nowrap}
+.no-notes .notes{display:none}
+.desc{width:1440px;background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:16px 22px;font-size:13px;color:var(--ink2);line-height:1.9}
+.desc b{color:var(--ink);font-weight:500}
+.desc em{font-style:normal;color:var(--purple)}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <b>陪伴模式 · 场景作全屏背景 1440×900</b>
+  <button onclick="go('p1')">方案 1 纸面靠左</button>
+  <button onclick="go('p2')">方案 2 纸面居中</button>
+  <span style="width:12px"></span>
+  <button class="on" onclick="setZoom(1)">1:1</button>
+  <button onclick="fit()">适配宽度</button>
+  <button id="bn" class="on" onclick="toggleNotes()">尺寸标注</button>
+  <span class="hint">两版都把首屏场景铺满 1440×900，按钮种类不增不删</span>
+</div>
+
+<div id="canvas">
+<div class="rules">
+  <div><h3>背景</h3><p>首屏场景层整屏贯通 <code>1440×900</code>，不再有左右白／灰分栏；月亮与山丘沿用首页同一组。</p></div>
+  <div><h3>正文层</h3><p>稿子落在<b>近不透明实底纸面</b>上，正文对比 <code>≥4.5:1</code>；长文不用玻璃拟态。</p></div>
+  <div><h3>陪伴层</h3><p>右侧只放短句卡（<code>88–90% 白 + 1px 线</code>），不用 backdrop-blur，视频背景下不掉帧。</p></div>
+  <div><h3>Chrome</h3><p>顶栏 <code>0</code>、工具栏 <code>0</code>、底栏 <code>0</code>；模式切换收进纸面顶部一行轻文字。</p></div>
+  <div><h3>留白</h3><p>纸面距边 <code>96</code>、圆角 <code>20</code>；纸面之外全部留给场景与周边动效。</p></div>
+  <div><h3>范围</h3><p>只改版式与层级，<b>不定按钮清单、不定功能</b>；沉浸模式仍保持纯白编辑器，两相对照。</p></div>
+</div>
+
+<div class="head" id="p1"><h2>方案 1 · 纸面靠左（延续 70/30 动线）</h2><span>场景在右半屏完整可见，改动最小</span></div>
+<div class="artboard">
+  <div class="bg"></div>
+  <div class="moon"></div>
+  <div class="hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div>
+  <div class="hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div>
+
+  <div class="paper" style="left:96px;top:96px;width:1008px;height:708px">
+    <div class="paper-tools">
+      <span>写作 <span style="color:var(--ink3)">›</span> 文章创作</span>
+      <span style="color:var(--ink3)">沉浸</span><span class="on">陪伴</span>
+      <span class="right"><span>字号 A− A＋</span><span>自动保存</span><span>完成标记</span><span>导出</span><span>场景切换 ▾</span><span>语音输入</span><span>电话</span></span>
+    </div>
+    <div style="padding:56px 144px 0">
+      <div class="doc-title">故都的秋</div>
+      <div class="doc-meta">草稿 · 最后编辑 23:41 · 切换模式不丢光标</div>
+      <div class="doc-body" style="margin-top:44px">
+        秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。<br>
+        我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这「秋」，这故都的秋味。
+      </div>
+      <div class="stuck">可是这秋，来得<span>　▏上次卡住的那句</span></div>
+    </div>
+  </div>
+
+  <div class="edge" style="right:96px;top:120px;text-align:right">月海花园 · 夜色尚静<br><span style="color:var(--ink3);font-size:12px">她在窗边看你的稿子</span></div>
+  <div class="mini" style="position:absolute;right:96px;top:228px;width:240px">
+    <div class="k">不定时的一句</div>
+    <div class="v">这句的「可是」或许可以留着，后面那一段已经替它作了回答。</div>
+    <div class="s">展开　·　忽略　·　点回出处</div>
+  </div>
+  <div class="mini" style="position:absolute;right:96px;top:420px;width:240px;padding:14px 18px">
+    <div class="k">建议来源</div>
+    <div class="v" style="font-size:13px;color:var(--ink2)">阅读摘录／写作切入点／一言<br>文学 · 古诗文 · 影视</div>
+  </div>
+  <div class="talk" style="position:absolute;right:96px;bottom:64px;width:240px"><span style="flex:1">想说点什么……</span><span>收起 ▾</span></div>
+  <div class="status" style="left:96px;bottom:48px">已自动保存 23:41 · 1,284 字 · 陪伴开启</div>
+
+  <div class="notes">
+    <div class="outline" style="left:0;top:0;width:1440px;height:900px"><span class="tag">场景层 1440×900 整屏贯通</span></div>
+    <div class="outline" style="left:96px;top:96px;width:1008px;height:708px"><span class="tag">实底纸面 1008×708 · 圆角 20 · 距边 96</span></div>
+    <div class="outline" style="left:240px;top:152px;width:720px;height:600px"><span class="tag">正文栏 720px · 19px / 2.1</span></div>
+    <div class="outline" style="left:1104px;top:96px;width:240px;height:708px"><span class="tag">周边区 240px · 只放短句</span></div>
+    <div class="dim" style="left:24px;top:24px">无顶栏 / 无工具栏 / 无底栏</div>
+    <div class="dim" style="right:24px;bottom:16px">纸面实底 → 正文 ≥4.5:1；短卡 90% 白，不用 blur</div>
+  </div>
+</div>
+<div class="desc"><b>版式：</b>首屏场景整屏铺底，稿子收成一张 1008×708 的实底纸面浮在左侧，右侧 240px 只放她的状态、不定时的一句与搭话口。<b>层级：</b>模式切换、字号、导出、场景切换、语音、电话全部收进纸面顶部一行轻文字，不再占三条横栏。<br><em>代价：</em>右半屏场景是连续的，但纸面仍占 70%，两侧重量不均；陪伴感来自「纸外还有一个世界」。</div>
+
+<div class="head" id="p2"><h2>方案 2 · 纸面居中（一张纸浮在世界里）</h2><span>左右都透出场景，最接近「进入文字创作世界」</span></div>
+<div class="artboard">
+  <div class="bg"></div>
+  <div class="moon"></div>
+  <div class="hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div>
+  <div class="hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div>
+
+  <div class="paper" style="left:360px;top:96px;width:720px;height:708px">
+    <div class="paper-tools" style="padding:0 32px;gap:16px">
+      <span>写作 <span style="color:var(--ink3)">›</span> 文章创作</span>
+      <span style="color:var(--ink3)">沉浸</span><span class="on">陪伴</span>
+      <span class="right" style="gap:12px"><span>字号</span><span>导出</span><span>场景 ▾</span><span>语音</span><span>电话</span></span>
+    </div>
+    <div style="padding:56px 72px 0">
+      <div class="doc-title" style="font-size:26px">故都的秋</div>
+      <div class="doc-meta">草稿 · 最后编辑 23:41</div>
+      <div class="doc-body" style="margin-top:44px;font-size:18px;line-height:2.05">
+        秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。<br>
+        我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这「秋」，这故都的秋味。
+      </div>
+      <div class="stuck" style="font-size:18px">可是这秋，来得<span>　▏上次卡住的那句</span></div>
+    </div>
+  </div>
+
+  <div class="edge" style="left:96px;top:120px">月海花园 · 夜色尚静<br><span style="color:var(--ink3);font-size:12px">她在窗边看你的稿子</span></div>
+  <div class="mini" style="position:absolute;right:96px;top:200px;width:240px">
+    <div class="k">不定时的一句</div>
+    <div class="v">这句的「可是」或许可以留着，后面那一段已经替它作了回答。</div>
+    <div class="s">展开　·　忽略　·　点回出处</div>
+  </div>
+  <div class="mini" style="position:absolute;right:96px;top:392px;width:240px;padding:14px 18px">
+    <div class="k">建议来源</div>
+    <div class="v" style="font-size:13px;color:var(--ink2)">阅读摘录／写作切入点／一言<br>文学 · 古诗文 · 影视</div>
+  </div>
+  <div class="talk" style="position:absolute;right:96px;bottom:64px;width:240px"><span style="flex:1">想说点什么……</span><span>收起 ▾</span></div>
+  <div class="status" style="left:96px;bottom:48px">已自动保存 23:41 · 1,284 字</div>
+
+  <div class="notes">
+    <div class="outline" style="left:0;top:0;width:1440px;height:900px"><span class="tag">场景层 1440×900 整屏贯通</span></div>
+    <div class="outline" style="left:360px;top:96px;width:720px;height:708px"><span class="tag">实底纸面 720×708 · 居中 · 圆角 20</span></div>
+    <div class="outline" style="left:432px;top:152px;width:576px;height:600px"><span class="tag">正文栏 576px · 18px / 2.05</span></div>
+    <div class="outline" style="left:96px;top:96px;width:240px;height:708px"><span class="tag">左留白 240 · 纯场景</span></div>
+    <div class="outline" style="left:1104px;top:96px;width:240px;height:708px"><span class="tag">右周边区 240 · 短句与动效</span></div>
+    <div class="dim" style="left:24px;top:24px">无顶栏 / 无工具栏 / 无底栏 · 纸面之外全是世界</div>
+    <div class="dim" style="right:24px;bottom:16px">中央实底保证长文可读；陪伴只在视野边缘</div>
+  </div>
+</div>
+<div class="desc"><b>版式：</b>稿子收成 720×708 居中纸面，左右各 240px 全部透出首屏场景；她的状态在左、建议与搭话口在右，都在视野边缘。<b>层级：</b>同一份稿子、同一批按钮，只是纸面变窄、正文栏收至 576px。<br><em>代价：</em>每行字数变少、长文翻页更频繁；换来「人在世界里写」的空间感，也和沉浸模式的纯白满屏拉开最大差别。</div>
+
+</div>
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function setZoom(v){document.documentElement.style.setProperty('--z',v)}
+function fit(){setZoom(Math.min(1,Math.max(.3,(window.innerWidth-72)/1440)))}
+function toggleNotes(){var b=document.body.classList.toggle('no-notes');document.getElementById('bn').classList.toggle('on',!b)}
+</script>
+</body>
+</html>

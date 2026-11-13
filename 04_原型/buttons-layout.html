@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>笺墨溪-Friend · 按钮放置与排布 1440×900</title>
+<style>
+:root{--z:1;--ink:#2C2C2A;--ink2:#5F5E5A;--ink3:#888780;--line:rgba(44,44,42,.14);--purple:#534AB7;--purple50:#EEEDFE;--purple200:#AFA9EC;--paper:#fff;--soft:#F7F6F2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E8E7E1;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink)}
+.toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:13px 24px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.toolbar b{font-size:14px;font-weight:500;margin-right:10px}
+button{font:inherit;font-size:13px;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 13px;cursor:pointer}
+button:hover{border-color:var(--purple);color:var(--purple)}
+button.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+.hint{font-size:12px;color:var(--ink3);margin-left:auto}
+#canvas{zoom:var(--z);padding:36px 32px 90px}
+.rules{width:1440px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 30px;margin-bottom:32px}
+.rules h3{font-size:13px;font-weight:500;color:var(--purple);margin-bottom:6px}
+.rules p{font-size:13px;color:var(--ink2);line-height:1.8}
+.rules code{font-family:ui-monospace,Consolas,monospace;font-size:12px;background:var(--soft);padding:1px 5px;border-radius:4px;color:var(--ink)}
+.head{width:1440px;display:flex;align-items:baseline;gap:14px;margin:32px 0 12px;scroll-margin-top:76px}
+.head:first-of-type{margin-top:0}
+.head h2{font-size:18px;font-weight:500}
+.head span{font-size:13px;color:var(--ink3)}
+.board{width:1440px;height:900px;position:relative;overflow:hidden;background:var(--purple50);border:1px solid var(--line)}
+.scene-moon{position:absolute;right:180px;top:180px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.55)}
+.scene-hill{position:absolute;border-radius:50% 50% 0 0;background:rgba(175,169,236,.28)}
+.eyebrow{position:absolute;left:96px;top:214px;font-size:13px;color:var(--ink2);letter-spacing:2px}
+.switch{position:absolute;left:96px;top:268px;display:flex;gap:12px}
+.switch div{min-width:180px;text-align:center;font-size:15px;padding:12px 24px;border-radius:10px}
+.switch .on{background:var(--purple);color:#fff}
+.switch .off{background:rgba(255,255,255,.75);border:1px solid var(--line);color:var(--ink2)}
+.return{position:absolute;left:96px;top:390px;width:560px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px}
+.return .t{font-size:18px}
+.return .s{font-size:13px;color:var(--ink3);margin-top:8px}
+.return .go{color:#185FA5;font-size:14px;white-space:nowrap}
+.herline{position:absolute;right:96px;bottom:168px;text-align:right;font-size:14px;color:var(--ink2);line-height:1.8}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px}
+.chip{font-size:13px;color:var(--ink2);border:1px solid var(--line);border-radius:8px;padding:7px 14px;background:rgba(255,255,255,.82)}
+.chip.ghost{background:transparent;border-color:transparent}
+.round{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink2)}
+.round.solid{background:var(--purple);border-color:var(--purple);color:#fff}
+.notes{position:absolute;inset:0;pointer-events:none}
+.frame{position:absolute;border:1px dashed var(--purple200)}
+.tag{position:absolute;top:-10px;left:10px;background:var(--purple50);color:var(--purple);font-size:12px;padding:1px 8px;border-radius:4px;white-space:nowrap}
+.dim{position:absolute;color:var(--purple);font-size:12px;background:rgba(255,255,255,.88);padding:2px 7px;border-radius:4px;white-space:nowrap}
+.no-notes .notes{display:none}
+.desc{width:1440px;background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:16px 22px;font-size:13px;color:var(--ink2);line-height:1.9}
+.desc b{color:var(--ink);font-weight:500}
+.desc em{font-style:normal;color:var(--purple)}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <b>按钮放置与排布 · 1440×900</b>
+  <button onclick="go('a')">A 底部一条</button>
+  <button onclick="go('b')">B 右下浮组</button>
+  <button onclick="go('c')">C 左右分离</button>
+  <button onclick="go('d')">D 命令栏</button>
+  <button id="bn" class="on" onclick="toggleNotes()">尺寸标注</button>
+  <button onclick="setZoom(1)">1:1</button>
+  <button onclick="fit()">适配宽度</button>
+  <span class="hint">四套只改位置与密度，按钮种类不增不删</span>
+</div>
+
+<div id="canvas">
+<div class="rules">
+  <div><h3>Position 位置</h3><p>安全边距 <code>96</code>、底部 <code>48</code>、右上浮动 <code>48/48</code>；不出现贯穿整屏的顶部横栏（首栏已删）。</p></div>
+  <div><h3>Rhythm 间距</h3><p>同组控件间距 <code>12–16</code>，分组之间 <code>24</code>，输入条内左右 <code>20</code>；同类按钮等高。</p></div>
+  <div><h3>Size 尺寸</h3><p>圆形图标钮 <code>44</code>、次级按钮高 <code>36</code>、主输入条 <code>72</code>；主行动点每屏 <code>1</code> 个。</p></div>
+  <div><h3>Hierarchy 主次</h3><p>实心＝主行动点，线框＝次级，纯文字／图标＝常驻工具；一屏内不出现两个同等强度的实心块。</p></div>
+  <div><h3>Density 密度</h3><p>首页可见控件 <code>≤ 6</code>；陪伴模式右侧只留一个可收起搭话口；沉浸模式零浮层按钮；阅读只在选中句旁出现一个。</p></div>
+  <div><h3>Scope 范围</h3><p>以下用已点名的四类控件（对话／语音输入／电话／场景切换）作占位摆位，<b>不定按钮清单、不定功能</b>。</p></div>
+</div>
+
+<div class="head" id="a"><h2>A · 底部一条（现稿）</h2><span>集中、最稳，但底部有横向贯通感</span></div>
+<div class="board">
+  <div class="scene-moon"></div><div class="scene-hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div><div class="scene-hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div>
+  <div class="eyebrow">笺墨溪 · Friend　／　文字创作世界</div>
+  <div class="switch"><div class="on">聊天</div><div class="off">写作</div></div>
+  <div class="return"><div style="flex:1"><div class="t">你停在《故都的秋》第 3 段</div><div class="s">昨天 23:41 · 第 3 段第 2 句 · 离开 19 小时</div></div><div class="go">点回原文 →</div></div>
+  <div class="herline">她在窗边翻旧摘句<br><span style="color:var(--ink3);font-size:13px">不弹窗 · 不催促</span></div>
+  <div style="position:absolute;right:48px;top:48px"><span class="chip">场景切换 ▾</span></div>
+  <div class="card" style="position:absolute;left:240px;bottom:48px;width:960px;height:72px;display:flex;align-items:center;gap:16px;padding:0 20px">
+    <div style="font-size:18px;color:var(--ink2)">≡</div>
+    <div style="flex:1;font-size:15px;color:var(--ink3)">想说点什么……</div>
+    <div style="font-size:18px;color:var(--ink2)">＋</div><span class="chip ghost">语音</span><span class="chip ghost">电话</span>
+    <div class="round solid">↑</div>
+  </div>
+  <div class="notes">
+    <div class="frame" style="left:240px;top:780px;width:960px;height:72px"><span class="tag">主输入条 960×72 · 距底 48</span></div>
+    <div class="frame" style="left:1248px;top:48px;width:144px;height:36px"><span class="tag">右上单点 48/48</span></div>
+    <div class="dim" style="left:24px;top:24px">无顶栏</div>
+    <div class="dim" style="left:24px;bottom:24px">安全边距 96 · 一级入口与归来卡同列</div>
+    <div class="dim" style="right:24px;bottom:132px">控件全部收进一条，占用 1 条横带</div>
+  </div>
+</div>
+<div class="desc"><b>排布：</b>一条 960×72 浮条居中靠底，≡／＋／语音／电话／发送全部收在里面，场景切换单独浮右上。<b>主次：</b>发送是唯一实心主按钮，其余为图标与纯文字。<br><em>视觉代价：</em>底部形成一条近千像素的横向带，与「无横栏」的首屏略有拉扯；好处是所有入口一眼找齐。</div>
+
+<div class="head" id="b"><h2>B · 右下浮组</h2><span>屏幕最空，入口收成可展开的一组圆钮</span></div>
+<div class="board">
+  <div class="scene-moon"></div><div class="scene-hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div><div class="scene-hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div>
+  <div class="eyebrow">笺墨溪 · Friend　／　文字创作世界</div>
+  <div class="switch"><div class="on">聊天</div><div class="off">写作</div></div>
+  <div class="return"><div style="flex:1"><div class="t">你停在《故都的秋》第 3 段</div><div class="s">昨天 23:41 · 第 3 段第 2 句 · 离开 19 小时</div></div><div class="go">点回原文 →</div></div>
+  <div class="herline">她在窗边翻旧摘句<br><span style="color:var(--ink3);font-size:13px">不弹窗 · 不催促</span></div>
+  <div style="position:absolute;right:96px;bottom:48px;display:flex;flex-direction:column;align-items:flex-end;gap:12px">
+    <div class="round">场</div><div class="round">语</div><div class="round">话</div>
+    <div class="round solid" style="width:56px;height:56px;font-size:20px">＋</div>
+  </div>
+  <div class="notes">
+    <div class="frame" style="left:1288px;top:624px;width:56px;height:228px"><span class="tag">右下浮组 · 44 圆钮 ×3 + 56 主钮</span></div>
+    <div class="dim" style="right:24px;bottom:20px">距右 96 · 距底 48 · 组内间距 12</div>
+    <div class="dim" style="left:24px;top:24px">无顶栏 · 无横条 · 全屏无横向带</div>
+    <div class="dim" style="left:24px;bottom:24px">左侧内容区完全不被控件占用</div>
+  </div>
+</div>
+<div class="desc"><b>排布：</b>三枚 44 圆钮竖排，下面一枚 56 实心主钮；组内间距 12，距右 96、距底 48。<b>主次：</b>只有最下一枚是实心，点它才展开输入条。<br><em>视觉代价：</em>首屏最干净、场景层完整，但入口从「看得见」变成「找得到」，需要一个小引导。</div>
+
+<div class="head" id="c"><h2>C · 左右分离（已调）</h2><span>入口轻文字 · 归来一行 · 中部与右侧整片留给场景</span></div>
+<div class="board">
+  <div class="scene-moon"></div><div class="scene-hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div><div class="scene-hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div>
+  <div style="position:absolute;left:96px;top:56px;display:flex;align-items:baseline;gap:24px">
+    <div style="font-size:14px;color:var(--purple);border-bottom:2px solid var(--purple);padding-bottom:6px">聊天</div>
+    <div style="font-size:14px;color:var(--ink3)">写作</div>
+  </div>
+  <div style="position:absolute;left:96px;top:104px"><span class="chip ghost" style="padding:0;font-size:13px">场景切换 ▾</span></div>
+  <div style="position:absolute;left:96px;bottom:136px;display:flex;align-items:baseline;gap:16px;font-size:14px;color:var(--ink2)">
+    <span>你停在《故都的秋》第 3 段</span><span style="font-size:13px;color:var(--ink3)">昨天 23:41 · 离开 19 小时</span><span style="font-size:13px;color:#185FA5">点回原文 →</span>
+  </div>
+  <div class="herline">她在窗边翻旧摘句<br><span style="color:var(--ink3);font-size:13px">不弹窗 · 不催促</span></div>
+  <div class="card" style="position:absolute;left:96px;bottom:48px;width:720px;height:72px;display:flex;align-items:center;gap:16px;padding:0 20px">
+    <div style="font-size:18px;color:var(--ink2)">≡</div><div style="flex:1;font-size:15px;color:var(--ink3)">想说点什么……</div><div class="round solid" style="width:36px;height:36px">↑</div>
+  </div>
+  <div style="position:absolute;right:96px;bottom:64px;display:flex;gap:12px"><div class="round">语</div><div class="round">话</div></div>
+  <div class="notes">
+    <div class="frame" style="left:96px;top:48px;width:150px;height:32px"><span class="tag">一级入口 · 左上轻文字</span></div>
+    <div class="frame" style="left:96px;top:744px;width:560px;height:24px"><span class="tag">归来一行 · 距输入条 16</span></div>
+    <div class="frame" style="left:96px;top:780px;width:720px;height:72px"><span class="tag">输入条 720×72 · 左对齐安全边距</span></div>
+    <div class="frame" style="left:1248px;top:792px;width:100px;height:44px"><span class="tag">工具组 2 枚 · 间距 12</span></div>
+    <div class="dim" style="right:24px;top:24px">中部与右侧整片留给场景</div>
+    <div class="dim" style="left:24px;top:140px">左上只两行轻文字，无横栏</div>
+    <div class="dim" style="left:840px;bottom:100px">两组之间留白 ≥ 400</div>
+  </div>
+</div>
+<div class="desc"><b>排布（已调）：</b>一级入口降为左上两行轻文字，归来收成一行贴在 720 输入条上方 16px；右下两枚工具圆钮不变；中部与右侧整片留给场景。<b>主次：</b>全屏唯一实心是发送钮，归来不再抢焦点。<br><em>视觉代价：</em>入口从「看得见」变「找得到」，靠左上位置固定来补；换来首屏真正以场景为主角。</div>
+
+<div class="head" id="d"><h2>D · 输入框即主角</h2><span>全屏零常驻按钮，控件收进输入条内部</span></div>
+<div class="board">
+  <div class="scene-moon"></div><div class="scene-hill" style="right:-160px;bottom:-220px;width:900px;height:520px"></div><div class="scene-hill" style="left:-220px;bottom:-300px;width:780px;height:520px"></div>
+  <div class="return" style="left:420px;top:170px;width:600px"><div style="flex:1"><div class="t">你停在《故都的秋》第 3 段</div><div class="s">昨天 23:41 · 第 3 段第 2 句 · 离开 19 小时</div></div><div class="go">点回原文 →</div></div>
+  <div class="card" style="position:absolute;left:420px;top:340px;width:600px;height:72px;display:flex;align-items:center;gap:14px;padding:0 18px">
+    <div style="flex:1;font-size:15px;color:var(--ink3)">想说点什么……</div>
+    <div class="round" style="width:36px;height:36px">场</div><div class="round" style="width:36px;height:36px">语</div><div class="round" style="width:36px;height:36px">话</div>
+    <div class="round solid" style="width:36px;height:36px">↑</div>
+  </div>
+  <div style="position:absolute;left:420px;top:436px;width:600px;display:flex;gap:20px;font-size:13px;color:var(--ink3)"><span>继续昨天的那段</span><span>读一段给我听</span><span>换个场景</span></div>
+  <div style="position:absolute;left:420px;top:490px;font-size:12px;color:var(--ink3)">⌘ K 唤起 · 一级入口收进命令栏</div>
+  <div class="notes">
+    <div class="frame" style="left:420px;top:340px;width:600px;height:72px"><span class="tag">主视觉 600×72 · 全屏唯一控件区</span></div>
+    <div class="dim" style="left:428px;top:316px">左右留白各 420</div>
+    <div class="dim" style="left:24px;top:24px">无顶栏 · 无侧边 · 无底栏</div>
+    <div class="dim" style="left:420px;top:470px">下方仅 3 条示例文字，无卡片</div>
+  </div>
+</div>
+<div class="desc"><b>排布：</b>一个 600×72 输入框居中，四类控件全部收成条内 36 圆钮；下方三条示例文字；一级入口改由命令栏唤起，不再占左侧。<b>主次：</b>输入框是唯一主角，其余都是它的附件。<br><em>视觉代价：</em>最贴「产品即首屏」，但归来卡与一级入口的层级要重排，改动最大。</div>
+
+</div>
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function setZoom(v){document.documentElement.style.setProperty('--z',v)}
+function fit(){setZoom(Math.min(1,Math.max(.3,(window.innerWidth-72)/1440)))}
+function toggleNotes(){var b=document.body.classList.toggle('no-notes');document.getElementById('bn').classList.toggle('on',!b)}
+</script>
+</body>
+</html>
