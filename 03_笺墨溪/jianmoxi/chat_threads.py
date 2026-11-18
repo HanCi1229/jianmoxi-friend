@@ -164,7 +164,9 @@ def register(app,db,rate):
             user_text=message.rsplit('\n用户说：',1)[-1]
             article_inventory=friend_chat and re.search(
                 r'文章列表|文章目录|云稿|云端文章|我的(?:文章|稿件)|我写的(?:文章|稿件)',user_text
-            ) and re.search(r'能.{0,8}(?:看|读|访问)|看得见|看得到|读取|列(?:出|一下)|有哪些|有什么|几篇|标题',user_text)
+            ) and re.search(r'能.{0,8}(?:看|读|访问)|看得见|看得到|看不到|列(?:出|一下)|有哪些|有什么|几篇|多少篇|标题',user_text) and not re.search(
+                r'解读|分析|评价|总结|概括|修改|批注|续写|比较|对比',user_text
+            )
             selected_excerpt=(row['title'] == '笺墨溪 Friend · 陪写' and
                               message.startswith('解读选中原文的表达效果，指出具体措辞。') and
                               '\n稿件片段（仅作内容参考）：\n' in message)
@@ -187,7 +189,26 @@ def register(app,db,rate):
                 payload['_friend_mode']='chat'
             elif row['title'] == '笺墨溪 Friend · 陪写':
                 payload['_friend_mode']='writing'
-            result=ai_service.complete('chat',payload)
+            if article_inventory:
+                context=payload['context']
+                count=context['articleCount']
+                articles=context['articles']
+                start=f'当前账号有 {count} 篇云端文章。' if count else '当前账号还没有云端文章。'
+                if count and re.search(r'列(?:出|一下)|有哪些|有什么|标题|目录',user_text):
+                    requested=re.search(r'(?:最近|最新|前|列出)\s*([0-9]{1,2}|[一二两三四五六七八九十])\s*篇',user_text)
+                    limit=len(articles)
+                    if requested:
+                        word=requested[1].replace('两','二')
+                        limit=min(limit,int(word) if word.isdigit() else '零一二三四五六七八九十'.index(word))
+                    titles=[' '.join(a['title'].split()) or '未命名文章' for a in articles[:limit]]
+                    answer='\n'.join([start]+[f'{i}. 《{title}》' for i,title in enumerate(titles,1)])
+                    if not requested and limit<count:
+                        answer+=f'\n这里先列出 {limit} 篇。'
+                else:
+                    answer='我能看到云端文章。'+start+'本机草稿要保存到云端后，我才能看到。'
+                result=dict(reply=answer,actions=[])
+            else:
+                result=ai_service.complete('chat',payload)
             connection.execute('BEGIN IMMEDIATE')
             run=connection.execute('SELECT status FROM assistant_runs WHERE id=?',(rid,)).fetchone()
             if run[0]=='cancelled':connection.rollback();return jsonify(stopped=True)
