@@ -1,0 +1,6 @@
+{
+  "name": "jianmoxi-friend",
+  "private": true,
+  "scripts": { "start": "node app/serve.mjs" },
+  "dependencies": { "ws": "8.23.0" }
+}

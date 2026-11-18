@@ -2,69 +2,51 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>笺墨溪 · Friend　文字创作世界</title>
-<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./styles.css?v=mobile-11">
 </head>
-<body data-module="home" data-scene="moon-garden" data-tab="article" data-mode="companion">
+<body data-module="chat" data-scene="morning-rest" data-tab="article" data-mode="companion">
 
-<!-- 场景层 0：带角色的静帧背景 + CSS 环境呼吸，不使用视频背景；角色画在底图里，不另设锚位/剪影 -->
+<!-- 场景层 0：带角色的静帧背景 -->
 <div id="sceneLayer" aria-hidden="true">
-  <div class="scene-bg is-active" data-scene="moon-garden"></div>
-  <div class="scene-bg" data-scene="wind-plain"></div>
-  <div class="scene-bg" data-scene="cloud-terminal"></div>
-  <div class="scene-bg" data-scene="summer-cicada"></div>
-  <div class="scene-scrim"></div>
-  <div id="ambient">
-    <span class="mote" style="--x:18%;--y:26%;--d:0s;--t:5s"></span>
-    <span class="mote" style="--x:72%;--y:18%;--d:1.4s;--t:4.2s"></span>
-    <span class="mote" style="--x:86%;--y:52%;--d:2.6s;--t:5.6s"></span>
-    <span class="mote" style="--x:34%;--y:74%;--d:.7s;--t:4.8s"></span>
-    <span class="mote" style="--x:58%;--y:38%;--d:3.2s;--t:5.2s"></span>
-    <span class="mote" style="--x:8%;--y:58%;--d:2.1s;--t:4.4s"></span>
-  </div>
+  <div class="scene-bg is-active" data-scene="morning-rest"></div>
+  <div class="scene-bg" data-scene="reading-time"></div>
 </div>
 
 <!-- 常驻壳 -->
-<nav id="entry" aria-label="一级入口">
-  <button data-go="home" class="on">桌面</button>
-  <button data-go="chat">聊天</button>
-  <button data-go="writing">写作</button>
-</nav>
+<header id="appHeader">
+<div class="header-start"><nav id="entry" aria-label="一级入口">
+  <button data-go="chat"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 1-8 8H5l1.5-3A8 8 0 1 1 20 11Z"/><path d="M9 11h.01m3 0h.01m3 0h.01"/></svg><span>聊天</span></button>
+  <button data-go="writing"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 19 5M8 16c-1-7 4-12 12-12 0 8-5 12-12 12Z"/></svg><span>写作</span></button>
+</nav></div>
 <div id="globalTools">
-  <button id="btnScene" title="场景切换">场景切换 ▾</button>
-  <button id="btnVoice" title="语音输入">语音输入</button>
-  <button id="btnCall" title="电话">电话</button>
+  <button id="btnScene" aria-expanded="false" aria-controls="sceneDrawer" title="场景切换"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 16 5-5 4 4 3-3 4 4"/><circle cx="15.5" cy="9" r="1"/></svg><span>场景</span></button>
+  <button id="settingsOpen" aria-label="账号与设置"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20v-2a7 7 0 0 1 14 0v2"/></svg><span>设置</span></button>
 </div>
-
-<!-- 01 首页 · 桌面大屏 -->
-<section class="view" id="view-home">
-  <div id="returnLine">
-    <span id="returnText">你停在《故都的秋》第 3 段</span>
-    <small id="returnMeta"></small>
-    <a id="returnGo" href="#">点回原文 →</a>
-  </div>
-  <div id="homeStatus">月海花园 · 夜色尚静</div>
-  <div class="inputbar" id="homeBar">
-    <button class="ic" id="homeHistory" title="对话记录">≡</button>
-    <input id="homeInput" placeholder="想说点什么……" autocomplete="off">
-    <button class="ic" id="homeAttach" title="上下文">＋</button>
-    <button class="send" id="homeSend" title="发送">↑</button>
-  </div>
-  <div id="homeReply" hidden></div>
-</section>
-
+</header>
 <!-- 02 聊天模块 -->
 <section class="view" id="view-chat">
   <div class="chat-paper">
-    <div class="chat-head"><span>对话</span><small>历史收在 ≡ 里 · 用完退回桌面</small></div>
-    <div id="chatLog" class="chat-log"></div>
-    <div class="inputbar">
-      <button class="ic" id="chatHistory" title="对话记录">≡</button>
-      <input id="chatInput" placeholder="想说点什么……" autocomplete="off">
-      <button class="ic" id="chatAttach" title="上下文">＋</button>
-      <button class="send" id="chatSend" title="发送">↑</button>
-    </div>
+    <header id="todayBlock" aria-label="今日状态">
+      <div class="chat-top">
+        <p id="todayGreeting" aria-live="polite"></p>
+        <nav class="chat-navigation" aria-label="聊天操作">
+          <button id="chatHistoryOpen" type="button" aria-label="历史对话" title="历史对话"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 1 3 6.7M3 6v6h6m3-5v5l3 2"/></svg></button>
+          <button id="chatNew" type="button" aria-label="新对话" title="新对话" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5m4 3 4-4 2 2-4 4-4 2 2-4Z"/></svg></button>
+        </nav>
+      </div>
+      <div id="todayBar"><time id="todayDate"></time><button id="weatherOpen">选择城市</button><label><select id="todayMood" aria-label="今日心情"><option value="">今日心情</option><option>平静</option><option>愉快</option><option>期待</option><option>想念</option><option>低落</option><option>疲惫</option></select></label></div>
+    </header>
+    <div id="chatLog" class="chat-log" role="log" aria-label="聊天记录"></div>
+    <div id="chatStatus" role="status" hidden></div>
+    <div id="dictationBar" hidden><button id="dictationCancel" type="button" aria-label="取消语音输入">×</button><span id="dictationStatus" role="status">准备麦克风…</span><button id="dictationRetry" type="button" hidden>重试</button><button id="dictationStop" type="button" aria-label="完成语音输入">✓</button></div>
+    <form class="inputbar" id="chatForm">
+      <textarea id="chatInput" aria-label="聊天消息" placeholder="想说点什么……" rows="1" maxlength="700" autocomplete="off"></textarea>
+      <button type="button" class="ic" data-voice title="语音输入" aria-label="语音输入"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0m-7 7v3m-3 0h6"/></svg></button>
+      <button type="button" class="ic" data-call title="开始通话" aria-label="开始通话" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3H4c-1 8 9 18 17 17v-4l-5-2-2 2a14 14 0 0 1-6-6l2-2-3-5Z"/></svg></button>
+      <button class="send" id="chatSend" title="发送" aria-label="发送"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 11 16-7-6 16-3-7-7-2Zm7 2 9-9"/></svg></button>
+    </form>
   </div>
 </section>
 
@@ -72,62 +54,132 @@
 <section class="view" id="view-writing">
   <div class="paper" id="paper">
     <div class="paper-tools">
-      <span class="crumb">写作</span>
-      <button data-tab="article" class="on">文章创作</button>
-      <button data-tab="reading">阅读</button>
-      <span class="sep"></span>
-      <button data-mode="immersive">沉浸</button>
-      <button data-mode="companion" class="on">陪伴</button>
-      <span class="r">
-        <button id="btnFontDown">A−</button><button id="btnFontUp">A＋</button>
-        <span id="saveState">自动保存</span>
-        <button id="btnDone">完成标记</button>
-        <button id="btnExport">导出</button>
-      </span>
+      <div class="writing-tabs" role="group" aria-label="写作导航">
+        <button data-tab="article" class="on"><span class="writing-wide-label">文章创作</span><span class="writing-short-label">编辑</span></button>
+        <button data-tab="articles"><span class="writing-wide-label">我的文章</span><span class="writing-short-label">文稿</span></button>
+        <button data-tab="reading">阅读</button>
+        <button data-tab="excerpts"><span class="writing-wide-label">摘录收藏</span><span class="writing-short-label">摘录</span></button>
+      </div>
+      <button id="exitImmersive" type="button">退出沉浸</button>
+      <details id="documentOptions" class="editor-options">
+        <summary aria-label="文稿操作">⋯</summary>
+        <div id="documentActions" class="editor-options-panel">
+          <button id="documentAI" type="button" disabled title="先选中正文">AI 解读</button>
+          <button id="btnExport" type="button">导出</button>
+        </div>
+      </details>
     </div>
 
     <!-- 文章创作 -->
     <div class="tab" id="tab-article">
-      <div class="doc-wrap">
-        <input id="docTitle" value="故都的秋" aria-label="文章标题">
-        <div class="doc-meta"><span id="docMeta">草稿 · 同一份稿子，切换不丢光标</span></div>
-        <div id="editor" contenteditable="true" spellcheck="false" aria-label="正文"></div>
+      <div id="formatTools" role="toolbar" aria-label="正文格式">
+        <div class="format-strip">
+          <button data-edit="undo" aria-label="撤销" title="撤销"><svg class="icon editor-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5 4 9l4 4M4 9h11a4 4 0 0 1 0 8h-3"/></svg></button>
+          <label><select id="blockFormat" aria-label="段落样式"><option value="p">正文</option><option value="h2">一级标题</option><option value="h3">二级标题</option><option value="blockquote">引用</option></select></label>
+          <button data-edit="bold" aria-label="加粗" aria-pressed="false"><b>B</b></button>
+          <button data-edit="italic" aria-label="斜体" aria-pressed="false"><svg class="icon editor-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M19 5h-8m2 14H5M15 5 9 19"/></svg></button>
+        </div>
+        <div id="editorExtra">
+          <button data-edit="redo" aria-label="重做" title="重做"><svg class="icon editor-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 5 4 4-4 4m4-4H9a4 4 0 0 0 0 8h3"/></svg></button>
+          <button data-edit="underline" aria-label="下划线" title="下划线" aria-pressed="false"><u aria-hidden="true">U</u></button>
+          <button data-edit="insertUnorderedList" aria-label="项目列表" title="项目列表" aria-pressed="false"><svg class="icon editor-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h.1M4 12h.1M4 18h.1M9 6h11M9 12h11M9 18h11"/></svg></button>
+          <button data-edit="insertOrderedList" aria-label="编号列表" title="编号列表" aria-pressed="false"><svg class="icon editor-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 5 2-1v5m4-3h12M3 14a1.3 1.3 0 1 1 2.2 1L3 18h3m3-2h12"/></svg></button>
+          <button id="findOpen" aria-label="查找替换" title="查找替换"><svg class="icon editor-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="5.5"/><path d="m14 14 5 5"/></svg></button>
+        </div>
+        <details class="editor-options" id="editorOptions">
+          <summary>更多</summary>
+          <div class="editor-options-panel">
+            <div class="editor-font-controls"><span>正文字号</span><button id="btnFontDown" aria-label="减小字号">A−</button><button id="btnFontUp" aria-label="增大字号">A＋</button></div>
+            <button data-edit="removeFormat" aria-label="清除格式" title="清除格式"><span aria-hidden="true">T×</span></button>
+          </div>
+        </details>
+        <button id="dismissWritingKeyboard" aria-label="收起键盘" title="收起键盘"><svg class="icon editor-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="11" rx="2"/><path d="M7 8h.01M10 8h.01M14 8h.01M17 8h.01M8 11h8m-7 8 3 3 3-3"/></svg></button>
       </div>
+      <div id="findPanel" hidden>
+        <input id="findText" aria-label="查找内容" placeholder="查找内容"><button id="findPrevious">上一处</button><button id="findNext">下一处</button><span id="findCount" role="status"></span>
+        <input id="replaceText" aria-label="替换为" placeholder="替换为"><button id="replaceOne">替换当前</button><button id="findClose" aria-label="关闭查找">×</button>
+      </div>
+      <div class="doc-wrap">
+        <input id="docTitle" placeholder="文章标题" aria-label="文章标题">
+        <div class="doc-meta"><button id="docMeta" type="button" aria-label="切换文稿完成状态" aria-pressed="false">草稿</button></div>
+        <div id="editor" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="正文"></div>
+      </div>
+      <footer class="editor-status"><span id="saveState" role="status">自动保存</span><button id="saveCloudArticle" hidden>同步本机稿到云端</button></footer>
       <!-- 共时层：贴在当前段，不写进正文 -->
       <div id="syncLayer">
-        <button id="syncDot" class="sync-dot" title="她有一句，点开看看" hidden></button>
+        <div id="selectedTools" role="toolbar" aria-label="选中文字的操作" hidden>
+          <button data-edit="bold" aria-label="加粗"><b>B</b></button><button data-edit="italic" aria-label="斜体"><i>I</i></button><button data-edit="underline" aria-label="下划线"><u>U</u></button><button id="selectionCopy">复制</button><button id="selectionAI">AI 解读</button>
+        </div>
+        <button id="syncDot" class="sync-dot" title="查看写作灵感" aria-label="查看写作灵感" aria-expanded="false" hidden></button>
         <div id="sayCard" class="say" hidden>
-          <div class="k" id="sayK">不定时的一句</div>
-          <div class="t" id="sayT"></div>
-          <div class="acts">
-            <a href="#" id="sayExpand">展开</a> · <a href="#" id="sayIgnore">忽略</a> · <a href="#" id="saySource">点回出处 ↗</a>
+          <div class="say-heading">
+            <div class="k" id="sayK">不定时的一句</div>
+            <button id="noteAnalyze" hidden>解读</button><button id="sayIgnore">收起</button>
           </div>
+          <blockquote id="noteQuote"></blockquote>
+          <div class="t" id="sayT"></div>
+          <div id="noteLog" class="note-log" aria-live="polite"></div>
+          <form id="noteForm"><input id="noteInput" aria-label="回复陪写建议" placeholder="说说你的想法"><button>发送</button></form>
         </div>
       </div>
-      <div id="companionFooter">
-        建议来源：阅读摘录／写作切入点／一言（文学 · 古诗文 · 影视）· 每条都能点回出处
-      </div>
     </div>
+
+    <section class="tab collection-page" id="tab-articles" aria-labelledby="articlesTitle" hidden>
+      <div class="collection-heading"><h2 id="articlesTitle">我的文章</h2><button id="newArticle">＋ 新建文章</button></div>
+      <p id="cloudArticlesStatus" class="collection-status" role="status"></p>
+      <div id="articleList"></div>
+    </section>
+    <section class="tab collection-page" id="tab-excerpts" aria-labelledby="excerptsTitle" hidden>
+      <div class="collection-heading"><h2 id="excerptsTitle">摘录收藏</h2>
+        <button id="excerptFilterButton" type="button" aria-label="筛选摘录" title="筛选摘录" aria-expanded="false" aria-controls="excerptFilters"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10m-7 6h4"/></svg></button>
+      </div>
+      <div id="excerptFilters" hidden>
+        <input id="excerptQuery" type="search" aria-label="搜索摘录" placeholder="搜索内容、书名或作者">
+        <div id="excerptSources" role="group" aria-label="摘录来源">
+          <button type="button" data-excerpt-source="all" aria-pressed="true">全部</button>
+          <button type="button" data-excerpt-source="cloud" aria-pressed="false">云端</button>
+          <button type="button" data-excerpt-source="local" aria-pressed="false">本机</button>
+        </div>
+      </div>
+      <p id="cloudExcerptStatus" class="collection-status" role="status"></p>
+      <div id="excerptList"></div>
+      <p id="excerptEmpty" class="collection-status" role="status" hidden></p>
+    </section>
 
     <!-- 阅读 -->
     <div class="tab" id="tab-reading" hidden>
       <aside class="shelf">
-        <div class="shelf-head">书库</div>
+        <div class="shelf-head">书库 <button id="shelfNext" hidden>下一页</button></div>
         <input id="shelfSearch" placeholder="搜索作品 / 作者 / 正文">
         <div id="shelfList" class="shelf-list"></div>
-        <div class="shelf-foot">逐字语录库 · 原文位置可回查</div>
       </aside>
       <div class="reader" id="reader">
-        <h2 id="readTitle">故都的秋</h2>
-        <div class="read-meta" id="readMeta"></div>
-        <div id="readBody"></div>
-        <div class="reader-section">
-          <div class="sec-title">摘录</div>
-          <div id="excerptList" class="cards"></div>
+        <header class="reader-header">
+          <button id="readerBack" type="button" aria-label="返回书库">‹</button>
+          <h2 id="readTitle" tabindex="-1"></h2>
+        </header>
+        <div id="readerViewport" tabindex="0" aria-label="阅读正文，左右方向键翻页"><div id="readBody"></div></div>
+        <div class="reader-footer">
+          <button id="readerPrevious" aria-label="上一页" type="button">‹</button>
+          <button id="readerPage" type="button" aria-label="阅读工具" aria-expanded="false"></button>
+          <button id="readerNext" aria-label="下一页" type="button">›</button>
         </div>
-        <div class="reader-section">
-          <div class="sec-title">一言 · 原样保留</div>
-          <div id="quoteList" class="cards"></div>
+        <div class="reader-tools" id="readerTools" hidden>
+        <details id="chapterControl" hidden>
+          <summary>目录</summary>
+          <div class="reader-popover">
+          <div id="chapterList" aria-label="章节目录"></div>
+          <footer id="chapterPages" hidden>
+            <button id="chaptersPrevious" type="button">前一组章节</button>
+            <button id="chaptersNext" type="button">后续章节</button>
+          </footer>
+          <p id="chapterStatus" role="status" hidden></p>
+          </div>
+        </details>
+          <details id="readerType">
+            <summary>字号</summary>
+            <div class="reader-popover reader-size"><button id="readerSmaller" type="button" aria-label="减小阅读字号">A−</button><output id="readerFontSize"></output><button id="readerLarger" type="button" aria-label="增大阅读字号">A＋</button></div>
+          </details>
         </div>
       </div>
       <button id="btnExcerpt" class="float-excerpt" hidden>摘录</button>
@@ -136,22 +188,86 @@
 </section>
 
 <!-- 场景切换抽屉 -->
-<div id="sceneDrawer" class="drawer" hidden>
-  <div class="drawer-head">切换场景 <button id="drawerClose">×</button></div>
-  <button class="scene-choice" data-scene="moon-garden"><b>月海花园</b><small>主居所 · 长期生活</small></button>
-  <button class="scene-choice" data-scene="wind-plain"><b>风眠浮原</b><small>白昼共处</small></button>
-  <button class="scene-choice" data-scene="cloud-terminal"><b>云上列车终点站</b><small>离开与归来</small></button>
-  <button class="scene-choice" data-scene="summer-cicada"><b>夏日蝉鸣</b><small>庭院 · 白昼</small></button>
-</div>
+<dialog id="sceneDrawer" class="drawer" aria-labelledby="sceneTitle">
+  <div class="drawer-head"><h2 id="sceneTitle">场景</h2><button id="drawerClose" aria-label="关闭场景选择">×</button></div>
+  <button class="scene-choice" data-scene="morning-rest"><b>清晨小憩</b></button>
+  <button class="scene-choice" data-scene="reading-time"><b>悦读时光</b></button>
+</dialog>
 
-<!-- 电话：双向语音 -->
-<div id="callPanel" class="call" hidden>
-  <div class="call-head"><span id="callState">通话中</span><button id="callHang">挂断</button></div>
-  <div class="call-body"><div class="call-orb"></div><p id="callText">按住下方说话，她会出声回答。</p></div>
-  <button id="callTalk">按住说话</button>
-</div>
-
+<dialog id="weatherDialog" class="small-dialog" aria-labelledby="weatherTitle">
+<header class="settings-head"><h2 id="weatherTitle">城市天气</h2><button data-close-dialog aria-label="关闭">×</button></header>
+<div class="settings-body"><form id="weatherForm"><input id="cityQuery" aria-label="城市名称" placeholder="输入城市名称" required minlength="2" maxlength="80"><button>查找</button></form><div id="cityResults" aria-live="polite"></div></div>
+</dialog>
+<dialog id="settings" aria-labelledby="settingsTitle">
+  <header class="settings-head"><h2 id="settingsTitle">设置</h2><button id="settingsClose" aria-label="关闭设置">×</button></header>
+  <nav class="settings-tabs" aria-label="设置分类"><button data-settings="general" aria-pressed="true">通用设置</button><button data-settings="companion" aria-pressed="false">AI 伴侣</button></nav>
+  <div class="settings-body" id="generalSettings">
+    <div class="settings-group"><div class="settings-row"><div><span id="accountStatus">游客</span><small>草稿仍保存在当前浏览器</small></div><button type="button" id="accountAction">登录</button></div></div>
+    <form id="loginForm" class="settings-group" hidden>
+      <label class="settings-row">笺墨溪账号 <input name="username" autocomplete="username" required></label>
+      <label class="settings-row">密码 <input name="password" type="password" autocomplete="current-password" required></label>
+      <div class="settings-row"><button>登录</button><small id="loginStatus" role="status"></small></div>
+    </form>
+    <h3>系统功能</h3>
+    <div class="settings-group">
+      <div class="settings-row"><div>当前版本<small id="clientVersion">网页版</small></div></div>
+      <label class="settings-row"><span>环境动效<small>播放场景中的局部光影</small></span><input id="settingsMotion" type="checkbox" role="switch"></label>
+      <label class="settings-row"><span>自动朗读回复<small>文字聊天时朗读 AI 回复</small></span><input id="settingsRead" type="checkbox" role="switch"></label>
+    </div>
+    <h3>写作</h3>
+    <div class="settings-group">
+      <div class="settings-row"><span>写作模式</span><div class="writing-modes" role="group" aria-label="写作模式">
+        <button type="button" data-mode="companion" aria-pressed="true" class="on">陪伴</button>
+        <button type="button" data-mode="immersive" aria-pressed="false">沉浸</button>
+      </div></div>
+      <label class="settings-row"><span>纸面不透明度</span><input id="paperOpacity" type="range" min="60" max="100" value="86"></label>
+    </div>
+    <h3>调试信息</h3>
+    <div class="settings-group"><div class="settings-row"><div>诊断信息<small>仅包含版本、界面和浏览器状态</small></div><button id="copyDiagnostics">复制</button></div></div>
+  </div>
+  <div class="settings-body" id="companionSettings" hidden>
+    <div class="settings-group">
+      <div class="settings-row"><div class="settings-avatar"><span class="chat-avatar" id="avatarPreview"></span>头像</div><label class="settings-action">更换头像<input id="settingsAvatar" type="file" accept="image/png,image/jpeg,image/webp" aria-label="更换头像"></label></div>
+      <label class="settings-row"><span>昵称</span><input id="settingsName" maxlength="20"></label>
+      <label class="settings-row"><span>怎么称呼我</span><input id="settingsAddress" maxlength="20" placeholder="可留空"></label>
+      <div class="settings-row frequency-row">
+        <span id="frequencyLabel">陪写提醒频率</span>
+        <div id="settingsFrequency" role="radiogroup" aria-labelledby="frequencyLabel">
+          <label><input type="radio" name="companionFrequency" value="normal">偶尔</label>
+          <label><input type="radio" name="companionFrequency" value="low">较少</label>
+          <label><input type="radio" name="companionFrequency" value="off">关闭</label>
+        </div>
+      </div>
+    </div>
+    <form id="companionInstructions" class="settings-group">
+      <h3>自定义指令</h3>
+      <p>让小溪记住你喜欢的交流方式，适用于聊天和 AI 陪写。</p>
+      <label for="companionPersona">性格与相处方式</label>
+      <textarea id="companionPersona" maxlength="2000" rows="4" placeholder="例如：做一个温柔、有主见的写作搭档。我卡住时，先问一句，再给建议。" disabled></textarea>
+      <label for="companionStyle">语气与回答方式</label>
+      <textarea id="companionStyle" maxlength="1000" rows="3" placeholder="例如：平时像朋友一样简短聊天，聊到稿件时引用原句，直接给具体意见。" disabled></textarea>
+      <div class="instructions-footer"><p id="companionInstructionsStatus" role="status"></p><button type="submit" disabled>保存指令</button></div>
+    </form>
+  </div>
+</dialog>
 <div id="toast" role="status"></div>
-<script src="./app.js" defer></script>
+<dialog id="chatHistory" aria-labelledby="chatHistoryTitle">
+  <header class="settings-head"><h2 id="chatHistoryTitle">历史对话</h2><button type="button" aria-label="关闭历史对话" data-close-dialog>×</button></header>
+  <input id="chatHistorySearch" type="search" placeholder="搜索对话标题" aria-label="搜索对话标题">
+  <button id="chatProjectNew" type="button">＋ 新建项目</button>
+  <p id="chatHistoryStatus" role="status"></p>
+  <div id="chatHistoryList"></div>
+</dialog>
+<dialog id="chatManage" class="small-dialog" aria-labelledby="chatManageTitle">
+  <form id="chatManageForm">
+    <h2 id="chatManageTitle">重命名对话</h2>
+    <input id="chatManageName" aria-labelledby="chatManageTitle" maxlength="80" required autocomplete="off" list="chatProjectNames">
+    <datalist id="chatProjectNames"></datalist>
+    <p id="chatManageStatus" role="status"></p>
+    <div><button type="button" data-close-dialog>取消</button><button type="submit">保存</button></div>
+  </form>
+</dialog>
+<script src="./chat-format.js?v=mobile-3" defer></script>
+<script src="./app.js?v=mobile-12" defer></script>
 </body>
 </html>
