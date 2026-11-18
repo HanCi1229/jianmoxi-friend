@@ -1,158 +1,206 @@
 import { randomUUID } from 'node:crypto';
-import { gunzipSync } from 'node:zlib';
 
-const path = '/api/friend/call/live';
-const endpoint = 'wss://openspeech.bytedance.com/api/v3/realtime/dialogue';
+const callPath = '/api/friend/call/live';
+const apiHost = 'wss://dashscope.aliyuncs.com/api-ws/v1/';
+const realtimeUrl = apiHost + 'realtime?model=qwen-audio-3.1-realtime-flash';
+const synthesisUrl = apiHost + 'inference';
+const synthesisModel = 'qwen-audio-3.1-tts-flash';
 const callDuration = 15 * 60 * 1000;
 const maxAudioMessage = 1024 * 1024;
 const activeCalls = new Set();
 
-function encode(event, sessionId, data = {}) {
-  const audio = Buffer.isBuffer(data);
-  const payload = audio ? data : Buffer.from(JSON.stringify(data));
-  const id = Buffer.from(sessionId || '');
-  const frame = Buffer.allocUnsafe(12 + (id.length ? 4 + id.length : 0) + payload.length);
-  frame.set([0x11, audio ? 0x24 : 0x14, audio ? 0 : 0x10, 0]);
-  frame.writeUInt32BE(event, 4);
-  let offset = 8;
-  if (id.length) {
-    frame.writeUInt32BE(id.length, offset);
-    id.copy(frame, offset + 4);
-    offset += 4 + id.length;
-  }
-  frame.writeUInt32BE(payload.length, offset);
-  payload.copy(frame, offset + 4);
-  return frame;
+function sendJson(socket, data) {
+  socket.send(JSON.stringify(data));
 }
 
-function decode(frame) {
-  if (frame.length < 8 || frame[0] !== 0x11) throw new Error('实时语音数据格式错误');
-  const type = frame[1] >> 4;
-  const flags = frame[1] & 15;
-  let offset = 4;
-  const number = () => { const value = frame.readUInt32BE(offset); offset += 4; return value; };
-  if (type === 15) return { error: number() };
-  if (flags & 3) number();
-  const event = flags & 4 ? number() : 0;
-  if (event >= 50) {
-    const idLength = number();
-    offset += idLength;
-  }
-  const size = number();
-  if (size > maxAudioMessage || offset + size !== frame.length) throw new Error('实时语音数据长度错误');
-  let data = frame.subarray(offset);
-  if ((frame[2] & 15) === 1) data = gunzipSync(data, { maxOutputLength: maxAudioMessage });
-  if (frame[2] >> 4 === 1) data = JSON.parse(data.toString());
-  return { event, data };
+function closeSocket(socket, WebSocket) {
+  if (socket?.readyState === WebSocket.OPEN) socket.close();
+  else if (socket?.readyState === WebSocket.CONNECTING) socket.terminate();
 }
 
-function dialogOptions(profile) {
-  return {
-    tts: {
-      speaker: 'S_nxM4bNzl2',
-      audio_config: { format: 'pcm_s16le', sample_rate: 24000, channel: 1 }
-    },
-    dialog: {
-      bot_name: '小溪',
-      system_role: ['你是笺墨溪 Friend 里陪伴用户写作与阅读的小溪。', (profile?.persona || '').slice(0, 2000)].filter(Boolean).join('\n'),
-      speaking_style: ['用自然的中文口语回应。先说一两句短话，给对方留接话的空当。只说电话里会说出口的话。', (profile?.style || '').slice(0, 1000)].filter(Boolean).join('\n'),
-      extra: { model: '1.2.1.1', input_mod: 'keep_alive' }
-    }
+function relayCall(browser, WebSocket, account, apiKey, voiceId) {
+  const socketOptions = {
+    maxPayload: maxAudioMessage,
+    handshakeTimeout: 8000,
+    perMessageDeflate: false,
+    headers: { Authorization: 'Bearer ' + apiKey }
   };
-}
-
-function relayCall(browser, WebSocket, account, apiKey) {
-  const id = randomUUID();
-  const voice = new WebSocket(endpoint, {
-    maxPayload: maxAudioMessage, handshakeTimeout: 8000, perMessageDeflate: false,
-    headers: { 'X-Api-Key': apiKey, 'X-Api-Resource-Id': 'volc.speech.dialog', 'X-Api-Connect-Id': randomUUID() }
-  });
+  const conversation = new WebSocket(realtimeUrl, socketOptions);
+  let current = null;
   let ready = false;
-  let acceptAudio = false;
-  let finished = false;
-  let answer = '';
-  let questionId = '';
-  const startup = setTimeout(() => fail('豆包实时语音连接超时，请重试。'), 12000);
+  let closed = false;
+  const startup = setTimeout(() => fail('千问实时语音连接超时，请重试。'), 12000);
   const limit = setTimeout(() => stop('本次通话已达到时长上限。'), callDuration);
 
   function tell(type, text) {
-    if (browser.readyState === WebSocket.OPEN) browser.send(JSON.stringify({ type, text }));
+    if (browser.readyState === WebSocket.OPEN) sendJson(browser, { type, text });
   }
+
+  function clearTurn() {
+    const previous = current;
+    current = null;
+    if (!previous) return;
+    clearTimeout(previous.transcriptTimer);
+    clearTimeout(previous.synthesisTimer);
+    closeSocket(previous.synthesis, WebSocket);
+  }
+
   function stop(message) {
-    if (finished) return;
-    finished = true;
+    if (closed) return;
+    closed = true;
     clearTimeout(startup);
     clearTimeout(limit);
+    clearTurn();
     activeCalls.delete(account.id);
     if (message) tell('ended', message);
-    if (voice.readyState === WebSocket.OPEN) {
-      if (ready) voice.send(encode(102, id));
-      voice.send(encode(2));
-      voice.close();
-    } else if (voice.readyState === WebSocket.CONNECTING) voice.terminate();
-    if (browser.readyState === WebSocket.OPEN) browser.close();
+    closeSocket(conversation, WebSocket);
+    closeSocket(browser, WebSocket);
   }
-  function fail(message) {
+
+  function fail(message, code) {
+    if (closed) return;
+    if (typeof code === 'string' && /^[\w.-]{1,80}$/.test(code)) console.warn('千问语音错误', code);
     tell('error', message);
     stop();
+  }
+
+  function playReply(turn) {
+    if (current !== turn || turn.synthesisStarted || !turn.reply) return;
+    clearTimeout(turn.transcriptTimer);
+    const synthesis = new WebSocket(synthesisUrl, socketOptions);
+    turn.synthesisStarted = true;
+    turn.synthesis = synthesis;
+    turn.synthesisTimer = setTimeout(() => fail('小溪的语音合成超时，请重试。'), 18000);
+    const taskId = randomUUID().replace(/-/g, '');
+    const task = (action, payload) => sendJson(synthesis, { header: { action, task_id: taskId, streaming: 'duplex' }, payload });
+    const synthesisFailed = code => {
+      if (current === turn && turn.synthesis === synthesis) fail('千问未能生成小溪的声音，请重试。', code);
+    };
+    synthesis.on('error', () => synthesisFailed());
+    synthesis.on('close', () => synthesisFailed());
+    synthesis.on('open', () => task('run-task', {
+      task_group: 'audio', task: 'tts', function: 'SpeechSynthesizer', model: synthesisModel,
+      parameters: { text_type: 'PlainText', voice: voiceId, format: 'pcm', sample_rate: 24000 },
+      input: {}
+    }));
+    synthesis.on('message', (data, binary) => {
+      if (current !== turn || turn.synthesis !== synthesis) return;
+      if (binary) {
+        if (browser.readyState !== WebSocket.OPEN) return;
+        if (browser.bufferedAmount > maxAudioMessage) return fail('语音播放积压，请重试。');
+        if (!turn.speaking) {
+          turn.speaking = true;
+          tell('reply', turn.reply);
+          tell('speaking');
+        }
+        browser.send(data);
+        return;
+      }
+      try {
+        const { header } = JSON.parse(data.toString());
+        if (header.task_id !== taskId) return;
+        if (header.event === 'task-started') {
+          task('continue-task', { input: { text: turn.reply } });
+          task('finish-task', { input: {} });
+        } else if (header.event === 'task-failed') {
+          synthesisFailed(header.error_code);
+        } else if (header.event === 'task-finished') {
+          if (!turn.speaking) return synthesisFailed('NoAudio');
+          clearTimeout(turn.synthesisTimer);
+          turn.synthesis = null;
+          synthesis.close();
+          tell('reply-ended');
+          tell('listening');
+        }
+      } catch {
+        synthesisFailed('InvalidSynthesisEvent');
+      }
+    });
   }
 
   browser.on('error', () => stop());
   browser.on('close', () => stop());
   browser.on('message', (data, binary) => {
-    if (!ready || finished || !binary || data.length !== 640) return;
-    if (voice.bufferedAmount > 64000) return fail('语音上传积压，请重试。');
-    voice.send(encode(200, id, data));
+    if (!ready || closed || !binary || data.length !== 640) return;
+    if (conversation.bufferedAmount > 64000) return fail('语音上传积压，请重试。');
+    sendJson(conversation, { type: 'input_audio_buffer.append', audio: data.toString('base64') });
   });
 
-  voice.on('open', () => voice.send(encode(1)));
-  voice.on('error', () => fail('豆包实时语音暂时无法连接，请重试。'));
-  voice.on('close', () => stop('豆包语音连接已结束。'));
-  voice.on('message', frame => {
-    if (finished) return;
+  conversation.on('open', () => sendJson(conversation, {
+    type: 'session.update',
+    session: {
+      modalities: ['text'],
+      input_audio_format: 'pcm',
+      input_audio_transcription: { language: 'zh' },
+      turn_detection: { type: 'server_vad', silence_duration_ms: 850 },
+      instructions: [
+        '你是笺墨溪 Friend 里陪伴用户写作与阅读的小溪。',
+        (account.profile?.persona || '').slice(0, 2000),
+        '用自然的中文口语回应。说一两句短话，给对方留接话的空当。只说电话里会说出口的话。',
+        (account.profile?.style || '').slice(0, 1000)
+      ].filter(Boolean).join('\n')
+    }
+  }));
+  conversation.on('error', () => fail('千问实时语音暂时无法连接，请重试。'));
+  conversation.on('close', () => stop('千问语音连接已结束。'));
+  conversation.on('message', data => {
+    if (closed) return;
     try {
-      const { event, data, error } = decode(frame);
-      if (error || event === 51 || event === 153 || event === 599) {
-        const code = Number(data?.status_code) || Number(data?.code) || error || event;
-        console.warn('豆包实时语音错误', code);
-        return fail(ready ? '豆包实时语音中断，请重新拨打。' : '豆包未能开启小溪的语音会话，请检查音色和服务权限。');
-      }
-      switch (event) {
-        case 50: voice.send(encode(100, id, dialogOptions(account.profile))); break;
-        case 150: ready = true; clearTimeout(startup); tell('ready'); break;
-        case 152: stop('通话已结束。'); break;
-        case 350: acceptAudio = true; tell('speaking'); break;
-        case 352:
-          if (acceptAudio && Buffer.isBuffer(data) && browser.readyState === WebSocket.OPEN) {
-            if (browser.bufferedAmount > maxAudioMessage) return fail('语音播放积压，请重试。');
-            browser.send(data);
+      const event = JSON.parse(data.toString());
+      switch (event.type) {
+        case 'session.updated':
+          if (!ready) {
+            ready = true;
+            clearTimeout(startup);
+            tell('ready');
           }
           break;
-        case 359: acceptAudio = false; tell('listening'); break;
-        case 450:
-          acceptAudio = false;
-          answer = '';
-          questionId = data?.question_id || '';
+        case 'input_audio_buffer.speech_started':
+          clearTurn();
+          current = { inputId: event.item_id };
           tell('interrupt');
           break;
-        case 451: {
-          const result = data?.results?.[0];
-          if (typeof result?.text === 'string' && result.text.trim()) tell('transcript', result.text);
-          break;
-        }
-        case 459: tell('thinking'); break;
-        case 550:
-          if ((!questionId || !data?.question_id || data.question_id === questionId) && typeof data?.content === 'string') {
-            answer = (answer + data.content).slice(-1000);
-            tell('reply', answer);
+        case 'input_audio_buffer.committed':
+          if (current && current.inputId === event.item_id) {
+            current.committed = true;
+            tell('thinking');
           }
           break;
-        case 559:
-          if (!questionId || !data?.question_id || data.question_id === questionId) tell('reply-ended');
+        case 'conversation.item.input_audio_transcription.completed':
+          if (current && current.inputId === event.item_id) {
+            current.transcribed = true;
+            if (typeof event.transcript === 'string' && event.transcript.trim()) {
+              tell('transcript', event.transcript);
+              tell('thinking');
+            }
+            playReply(current);
+          }
+          break;
+        case 'response.created':
+          if (current?.committed) current.responseId = event.response?.id;
+          break;
+        case 'response.text.done':
+          if (current?.responseId && current.responseId === event.response_id) {
+            current.reply = event.text?.trim().slice(0, 1000);
+            if (!current.reply) { tell('listening'); break; }
+            if (current.transcribed) playReply(current);
+            else {
+              const turn = current;
+              turn.transcriptTimer = setTimeout(() => playReply(turn), 900);
+            }
+          }
+          break;
+        case 'response.done':
+          if (current?.responseId === event.response?.id && event.response?.status === 'failed') {
+            fail('千问回复失败，请重新拨打。', event.response?.status_details?.error?.code);
+          }
+          break;
+        case 'error':
+          fail('千问实时语音暂时不可用，请重试。', event.error?.code);
           break;
       }
     } catch {
-      fail('实时语音数据未能处理，请重试。');
+      fail('实时语音数据未能处理，请重试。', 'InvalidConversationEvent');
     }
   });
 }
@@ -160,13 +208,14 @@ function relayCall(browser, WebSocket, account, apiKey) {
 export function attachRealtimeCalls(server, authenticate) {
   let webSockets;
   server.on('upgrade', async (req, socket, head) => {
-    const reject = status => socket.end(`HTTP/1.1 ${status}\r\nConnection: close\r\nContent-Length: 0\r\n\r\n`);
+    const reject = status => socket.end('HTTP/1.1 ' + status + '\r\nConnection: close\r\nContent-Length: 0\r\n\r\n');
     const checkSocket = () => socket.destroy();
     socket.on('error', checkSocket);
-    if (req.url !== path) return reject('404 Not Found');
+    if (req.url !== callPath) return reject('404 Not Found');
     if (req.headers.origin !== (process.env.FRIEND_PUBLIC_ORIGIN || 'http://' + req.headers.host)) return reject('403 Forbidden');
-    const apiKey = process.env.FRIEND_DOUBAO_API_KEY?.trim();
-    if (!apiKey) return reject('503 Service Unavailable');
+    const apiKey = process.env.DASHSCOPE_API_KEY?.trim();
+    const voiceId = process.env.FRIEND_QWEN_VOICE_ID?.trim();
+    if (!apiKey || !voiceId?.startsWith(synthesisModel + '-')) return reject('503 Service Unavailable');
     try {
       const account = await authenticate(req);
       if (!account) return reject('401 Unauthorized');
@@ -177,7 +226,7 @@ export function attachRealtimeCalls(server, authenticate) {
       webSockets.handleUpgrade(req, socket, head, browser => {
         socket.off('error', checkSocket);
         activeCalls.add(account.id);
-        try { relayCall(browser, WebSocket, account, apiKey); }
+        try { relayCall(browser, WebSocket, account, apiKey, voiceId); }
         catch { activeCalls.delete(account.id); browser.close(1011); }
       });
     } catch {
