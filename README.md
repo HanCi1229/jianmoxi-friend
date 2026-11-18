@@ -11,7 +11,7 @@ npm ci
 npm start
 ```
 
-打开 `http://127.0.0.1:4180/`。聊天和写作的云端功能依赖笺墨溪账号服务，可通过 `JIANMOXI_ORIGIN` 指定服务地址。豆包实时通话需要在服务端环境中配置 `FRIEND_DOUBAO_API_KEY`。HTTPS 部署时，设置 `FRIEND_PUBLIC_ORIGIN` 为公开来源，并为实时通话路由启用 WebSocket 转发。
+打开 `http://127.0.0.1:4180/`。聊天和写作的云端功能依赖账号与数据服务，部署默认通过本机 `http://127.0.0.1:8766` 访问，可用 `JIANMOXI_ORIGIN` 指定 HTTPS 服务或本机回环地址。豆包实时通话需要在服务端环境中配置 `FRIEND_DOUBAO_API_KEY`。HTTPS 部署时，设置 `FRIEND_PUBLIC_ORIGIN` 为公开来源，并为实时通话路由启用 WebSocket 转发。
 
 ## 项目文件
 

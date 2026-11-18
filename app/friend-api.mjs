@@ -2,8 +2,9 @@ import { createHash, randomUUID } from 'node:crypto';
 import { startFriendCall, stopFriendCall } from './friend-call.mjs';
 import { dictationAvailable, transcribe } from './friend-dictation.mjs';
 
-const upstream = new URL(process.env.JIANMOXI_ORIGIN || 'https://49.234.43.25');
-if (upstream.protocol !== 'https:') throw new Error('JIANMOXI_ORIGIN 必须使用 HTTPS');
+const upstream = new URL(process.env.JIANMOXI_ORIGIN || 'http://127.0.0.1:8766');
+const localHttp = upstream.protocol === 'http:' && ['127.0.0.1', '[::1]'].includes(upstream.hostname);
+if (upstream.protocol !== 'https:' && !localHttp) throw new Error('JIANMOXI_ORIGIN 必须使用 HTTPS 或本机回环地址');
 
 function json(res, status, data, headers = {}) {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...headers });
