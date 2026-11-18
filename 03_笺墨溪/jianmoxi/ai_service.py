@@ -1,4 +1,4 @@
-"""Private DeepSeek adapter. Only bounded, product-specific tasks are exposed."""
+"""Model adapter for bounded, product-specific tasks."""
 import json
 import os
 import subprocess
@@ -139,9 +139,27 @@ def validate(task, value, data):
 def _complete_once(task, data):
     global LAST_MODEL
     prompt, payload = prepare(task, data)
-    key, model = configuration()
+    ark_model = os.environ.get('FRIEND_TEXT_MODEL', '').strip() if task == 'chat' and data.get('_friend_text') else ''
+    if ark_model:
+        key = os.environ.get('ARK_API_KEY', '').strip()
+        model = ark_model
+        provider = '火山方舟'
+        endpoint = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions'
+        profile = payload.get('context', {}).get('companion', {}).get('profile', {})
+        persona = profile.get('persona', '').strip()
+        style = profile.get('style', '').strip()
+        prompt += ('\n在 Friend 中用小溪的口吻和用户交谈。闲聊用简短口语，聊稿件时回应具体文字。'
+                   '以下角色设定只用于性格与表达，继续遵守前面的引用、操作和输出约束。')
+        if persona:
+            prompt += '\n小溪的性格与相处方式：' + persona
+        if style:
+            prompt += '\n小溪的语气与回答方式：' + style
+    else:
+        key, model = configuration()
+        provider = 'DeepSeek'
+        endpoint = 'https://api.deepseek.com/chat/completions'
     if not key:
-        raise AIError('尚未配置 DeepSeek 密钥', 503)
+        raise AIError(f'尚未配置 {provider} 密钥', 503)
     if not SLOTS.acquire(blocking=False):
         raise AIError('正在处理其他请求，请稍后再试', 429)
     try:
@@ -151,7 +169,7 @@ def _complete_once(task, data):
                           max_tokens=3200 if task.startswith('study_') else 500 if task=='greeting' else 8000 if task == 'chat' else 1200 if task == 'research_plan' else 5000 if task == 'library_inspiration' else 2200 if task == 'book_overview' else 6000 if task == 'inspiration' else 2200 if task == 'reading' else 1400, stream=False), ensure_ascii=False)
         # Credentials and article text travel through stdin, never process arguments.
         config = '\n'.join(k + ' = ' + json.dumps(v, ensure_ascii=False) for k, v in [
-            ('url', 'https://api.deepseek.com/chat/completions'), ('request', 'POST'),
+            ('url', endpoint), ('request', 'POST'),
             ('header', 'Content-Type: application/json'), ('header', 'Authorization: Bearer ' + key),
             ('data', body)])
         response = subprocess.run(['curl', '--disable', '--config', '-', '--silent', '--show-error',
@@ -160,11 +178,14 @@ def _complete_once(task, data):
                                   capture_output=True, timeout=60)
         if response.returncode or len(response.stdout) > 200000:
             logging.getLogger(__name__).warning('AI transport failure task=%s code=%s',task,response.returncode)
-            raise AIError('DeepSeek 连接超时或暂不可用，请稍后重试')
+            raise AIError(f'{provider} 连接超时或暂不可用，请稍后重试')
         raw, code = response.stdout.rsplit(b'\n', 1)
         if code != b'200':
-            message = {b'401': 'DeepSeek 密钥无效，请检查服务端配置', b'402': 'DeepSeek 余额不足',
-                       b'429': 'DeepSeek 请求繁忙，请稍后重试'}.get(code, 'DeepSeek 暂未完成请求，请稍后重试')
+            message = {
+                b'401': f'{provider} 密钥无效，请检查服务端配置',
+                b'402': f'{provider} 余额不足',
+                b'429': f'{provider} 请求繁忙，请稍后重试',
+            }.get(code, f'{provider} 暂未完成请求，请稍后重试')
             raise AIError(message)
         reply = json.loads(raw)
         choice = reply['choices'][0]
@@ -179,7 +200,7 @@ def _complete_once(task, data):
         logging.getLogger(__name__).warning('AI validation failure task=%s reason=%s',task,str(error)[:120])
         raise AIError('AI 返回内容格式异常，请重试') from None
     except (OSError, subprocess.SubprocessError):
-        raise AIError('DeepSeek 连接暂不可用，请稍后重试') from None
+        raise AIError(f'{provider} 连接暂不可用，请稍后重试') from None
     finally:
         SLOTS.release()
 

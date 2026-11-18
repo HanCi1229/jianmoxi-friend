@@ -172,6 +172,8 @@ def register(app,db,rate):
                 if not any(b['id']==book['id'] for b in payload['context']['readingChoices']):payload['context']['readingChoices'].append({k:book.get(k) for k in ('id','title','author','genre','intro','collection')})
             sources=payload['research'].get('sources',[])
             companion.progress(connection,rid,cid,'answer',('已查阅 '+str(len(sources))+' 处原文，正在整理解读与出处') if sources else '正在结合当前问题组织回答',sources)
+            if selection.get('project') == 'friend-chat' or row['title'] == '笺墨溪 Friend · 聊天':
+                payload['_friend_text']=True
             result=ai_service.complete('chat',payload)
             connection.execute('BEGIN IMMEDIATE')
             run=connection.execute('SELECT status FROM assistant_runs WHERE id=?',(rid,)).fetchone()
