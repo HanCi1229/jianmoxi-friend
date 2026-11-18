@@ -214,3 +214,13 @@ grep -rE '<video|\.mp4|\.webm' app/   # 应无命中
 
 已检查 WAV 格式、峰值和重复段转写。该文件供复刻测试，尚未用它创建或替换线上音色。本次仅更新素材与交接文档，未发布服务器、未打包 Android。后续可创建测试音色，再用通话和自动朗读的同一组台词对比。千问复刻接口默认最多使用 10 秒参考音频，`max_prompt_audio_length` 最多可设为 30 秒，计划保留的情绪段位于 13 秒后。[百炼复刻 API 参数](https://help.aliyun.com/zh/model-studio/voice-clone-design-http-api)
 
+## 小溪6 音色发布配置
+
+通话和文本朗读共用阿里云百炼的「小溪6」音色，绑定 `qwen-audio-3.1-tts-flash`。部署到腾讯云时，在 `/etc/jianmoxi-friend/model-studio.env` 中更新下列设置并重启 `jianmoxi-friend` 服务。
+
+```dotenv
+FRIEND_QWEN_VOICE_ID=qwen-audio-3.1-tts-flash-bailian-92dcc0d4be6247a1a462fd8915fc0731
+```
+
+`DASHSCOPE_API_KEY` 由服务端保密配置提供。发布前用正式环境的凭据和共用的合成代码验证了流式 PCM 和 MP3。网页和 Android 共用该服务。
+
