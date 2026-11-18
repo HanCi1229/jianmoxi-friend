@@ -79,7 +79,7 @@ public final class MainActivity extends Activity {
     private View offline;
     private boolean loadFailed;
     private Boolean keyboardVisible;
-    private boolean editorSelectionControls;
+    private boolean customSelectionControls;
     private PermissionRequest microphone;
     private ValueCallback<Uri[]> imageCallback;
     private String exportText;
@@ -102,10 +102,12 @@ public final class MainActivity extends Activity {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout root = new FrameLayout(this) {
+            @Override public ActionMode startActionModeForChild(View child, ActionMode.Callback callback) {
+                return startActionModeForChild(child, callback, ActionMode.TYPE_PRIMARY);
+            }
+
             @Override public ActionMode startActionModeForChild(View child, ActionMode.Callback callback, int type) {
-                if (child == web && editorSelectionControls && type == ActionMode.TYPE_FLOATING) {
-                    callback = editorSelectionCallback(callback);
-                }
+                if (child == web && customSelectionControls) callback = customSelectionCallback(callback);
                 return super.startActionModeForChild(child, callback, type);
             }
         };
@@ -195,7 +197,7 @@ public final class MainActivity extends Activity {
 
             @Override public void onPageStarted(WebView view, String url, android.graphics.Bitmap icon) {
                 clearChatRecording();
-                editorSelectionControls = false;
+                customSelectionControls = false;
                 loadFailed = false;
                 progress.setVisibility(View.VISIBLE);
             }
@@ -242,7 +244,7 @@ public final class MainActivity extends Activity {
 
             @Override public boolean onJsPrompt(WebView view, String url, String command, String value, JsPromptResult result) {
                 if ("friend:copy-selection".equals(command)) {
-                    if (!friendPage(url) || !friendPage(view.getUrl()) || !editorSelectionControls ||
+                    if (!friendPage(url) || !friendPage(view.getUrl()) || !customSelectionControls ||
                             value == null || value.isEmpty() || value.length() > 200000) {
                         result.cancel();
                         return true;
@@ -258,7 +260,7 @@ public final class MainActivity extends Activity {
                 }
                 if ("friend:editor-selection".equals(command)) {
                     if (!friendPage(url) || !friendPage(view.getUrl())) { result.cancel(); return true; }
-                    editorSelectionControls = "1".equals(value);
+                    customSelectionControls = "1".equals(value);
                     result.confirm("ok");
                     return true;
                 }
@@ -291,7 +293,7 @@ public final class MainActivity extends Activity {
         });
     }
 
-    private ActionMode.Callback editorSelectionCallback(ActionMode.Callback delegate) {
+    private ActionMode.Callback customSelectionCallback(ActionMode.Callback delegate) {
         // Keep WebView's action mode alive so Chromium keeps the selected range and handles.
         return new ActionMode.Callback2() {
             @Override public boolean onCreateActionMode(ActionMode mode, Menu menu) {

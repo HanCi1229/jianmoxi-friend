@@ -241,3 +241,12 @@ FRIEND_QWEN_VOICE_ID=qwen-audio-3.1-tts-flash-bailian-92dcc0d4be6247a1a462fd8915
 腾讯云端部署到 `/opt/jianmoxi-friend/backend/friend-persona.md`，文字后端用 `FRIEND_PERSONA_FILE` 指向该文件，实时通话服务从应用目录的同级 `backend` 目录加载。以后在 GitHub 修改这份文件，随版本部署并重启 `jianmoxi-friend` 和 `xingzou`。现有人设文件保留了用户提交的 V2.0 原文，账号历史与已保存的记忆继续使用。
 
 2026-11-19 已按提交 `03b9150` 部署到腾讯云，两个服务均已重启。线上设置页已移除自定义指令入口；临时账号完成两轮文字聊天，回复保留在同一个会话，后端确认实际模型为 `doubao-seed-character-260628`。本次按要求仅对文字聊天做实际对话验收，通话人设加载通过启动检查。Android 沿用线上页面，未重新打包。
+
+## 文字聊天、天气和阅读选区修复
+
+2026-11-19 修复 Friend 文字聊天将「文章列表」误判为书库检索的问题。问云稿数量、标题或是否可见时，按当前账号的云端目录回答，本机草稿仍由设备保管。
+
+天气入口在登录前后均可查询城市和实况，保留原来的请求来源校验和限流。阅读选中文字时打开 Friend 的浮动工具条，提供 AI 解读、摘录和复制。Android 的阅读和写作选区接管保留选区拖动手柄，并兼容原生两种 ActionMode 入口。
+
+[Android 0.1.13 安装包](artifacts/android/Jianmoxi-Friend-0.1.13.apk)沿用 0.1.12 的签名，可覆盖安装。包已通过构建、版本号、签名与对齐检查。
+

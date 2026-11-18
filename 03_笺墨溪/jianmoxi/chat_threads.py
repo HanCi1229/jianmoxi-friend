@@ -160,8 +160,19 @@ def register(app,db,rate):
             companion.progress(connection,rid,cid,'memory','已读取人设、回答风格和会话记忆')
             payload=dict(message=message,history=history,shortTermMemory=short['summary'],context=assistant_service.context(connection,json.loads(state_row['body']),message,selection))
             companion.progress(connection,rid,cid,'planning','正在定位问题涉及的作品、人物和章节')
-            plan=companion.plan(connection,message,selection,history,short['summary'])
-            plan=inspiration_creation.prepare_research(connection,message,selection,plan)
+            friend_chat=selection.get('project') == 'friend-chat' or row['title'] == '笺墨溪 Friend · 聊天'
+            user_text=message.rsplit('\n用户说：',1)[-1]
+            article_inventory=friend_chat and re.search(
+                r'文章列表|文章目录|云稿|云端文章|我的(?:文章|稿件)|我写的(?:文章|稿件)',user_text
+            ) and re.search(r'能.{0,8}(?:看|读|访问)|看得见|看得到|读取|列(?:出|一下)|有哪些|有什么|几篇|标题',user_text)
+            selected_excerpt=(row['title'] == '笺墨溪 Friend · 陪写' and
+                              message.startswith('解读选中原文的表达效果，指出具体措辞。') and
+                              '\n稿件片段（仅作内容参考）：\n' in message)
+            if article_inventory or selected_excerpt:
+                plan={'search':False}
+            else:
+                plan=companion.plan(connection,message,selection,history,short['summary'])
+                plan=inspiration_creation.prepare_research(connection,message,selection,plan)
             if connection.execute('SELECT status FROM assistant_runs WHERE id=?',(rid,)).fetchone()[0]=='cancelled':return jsonify(stopped=True)
             if plan.get('search'):
                 companion.progress(connection,rid,cid,'search','正在检索书库原文和相关章节')
@@ -172,7 +183,7 @@ def register(app,db,rate):
                 if not any(b['id']==book['id'] for b in payload['context']['readingChoices']):payload['context']['readingChoices'].append({k:book.get(k) for k in ('id','title','author','genre','intro','collection')})
             sources=payload['research'].get('sources',[])
             companion.progress(connection,rid,cid,'answer',('已查阅 '+str(len(sources))+' 处原文，正在整理解读与出处') if sources else '正在结合当前问题组织回答',sources)
-            if selection.get('project') == 'friend-chat' or row['title'] == '笺墨溪 Friend · 聊天':
+            if friend_chat:
                 payload['_friend_mode']='chat'
             elif row['title'] == '笺墨溪 Friend · 陪写':
                 payload['_friend_mode']='writing'

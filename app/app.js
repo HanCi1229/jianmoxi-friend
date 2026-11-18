@@ -81,6 +81,9 @@
     // 沉浸只属于写作模块，回到首页/聊天时恢复场景与她
     document.body.dataset.mode = (m === 'writing' && state.tab === 'article') ? state.mode : 'companion';
     if (m === 'writing') { setTab(state.tab, false); setMode(state.mode, false); }
+    if (m !== 'writing' || state.tab === 'reading') {
+      syncNativeEditorSelection(m === 'writing' && document.body.hasAttribute('data-reader-open'));
+    }
     if (m === 'chat') renderChat(false, true);
     closeNote(); positionNote();
     queueWritingViewport();
@@ -847,7 +850,7 @@
     readerPrevious.disabled = Boolean(chapterPending || (!readerPageIndex && !chapter));
     readerNext.disabled = Boolean(chapterPending || (readerPageIndex === readerPageCount - 1 &&
       (!currentWork?.chunked || chapter + 1 >= currentWork.chapterCount)));
-    $('#btnExcerpt').hidden = true;
+    $('#readerSelectionTools').hidden = true;
   }
   function showReaderPosition(position) {
     if (!position || !readerViewport.clientWidth) return;
@@ -995,7 +998,8 @@
   }
   function showReader(open) {
     document.body.toggleAttribute('data-reader-open', open);
-    $('#btnExcerpt').hidden = true;
+    syncNativeEditorSelection(open && state.module === 'writing');
+    $('#readerSelectionTools').hidden = true;
     if (open) showReaderPage();
     else { ++workRequest; chapterPending = 0; selectionText = ''; setReaderTools(false); }
   }
@@ -1029,39 +1033,76 @@
   $('#shelfSearch').addEventListener('input', e => renderShelf(e.target.value.trim()));
 
   let selectionText = '';
+  const readingSelectionTools = $('#readerSelectionTools');
+  const readerInterpretation = $('#readerInterpretation');
+  let readerInterpretationRequest = 0;
   function onSelect() {
-    if (state.tab !== 'reading' || state.module !== 'writing' || !document.body.hasAttribute('data-reader-open')) return;
-    const s = getSelection();
-    const range = s?.rangeCount ? s.getRangeAt(0) : null;
-    const body = $('#readBody');
-    selectionText = range && body.contains(range.startContainer) && body.contains(range.endContainer) ? s.toString().trim() : '';
-    const btn = $('#btnExcerpt');
-    if (!selectionText || selectionText.length < 4) { btn.hidden = true; return; }
-    const r = range.getBoundingClientRect();
+    const selection = getSelection();
+    const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
+    const active = state.tab === 'reading' && state.module === 'writing' && document.body.hasAttribute('data-reader-open');
+    selectionText = active && range && readerBody.contains(range.startContainer) &&
+      readerBody.contains(range.endContainer) ? selection.toString().trim() : '';
+    readingSelectionTools.hidden = !selectionText;
+    if (!selectionText) return;
+    const rect = range.getBoundingClientRect();
     const host = $('#paper').getBoundingClientRect();
-    btn.style.left = Math.max(8, Math.min(r.left - host.left + r.width / 2 - 30, host.width - 80)) + 'px';
-    btn.style.top = Math.max(8, r.top - host.top - 48) + 'px';
-    btn.hidden = false;
+    const width = readingSelectionTools.offsetWidth;
+    const top = rect.top - host.top - readingSelectionTools.offsetHeight - 8;
+    readingSelectionTools.style.left = Math.max(8, Math.min(rect.left - host.left + (rect.width - width) / 2, host.width - width - 8)) + 'px';
+    readingSelectionTools.style.top = (top >= 8 ? top : rect.bottom - host.top + 8) + 'px';
+    $('#btnExcerpt').disabled = selectionText.length < 4;
   }
   document.addEventListener('selectionchange', onSelect);
-  $('#btnExcerpt').addEventListener('pointerdown', e => e.preventDefault());
+  readerBody.addEventListener('pointerdown', () => syncNativeEditorSelection(true));
+  readingSelectionTools.addEventListener('pointerdown', e => e.preventDefault());
+  function clearReadingSelection() {
+    readingSelectionTools.hidden = true;
+    selectionText = '';
+    getSelection()?.removeAllRanges();
+  }
+  $('#readerInterpret').addEventListener('click', async () => {
+    const text = selectionText;
+    if (!text) return;
+    if (text.length > 1000) { toast('请选取 1000 字以内的原文'); return; }
+    const request = ++readerInterpretationRequest, account = accountGeneration;
+    const answer = $('#readerInterpretationReply');
+    $('#readerInterpretationQuote').textContent = text;
+    answer.textContent = '正在解读…';
+    clearReadingSelection();
+    readerInterpretation.showModal();
+    const reply = await aiReply('interpret', '请根据选中文字解读。', text);
+    if (request === readerInterpretationRequest && account === accountGeneration && readerInterpretation.open) {
+      answer.textContent = reply.text || reply.error;
+    }
+  });
+  readerInterpretation.addEventListener('close', () => { ++readerInterpretationRequest; });
+  $('#readerCopy').addEventListener('click', async () => {
+    const text = selectionText;
+    if (!text) return;
+    try {
+      const copiedNatively = nativeEditorSelection && window.prompt('friend:copy-selection', text) === 'ok';
+      if (!copiedNatively) await navigator.clipboard.writeText(text);
+      if (selectionText === text) clearReadingSelection();
+      toast('已复制');
+    } catch { toast('复制失败，请重试'); }
+  });
   $('#btnExcerpt').addEventListener('click', async () => {
-    if (!selectionText || !currentWork) return;
-    const p = getSelection().anchorNode?.parentElement?.closest('#readBody p');
-    const sec = p ? `第 ${Number(p.dataset.i) + 1} 段` : currentWork.title;
-    if (currentWork.cloud) {
+    const text = selectionText;
+    const work = currentWork;
+    if (text.length < 4 || !work) return;
+    const p = getSelection()?.anchorNode?.parentElement?.closest('#readBody p');
+    const sec = p ? `第 ${Number(p.dataset.i) + 1} 段` : work.title;
+    if (work.cloud) {
       try {
-        await api('/api/excerpts', {workId:currentWork.id, chapter:currentWork.chapter?.index || 0, text:selectionText});
+        await api('/api/excerpts', {workId:work.id, chapter:work.chapter?.index || 0, text});
         toast('已收藏到笺墨溪');
       } catch (error) { toast(error.message); return; }
-      $('#btnExcerpt').hidden = true;
-      getSelection().removeAllRanges();
-      return;
+    } else {
+      state.excerpts.unshift({ text, title: work.title, author: work.author, section: sec });
+      state.excerpts = state.excerpts.slice(0, 20); save(); renderExcerpts();
+      toast('已摘录 · ' + work.title + ' ' + sec);
     }
-    state.excerpts.unshift({ text: selectionText, title: currentWork.title, author: currentWork.author, section: sec });
-    state.excerpts = state.excerpts.slice(0, 20); save(); renderExcerpts();
-    $('#btnExcerpt').hidden = true; getSelection().removeAllRanges();
-    toast('已摘录 · ' + currentWork.title + ' ' + sec);
+    if (currentWork === work && selectionText === text) clearReadingSelection();
   });
   $$('[data-close-dialog]').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
   let excerptRequest = 0;

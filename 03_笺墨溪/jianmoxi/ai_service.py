@@ -154,6 +154,12 @@ def _complete_once(task, data):
             '每次遵循下方服务端定义的人设'
         )
         context = payload.get('context', {})
+        if friend_mode == 'chat':
+            prompt += ('\nFriend 文字聊天能读取当前账号的云端文章目录。'
+                       'context.articleCount 是云稿总数，context.articles 含最多前 60 篇的标题、摘要和正文开头。'
+                       '被问到能否看见文章时，按本轮数据回答。若有云稿，可举一个真实标题；总数为零就说这个账号暂无云稿。'
+                       '本机草稿只有在用户把内容发来或保存到云端后才知道。列标题时使用云稿目录，不要求书库引文。'
+                       '可以读取此处给出的资料，但不声称能操作用户的文章。')
         companion = context.get('companion', {})
         payload['context'] = {**context, 'companion': {
             field: value for field, value in companion.items() if field != 'profile'

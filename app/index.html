@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>笺墨溪 · Friend　文字创作世界</title>
-<link rel="stylesheet" href="./styles.css?v=mobile-12">
+<link rel="stylesheet" href="./styles.css?v=mobile-13">
 </head>
 <body data-module="chat" data-scene="morning-rest" data-tab="article" data-mode="companion">
 
@@ -182,7 +182,11 @@
           </details>
         </div>
       </div>
-      <button id="btnExcerpt" class="float-excerpt" hidden>摘录</button>
+      <div id="readerSelectionTools" class="reader-selection-tools" role="group" aria-label="阅读选区操作" hidden>
+        <button type="button" id="readerInterpret">AI 解读</button>
+        <button type="button" id="btnExcerpt">摘录</button>
+        <button type="button" id="readerCopy">复制</button>
+      </div>
     </div>
   </div>
 </section>
@@ -241,6 +245,11 @@
     </div>
   </div>
 </dialog>
+<dialog id="readerInterpretation" aria-labelledby="readerInterpretationTitle">
+  <header class="settings-head"><h2 id="readerInterpretationTitle">AI 解读</h2><button type="button" aria-label="关闭解读" data-close-dialog>×</button></header>
+  <blockquote id="readerInterpretationQuote"></blockquote>
+  <p id="readerInterpretationReply" role="status"></p>
+</dialog>
 <div id="toast" role="status"></div>
 <dialog id="chatHistory" aria-labelledby="chatHistoryTitle">
   <header class="settings-head"><h2 id="chatHistoryTitle">历史对话</h2><button type="button" aria-label="关闭历史对话" data-close-dialog>×</button></header>
@@ -259,6 +268,6 @@
   </form>
 </dialog>
 <script src="./chat-format.js?v=mobile-3" defer></script>
-<script src="./app.js?v=mobile-14" defer></script>
+<script src="./app.js?v=mobile-15" defer></script>
 </body>
 </html>

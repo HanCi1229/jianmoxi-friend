@@ -144,6 +144,11 @@ export async function friendApi(req, res, url) {
       return json(res, 200, { authenticated: data.authenticated, username: data.account?.username, accountId: data.account?.id,
         dictation: Boolean(data.authenticated && dictationAvailable()) });
     }
+    if (route === '/api/weather') {
+      const payload = await readBody(req);
+      const { data } = await call(route, { payload, timeout: 12000 });
+      return json(res, 200, data);
+    }
     if (!cookie) return json(res, 401, { error: '请先登录笺墨溪账号' });
     if (route === dictationRoute) {
       const { data: session } = await call('/api/session', { cookie });
@@ -220,7 +225,7 @@ export async function friendApi(req, res, url) {
       await stopFriendCall(scope, payload?.id);
       return json(res, 200, { ok: true });
     }
-    if (route === '/api/weather' || route === '/api/excerpts' || route === '/api/companion/greeting') {
+    if (route === '/api/excerpts' || route === '/api/companion/greeting') {
       const { data } = await call(route, { cookie, scope, payload });
       return json(res, 200, data);
     }

@@ -228,7 +228,7 @@ def create_app(config=None):
         if request.method not in ('GET', 'HEAD', 'OPTIONS') and not request.is_json:
             return jsonify(error='需要 JSON 格式'), 415
         g.personal_accounts = account_mode() if request.path.startswith(('/api/', '/data/', '/web-client/')) else False
-        protected = (request.path.startswith('/api/') and request.path not in ('/api/session', '/api/login', '/api/register')) or request.path.startswith('/data/')
+        protected = (request.path.startswith('/api/') and request.path not in ('/api/session', '/api/login', '/api/register', '/api/weather')) or request.path.startswith('/data/')
         if protected and not authenticated():
             return jsonify(error='请先登录'), 401
         if protected and g.personal_accounts:
