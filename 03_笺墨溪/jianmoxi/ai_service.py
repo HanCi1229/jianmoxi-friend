@@ -139,21 +139,34 @@ def validate(task, value, data):
 def _complete_once(task, data):
     global LAST_MODEL
     prompt, payload = prepare(task, data)
-    ark_model = os.environ.get('FRIEND_TEXT_MODEL', '').strip() if task == 'chat' and data.get('_friend_text') else ''
+    friend_mode = data.get('_friend_mode') if task == 'chat' else None
+    if friend_mode:
+        persona_file = Path(os.environ.get('FRIEND_PERSONA_FILE') or
+                            Path(__file__).resolve().parents[2] / 'backend' / 'friend-persona.md')
+        try:
+            persona = persona_file.read_text(encoding='utf-8').strip()
+        except OSError:
+            raise AIError('小溪人设配置暂不可用', 503) from None
+        if not persona:
+            raise AIError('小溪人设配置为空', 503)
+        prompt = prompt.replace(
+            '每次遵循 context.companion.profile 中的人设、名字和回答风格',
+            '每次遵循下方服务端定义的人设'
+        )
+        context = payload.get('context', {})
+        companion = context.get('companion', {})
+        payload['context'] = {**context, 'companion': {
+            field: value for field, value in companion.items() if field != 'profile'
+        }}
+        prompt += ('\n以下是笺墨溪 Friend 的系统人设。按它表达性格和语言，'
+                   '继续遵守前面的数据操作、引用及输出约束。'
+                   '日常聊天的回复只写发给对方的话，省去括号动作和实际未发生的互动。\n' + persona)
+    ark_model = os.environ.get('FRIEND_TEXT_MODEL', '').strip() if friend_mode == 'chat' else ''
     if ark_model:
         key = os.environ.get('ARK_API_KEY', '').strip()
         model = ark_model
         provider = '火山方舟'
         endpoint = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions'
-        profile = payload.get('context', {}).get('companion', {}).get('profile', {})
-        persona = profile.get('persona', '').strip()
-        style = profile.get('style', '').strip()
-        prompt += ('\n在 Friend 中用小溪的口吻和用户交谈。闲聊用简短口语，聊稿件时回应具体文字。'
-                   '以下角色设定只用于性格与表达，继续遵守前面的引用、操作和输出约束。')
-        if persona:
-            prompt += '\n小溪的性格与相处方式：' + persona
-        if style:
-            prompt += '\n小溪的语气与回答方式：' + style
     else:
         key, model = configuration()
         provider = 'DeepSeek'

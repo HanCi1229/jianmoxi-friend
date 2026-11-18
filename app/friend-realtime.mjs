@@ -1,5 +1,7 @@
+import { readFileSync } from 'node:fs';
 import { qwenSpeechConfig, synthesizeQwenSpeech } from './friend-qwen-tts.mjs';
 
+const persona = readFileSync(new URL('../backend/friend-persona.md', import.meta.url), 'utf8').trim();
 const callPath = '/api/friend/call/live';
 const apiHost = 'wss://dashscope.aliyuncs.com/api-ws/v1/';
 const realtimeUrl = apiHost + 'realtime?model=qwen-audio-3.1-realtime-flash';
@@ -108,10 +110,8 @@ function relayCall(browser, WebSocket, account, config) {
       input_audio_transcription: { language: 'zh' },
       turn_detection: { type: 'server_vad', silence_duration_ms: 850 },
       instructions: [
-        '你是笺墨溪 Friend 里陪伴用户写作与阅读的小溪。',
-        (account.profile?.persona || '').slice(0, 2000),
-        '用自然的中文口语回应。说一两句短话，给对方留接话的空当。只说电话里会说出口的话。',
-        (account.profile?.style || '').slice(0, 1000)
+        persona,
+        '当前在语音通话。用自然的中文口语回应。说一两句短话，只说电话里能说出口的话，给寒辞留接话的空当。'
       ].filter(Boolean).join('\n')
     }
   }));

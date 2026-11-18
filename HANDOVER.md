@@ -234,3 +234,9 @@ FRIEND_QWEN_VOICE_ID=qwen-audio-3.1-tts-flash-bailian-92dcc0d4be6247a1a462fd8915
 
 更新前在隔离环境跑通了指定方舟版本的 JSON 回复和模型适配层验收。账号、历史和模型适配相关的 12 项现有测试已通过。
 
+## 慕辰雪人设维护
+
+2026-11-19 将[少东家人格指令 V2.0](backend/friend-persona.md)设为 Friend 后端人设。文字聊天、AI 陪写和实时通话共用这一份人设，通话继续沿用语音场景的简短应答规则。设置里已撤掉自定义指令表单，并移除 Friend 的对应读写接口。已保存的旧自定义指令不再参与 Friend 的回复。
+
+腾讯云端部署到 `/opt/jianmoxi-friend/backend/friend-persona.md`，文字后端用 `FRIEND_PERSONA_FILE` 指向该文件，实时通话服务从应用目录的同级 `backend` 目录加载。以后在 GitHub 修改这份文件，随版本部署并重启 `jianmoxi-friend` 和 `xingzou`。现有人设文件保留了用户提交的 V2.0 原文，账号历史与已保存的记忆继续使用。
+

@@ -860,14 +860,6 @@ body[data-writing-keyboard] #dismissWritingKeyboard{
 }
 #sceneDrawer .scene-choice:focus-visible{outline:2px solid #f6e4ff;outline-offset:2px}
 #sceneDrawer::backdrop{background:#17102180}
-#companionInstructions{display:grid;gap:8px;margin-top:12px}
-#companionInstructions h3,#companionInstructions p{margin:0}
-#companionInstructions p{color:var(--ink3);font-size:13px;line-height:1.45}
-#companionInstructions label{margin-top:7px;font-size:14px;font-weight:600}
-#companionInstructions textarea{display:block;box-sizing:border-box;width:100%;resize:vertical;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fffaf7;color:var(--ink);font:inherit;font-size:16px;line-height:1.5}
-.instructions-footer{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.instructions-footer button{margin-inline-start:auto;flex:none;padding:7px 12px;border-radius:7px;background:var(--accent-soft);color:var(--purple)}
-.instructions-footer button:disabled{opacity:.5}
 .editor-status:has(#saveCloudArticle[hidden]){min-height:26px;padding-block:4px}
 body:not([data-reader-open]) #paper #reader,body[data-reader-open] #tab-reading .shelf{display:none}
 body[data-reader-open][data-tab="reading"] #paper .paper-tools{display:none}

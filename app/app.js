@@ -1668,7 +1668,6 @@
     $$('#settingsFrequency input').forEach(option => { option.checked = option.value === state.frequency; });
     applyAvatar($('#avatarPreview'));
     settings.showModal();
-    if (!$('#companionSettings').hidden) void loadCompanionInstructions();
   });
   const loginForm = $('#loginForm');
   function openLogin() {
@@ -1750,77 +1749,7 @@
     $('#generalSettings').hidden = !general;
     $('#companionSettings').hidden = general;
     $$('[data-settings]').forEach(tab => tab.setAttribute('aria-pressed', String(tab === button)));
-    if (!general) void loadCompanionInstructions();
   }));
-  const instructionsForm = $('#companionInstructions');
-  const personaField = $('#companionPersona'), styleField = $('#companionStyle');
-  const instructionsStatus = $('#companionInstructionsStatus');
-  const instructionsSave = $('button[type="submit"]', instructionsForm);
-  let instructionsProfile = null, instructionsAccount = -1, instructionsLoad = 0;
-  async function loadCompanionInstructions() {
-    const request = ++instructionsLoad;
-    const generation = accountGeneration;
-    if (instructionsProfile && instructionsAccount === generation &&
-        (personaField.disabled || !instructionsSave.disabled)) return;
-    instructionsProfile = null;
-    personaField.value = styleField.value = '';
-    personaField.disabled = styleField.disabled = instructionsSave.disabled = true;
-    instructionsStatus.textContent = authenticated ? '正在读取…' : '登录后可编辑指令，并同步到其他设备。';
-    if (!authenticated) return;
-    try {
-      const profile = await api('/api/friend/companion');
-      if (request !== instructionsLoad || generation !== accountGeneration) return;
-      instructionsProfile = profile;
-      instructionsAccount = generation;
-      personaField.value = profile.persona;
-      styleField.value = profile.style;
-      personaField.disabled = styleField.disabled = false;
-      instructionsStatus.textContent = '';
-    } catch (error) {
-      if (request === instructionsLoad && generation === accountGeneration) instructionsStatus.textContent = error.message;
-    }
-  }
-  function refreshInstructionsButton() {
-    instructionsSave.disabled = !instructionsProfile || (
-      personaField.value === instructionsProfile.persona && styleField.value === instructionsProfile.style
-    );
-  }
-  instructionsForm.addEventListener('input', refreshInstructionsButton);
-  instructionsForm.addEventListener('submit', async event => {
-    event.preventDefault();
-    if (!instructionsProfile || instructionsSave.disabled || instructionsAccount !== accountGeneration) return;
-    const generation = accountGeneration;
-    instructionsSave.disabled = personaField.disabled = styleField.disabled = true;
-    instructionsStatus.textContent = '正在保存…';
-    try {
-      const profile = await api('/api/friend/companion', {
-        version: instructionsProfile.version, persona: personaField.value, style: styleField.value
-      });
-      if (generation !== accountGeneration) return;
-      instructionsProfile = profile;
-      personaField.value = profile.persona;
-      styleField.value = profile.style;
-      instructionsStatus.textContent = '已保存 · 下一条回复生效';
-    } catch (error) {
-      if (generation === accountGeneration) {
-        instructionsStatus.textContent = error.message;
-        if (error.status === 409) {
-          try {
-            const latest = await api('/api/friend/companion');
-            if (generation === accountGeneration) {
-              instructionsProfile = latest;
-              instructionsStatus.textContent = '另一台设备更新了指令。已保留你输入的内容，再保存可使用此版本。';
-            }
-          } catch {}
-        }
-      }
-    } finally {
-      if (generation === accountGeneration) {
-        personaField.disabled = styleField.disabled = false;
-        refreshInstructionsButton();
-      }
-    }
-  });
   $('#settingsMotion').addEventListener('change', e => { state.motion = e.target.checked; applyMotion(); save(); });
   $('#settingsRead').addEventListener('change', e => {
     state.autoRead = e.target.checked;
