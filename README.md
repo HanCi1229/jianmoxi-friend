@@ -11,7 +11,7 @@ npm ci
 npm start
 ```
 
-打开 `http://127.0.0.1:4180/`。聊天和写作的云端功能依赖账号与数据服务，部署默认通过本机 `http://127.0.0.1:8766` 访问，可用 `JIANMOXI_ORIGIN` 指定 HTTPS 服务或本机回环地址。实时通话使用千问 Qwen-Audio-3.1-Realtime-Flash 生成文本回复，再通过 Qwen-Audio-3.1-TTS-Flash 用配置的复刻音色流式播放。在服务端配置 `DASHSCOPE_API_KEY` 和 `FRIEND_QWEN_VOICE_ID`。音色须绑定到 `qwen-audio-3.1-tts-flash`。HTTPS 部署时，设置 `FRIEND_PUBLIC_ORIGIN` 为公开来源，并为实时通话路由启用 WebSocket 转发。
+打开 `http://127.0.0.1:4180/`。聊天和写作的云端功能依赖账号与数据服务，部署默认通过本机 `http://127.0.0.1:8766` 访问，可用 `JIANMOXI_ORIGIN` 指定 HTTPS 服务或本机回环地址。实时通话使用千问 Qwen-Audio-3.1-Realtime-Flash 生成文本回复，再通过 Qwen-Audio-3.1-TTS-Flash 用配置的复刻音色流式播放。在服务端配置 `DASHSCOPE_API_KEY` 和 `FRIEND_QWEN_VOICE_ID`。音色须绑定到 `qwen-audio-3.1-tts-flash`。开启设置里的「自动朗读回复」后，文字聊天也用同一个复刻音色。HTTPS 部署时，设置 `FRIEND_PUBLIC_ORIGIN` 为公开来源，并为实时通话路由启用 WebSocket 转发。
 
 ## 项目文件
 

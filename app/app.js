@@ -74,7 +74,7 @@
   /* ---------------- 模块 / 页签 / 模式 ---------------- */
   function setModule(m, persist = true) {
     if (m !== 'chat') cancelChatDictation();
-    if (m !== state.module) hangup();
+    if (m !== state.module) { hangup(); stopSpeaking(); }
     setSceneDrawer(false);
     state.module = m; document.body.dataset.module = m;
     $$('#entry button').forEach(b => setPressed(b, b.dataset.go === m));
@@ -208,6 +208,7 @@
   let chatAccountKey = '', historyRequest = 0;
   let noteThread = '';
   let accountGeneration = 0;
+  let readContext, readPlayback;
   async function api(route, payload) {
     const response = await fetch(new URL("." + route, document.baseURI), payload === undefined ? {} : {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
@@ -534,8 +535,12 @@
     }
     chatInput.value = '';
     resizeChatInput();
+    const chat = activeChat;
+    stopSpeaking();
+    if (state.autoRead) prepareReadAloud();
     const result = await cloudChat(text);
-    if (result?.text && state.autoRead) speak(result.text);
+    if (result?.text && state.autoRead && activeChat === chat && state.module === 'chat' &&
+        !rtcCall && !recording && !dictationTarget && !voiceRec) void speak(result.text);
   }
   async function cloudChat(text) {
     if (chatPending) return null;
@@ -625,6 +630,7 @@
   });
   function showChat(chat) {
     hangup();
+    stopSpeaking();
     cancelChatDictation();
     activeChat = chat;
     editingChatMessage = null;
@@ -1131,18 +1137,50 @@
 
   /* ---------------- 语音输入 / 电话 ---------------- */
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  function stopSpeaking() {
-    if (androidApp) window.prompt('friend:stop-speaking', '');
-    else window.speechSynthesis?.cancel();
+  function prepareReadAloud() {
+    if (!window.AudioContext) return;
+    try {
+      readContext ||= new AudioContext();
+      if (readContext.state !== 'running') void readContext.resume().catch(() => {});
+    } catch {}
   }
-  function speak(text) {
-    if (androidApp) { window.prompt('friend:speak', text); return; }
-    if (!window.speechSynthesis) return;
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = 'zh-CN';
-    speech.rate = .95;
+
+  function stopSpeaking() {
+    const previous = readPlayback;
+    readPlayback = null;
+    if (!previous) return;
+    previous.request.abort();
+    previous.source?.stop();
+  }
+
+  async function speak(text) {
     stopSpeaking();
-    window.speechSynthesis.speak(speech);
+    const current = { request: new AbortController(), source: null };
+    readPlayback = current;
+    try {
+      if (!readContext) throw new Error('当前设备暂时无法播放朗读');
+      const response = await fetch(new URL('./api/friend/speech', document.baseURI), {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }), signal: current.request.signal
+      });
+      if (!response.ok) throw new Error('小溪的朗读暂时不可用');
+      const buffer = await readContext.decodeAudioData(await response.arrayBuffer());
+      if (readPlayback !== current) return;
+      if (readContext.state !== 'running') throw new Error('浏览器暂时未允许播放朗读');
+      const source = readContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(readContext.destination);
+      current.source = source;
+      source.onended = () => {
+        source.disconnect();
+        if (readPlayback === current) readPlayback = null;
+      };
+      source.start();
+    } catch (error) {
+      if (readPlayback !== current) return;
+      readPlayback = null;
+      toast(error.message || '小溪的朗读暂时不可用');
+    }
   }
   function recognize(onResult, onEnd) {
     if (!SR) { toast('当前浏览器不支持语音识别，可继续用文字输入'); onEnd && onEnd(); return null; }
@@ -1453,6 +1491,7 @@
   }
 
   window.addEventListener('pagehide', hangup);
+  window.addEventListener('pagehide', stopSpeaking);
   function hangup() { if (rtcCall) endRtc(rtcCall); }
 
   function endRtc(call, message = '') {
@@ -1640,6 +1679,7 @@
   }
   function setChatAccount(accountId, restoreLegacy = false) {
     hangup();
+    stopSpeaking();
     cancelChatDictation();
     activeChat = { messages: [], thread: '' };
     chatAccountKey = accountId ? 'account:' + accountId : '';
@@ -1782,7 +1822,12 @@
     }
   });
   $('#settingsMotion').addEventListener('change', e => { state.motion = e.target.checked; applyMotion(); save(); });
-  $('#settingsRead').addEventListener('change', e => { state.autoRead = e.target.checked; save(); });
+  $('#settingsRead').addEventListener('change', e => {
+    state.autoRead = e.target.checked;
+    if (state.autoRead) prepareReadAloud();
+    else stopSpeaking();
+    save();
+  });
   $('#settingsName').addEventListener('change', e => {
     const name = e.target.value.trim();
     state.companionNameCustomized = Boolean(name);
@@ -1810,7 +1855,7 @@
   });
   $('#copyDiagnostics').addEventListener('click', async () => {
     try {
-      await navigator.clipboard.writeText(['笺墨溪 Friend · ' + clientVersion, '页面：' + state.module, '视口：' + innerWidth + ' × ' + innerHeight, '语音朗读：' + Boolean(window.speechSynthesis)].join('\n'));
+      await navigator.clipboard.writeText(['笺墨溪 Friend · ' + clientVersion, '页面：' + state.module, '视口：' + innerWidth + ' × ' + innerHeight, '云端朗读播放支持：' + Boolean(window.AudioContext)].join('\n'));
       $('#copyDiagnostics').textContent = '已复制';
     } catch { $('#copyDiagnostics').textContent = '复制失败'; }
   });

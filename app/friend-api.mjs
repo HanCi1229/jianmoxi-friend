@@ -1,6 +1,9 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { startFriendCall, stopFriendCall } from './friend-call.mjs';
 import { dictationAvailable, transcribe } from './friend-dictation.mjs';
+import { qwenSpeechConfig, synthesizeQwenSpeech } from './friend-qwen-tts.mjs';
+
+const activeReadAloud = new Set();
 
 const upstream = new URL(process.env.JIANMOXI_ORIGIN || 'http://127.0.0.1:8766');
 const localHttp = upstream.protocol === 'http:' && ['127.0.0.1', '[::1]'].includes(upstream.hostname);
@@ -76,11 +79,48 @@ export async function realtimeAccount(req) {
   return { id, profile };
 }
 
+async function readAloud(res, accountId, text) {
+  const line = typeof text === 'string' ? text.trim() : '';
+  if (!line || line.length > 2000) return json(res, 400, { error: '朗读文字长度超出范围' });
+  const config = qwenSpeechConfig();
+  if (!config) return json(res, 503, { error: '小溪的朗读暂不可用' });
+  if (activeReadAloud.has(accountId)) return json(res, 429, { error: '上一段朗读正在准备，请稍后再试' });
+
+  const playback = new AbortController();
+  const abort = () => playback.abort();
+  const chunks = [];
+  let size = 0;
+  activeReadAloud.add(accountId);
+  res.once('close', abort);
+  try {
+    await synthesizeQwenSpeech(line, {
+      config, format: 'mp3', signal: playback.signal,
+      onAudio(chunk) {
+        size += chunk.length;
+        if (size > 4 * 1024 * 1024) throw new Error('AudioLimitExceeded');
+        chunks.push(chunk);
+      }
+    });
+    if (res.destroyed) return;
+    res.writeHead(200, {
+      'Content-Type': 'audio/mpeg', 'Content-Length': size,
+      'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff'
+    });
+    res.end(Buffer.concat(chunks, size));
+  } catch {
+    if (!res.destroyed) json(res, 502, { error: '小溪的朗读暂时无法播放，请稍后再试' });
+  } finally {
+    res.off('close', abort);
+    activeReadAloud.delete(accountId);
+  }
+}
+
 export async function friendApi(req, res, url) {
   const route = url.pathname;
   const profileRoute = '/api/friend/companion';
   const dictationRoute = '/api/friend/dictation';
-  const write = req.method === 'POST' && (/^\/api\/friend\/history(?:\/[a-f0-9]{32})?$/.test(route) || ['/api/login', '/api/logout', '/api/friend/reply', '/api/friend/articles', profileRoute, dictationRoute, '/api/friend/call/start', '/api/friend/call/stop', '/api/weather', '/api/excerpts', '/api/companion/greeting'].includes(route));
+  const speechRoute = '/api/friend/speech';
+  const write = req.method === 'POST' && (/^\/api\/friend\/history(?:\/[a-f0-9]{32})?$/.test(route) || ['/api/login', '/api/logout', '/api/friend/reply', '/api/friend/articles', profileRoute, dictationRoute, speechRoute, '/api/friend/call/start', '/api/friend/call/stop', '/api/weather', '/api/excerpts', '/api/companion/greeting'].includes(route));
   const library = /^\/api\/library(?:\/[a-z0-9_-]{1,200}(?:\/chapters\/[0-9]{1,7}|\/cover)?)?$/i.test(route);
   const libraryImage = /^\/api\/friend\/library-image\/([a-z0-9-]{1,80})$/.exec(route);
   const history = /^\/api\/friend\/history(?:\/([a-f0-9]{32}))?$/.exec(route);
@@ -136,6 +176,10 @@ export async function friendApi(req, res, url) {
     const { data: session } = await call('/api/session', { cookie });
     if (!session.authenticated) return json(res, 401, { error: '登录已失效，请重新登录' });
     const scope = session.account?.id;
+    if (route === speechRoute) {
+      if (!scope) return json(res, 401, { error: '请重新登录后再朗读' });
+      return await readAloud(res, scope, payload?.text);
+    }
     if (route === profileRoute) {
       const { data } = await call('/api/companion/settings', { cookie, scope });
       const profile = data.profile;
