@@ -418,6 +418,9 @@ async function mcp(request, env) {
   }
   const { id, method, params = {} } = message;
   if (id === undefined) return new Response(null, { status: 202 });
+  if (params === null || typeof params !== "object" || Array.isArray(params)) {
+    return rpcError(id, -32602, "Invalid parameters");
+  }
   let result;
   switch (method) {
     case "server/discover":
@@ -435,7 +438,8 @@ async function mcp(request, env) {
         break;
       }
       if (!tools.some(tool => tool.name === params.name)) return rpcError(id, -32602, "Unknown tool");
-      if (!params.arguments || typeof params.arguments !== "object" || Array.isArray(params.arguments)) {
+      const args = params.arguments ?? {};
+      if (typeof args !== "object" || Array.isArray(args)) {
         return rpcError(id, -32602, "Tool arguments must be an object");
       }
       if (!env.JIANMOXI_BRIDGE_URL || !env.JIANMOXI_BRIDGE_TOKEN) {
@@ -446,7 +450,7 @@ async function mcp(request, env) {
         const response = await fetch(env.JIANMOXI_BRIDGE_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json", Authorization: "Bearer " + env.JIANMOXI_BRIDGE_TOKEN },
-          body: JSON.stringify({ name: params.name, arguments: params.arguments }),
+          body: JSON.stringify({ name: params.name, arguments: args }),
           signal: AbortSignal.timeout(30000), redirect: "error"
         });
         const data = await response.json();
