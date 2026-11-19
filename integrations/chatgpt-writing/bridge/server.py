@@ -1,5 +1,7 @@
 """Private Sites-to-Friend bridge. All data operations use the existing account APIs."""
+import asyncio
 import datetime
+import hmac
 import hashlib
 import html
 import json
@@ -14,6 +16,10 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from jsonschema import Draft202012Validator
+from starlette.applications import Starlette
+from starlette.requests import Request as WebRequest
+from starlette.responses import JSONResponse
+from starlette.routing import Route
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -281,5 +287,34 @@ def dispatch(name, arguments):
     if errors:
         raise ToolError("参数不符合工具要求：" + errors[0].message[:180])
     return HANDLERS[name](arguments)
+
+
+async def endpoint(request: WebRequest):
+    credential = request.headers.get("authorization", "")
+    if not hmac.compare_digest(credential.encode(), ("Bearer " + BRIDGE_TOKEN).encode()):
+        return JSONResponse({"error": "Unauthorized"}, status_code=401)
+    try:
+        body = bytearray()
+        async for chunk in request.stream():
+            body.extend(chunk)
+            if len(body) > 1024 * 1024:
+                return JSONResponse({"error": "请求内容过长"}, status_code=413)
+        payload = json.loads(body)
+        if not isinstance(payload, dict) or not isinstance(payload.get("name"), str):
+            raise ToolError("参数格式错误")
+        arguments = payload.get("arguments", {})
+        if not isinstance(arguments, dict):
+            raise ToolError("参数必须是对象")
+        result = await asyncio.to_thread(dispatch, payload["name"], arguments)
+        return JSONResponse({"result": result})
+    except (ValueError, UnicodeError):
+        return JSONResponse({"error": "请求格式错误"}, status_code=400)
+    except ToolError as error:
+        return JSONResponse({"error": str(error)}, status_code=error.status)
+    except Exception:
+        return JSONResponse({"error": "写作资料暂时不可用；保存操作请先重新读稿确认结果。"}, status_code=503)
+
+
+app = Starlette(routes=[Route("/v1", endpoint, methods=["POST"])])
 
 

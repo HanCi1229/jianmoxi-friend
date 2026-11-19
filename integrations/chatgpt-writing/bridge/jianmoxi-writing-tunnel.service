@@ -1,0 +1,17 @@
+[Unit]
+Description=Jianmoxi temporary encrypted plugin tunnel
+After=network-online.target jianmoxi-writing-tools.service
+Wants=network-online.target
+
+[Service]
+User=nobody
+ExecStart=/usr/local/bin/cloudflared tunnel --no-autoupdate --protocol http2 --url http://127.0.0.1:4190
+Restart=always
+RestartSec=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target

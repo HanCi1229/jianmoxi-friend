@@ -15,31 +15,22 @@ assert.equal((await call('initialize', { protocolVersion: '2025-03-26' })).resul
 assert.deepEqual((await call('tools/list')).result.tools, tools);
 assert.equal((await call('tools/call', { name: 'list_articles', arguments: {} })).result.isError, true);
 assert.equal((await call('tools/call', { name: 'shell', arguments: {} }, { 'oai-authenticated-user-id': 'qa' })).error.code, -32602);
-let pendingJob;
-const DB = {
-  prepare(sql) {
-    let values;
-    return {
-      bind(...args) { values = args; return this; },
-      async run() {
-        if (sql.startsWith('INSERT INTO writing_jobs')) pendingJob = { id: values[0], name: values[1], args: values[2] };
-        return { meta: { changes: 1 } };
-      },
-      async first() {
-        assert.equal(values[0], pendingJob.id);
-        return { status: 'done', response: JSON.stringify({ result: { total: 0, articles: [] } }) };
-      }
-    };
-  }
+const env = { JIANMOXI_BRIDGE_URL: 'https://test.trycloudflare.com/v1', JIANMOXI_BRIDGE_TOKEN: 'synthetic-test-credential' };
+let calls = 0;
+globalThis.fetch = async (url, options) => {
+  calls++;
+  assert.equal(url, env.JIANMOXI_BRIDGE_URL);
+  assert.equal(options.redirect, 'manual');
+  assert.equal(options.headers.Authorization, 'Bearer ' + env.JIANMOXI_BRIDGE_TOKEN);
+  assert.deepEqual(JSON.parse(options.body), { name: 'list_articles', arguments: {} });
+  return Response.json({ result: { total: 0, articles: [] } });
 };
-const result = await call('tools/call', { name: 'list_articles' },
-  { 'oai-authenticated-user-id': 'qa' }, { DB, JIANMOXI_BRIDGE_TOKEN: 'synthetic-test-credential' });
-assert.equal(pendingJob.name, 'list_articles');
-assert.deepEqual(JSON.parse(pendingJob.args), {});
+const result = await call('tools/call', { name: 'list_articles' }, { 'oai-authenticated-user-id': 'qa' }, env);
+assert.equal(calls, 1);
 assert.deepEqual(result.result.structuredContent, { total: 0, articles: [] });
-assert.ok(!JSON.stringify(result).includes('synthetic-test-credential'));
-const denied = await worker.fetch(new Request('https://writing-tools.test/bridge/poll', {
-  method: 'POST', body: '{}'
-}), { DB, JIANMOXI_BRIDGE_TOKEN: 'synthetic-test-credential' });
-assert.equal(denied.status, 401);
-console.log('Discovery, schemas, authentication, queued tool results and private polling passed');
+assert.ok(!JSON.stringify(result).includes(env.JIANMOXI_BRIDGE_TOKEN));
+globalThis.fetch = async () => new Response(null, { status: 302, headers: { Location: 'https://example.com' } });
+assert.equal((await call('tools/call', { name: 'list_articles' }, { 'oai-authenticated-user-id': 'qa' }, env)).result.isError, true);
+globalThis.fetch = async () => Response.json({ error: '文章已更新，请重新读取后再操作' }, { status: 409 });
+assert.match((await call('tools/call', { name: 'edit_article' }, { 'oai-authenticated-user-id': 'qa' }, env)).result.content[0].text, /文章已更新/);
+console.log('Discovery, schemas, authentication, HTTPS dispatch, redirect refusal and revision errors passed');

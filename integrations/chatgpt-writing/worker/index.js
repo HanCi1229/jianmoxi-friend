@@ -399,62 +399,44 @@ const instructions = "笺墨溪云端文章、阅读和摘录工具。先列出�
 const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" }
 });
-const nowSeconds = () => Math.floor(Date.now() / 1000);
-function serviceAuthorized(request, env) {
-  return env.JIANMOXI_BRIDGE_TOKEN && request.headers.get('authorization') === 'Bearer ' + env.JIANMOXI_BRIDGE_TOKEN;
+function bridgeUrl(env) {
+  const url = new URL(env.JIANMOXI_BRIDGE_URL);
+  if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash || url.pathname !== '/v1' ||
+      !url.hostname.endsWith('.trycloudflare.com')) throw new Error('Invalid bridge URL');
+  return url.href;
 }
-async function queueTool(env, name, args) {
-  if (!env.DB) return toolError('写作连接尚未就绪。');
-  const id = crypto.randomUUID();
-  const now = nowSeconds();
-  await env.DB.prepare('DELETE FROM writing_jobs WHERE expires_at < ?').bind(now - 120).run();
-  await env.DB.prepare("INSERT INTO writing_jobs(id,name,arguments,status,created_at,expires_at) VALUES (?,?,?,'pending',?,?)")
-    .bind(id, name, JSON.stringify(args), now, now + 35).run();
-  try {
-    for (let attempt = 0; attempt < 60; attempt++) {
-      await new Promise(resolve => setTimeout(resolve, 500));
-      const row = await env.DB.prepare('SELECT status,response FROM writing_jobs WHERE id=?').bind(id).first();
-      if (row?.status === 'done') {
-        const data = JSON.parse(row.response);
-        return data.error ? toolError(data.error) : {
-          content: [{ type: 'text', text: JSON.stringify(data.result) }], structuredContent: data.result
-        };
-      }
-    }
-    return toolError('服务器暂时没有响应，请稍后重试；保存操作可先重新读稿确认结果。');
-  } finally {
-    await env.DB.prepare('DELETE FROM writing_jobs WHERE id=?').bind(id).run();
+async function callBridge(env, name, args) {
+  const response = await fetch(bridgeUrl(env), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + env.JIANMOXI_BRIDGE_TOKEN },
+    body: JSON.stringify({ name, arguments: args }),
+    redirect: 'manual', signal: AbortSignal.timeout(20000)
+  });
+  if (response.status >= 300 && response.status < 400) {
+    await response.body?.cancel();
+    throw new Error('Bridge redirect refused');
   }
-}
-async function relay(request, env, path) {
-  if (!serviceAuthorized(request, env)) return json({ error: 'Unauthorized' }, 401);
-  if (request.method !== 'POST') return new Response('Use POST', { status: 405 });
-  const raw = await request.text();
-  if (new TextEncoder().encode(raw).length > 1024 * 1024) return json({ error: 'Too large' }, 413);
-  let input;
-  try { input = JSON.parse(raw); } catch { return json({ error: 'Invalid JSON' }, 400); }
-  const now = nowSeconds();
-  if (path === '/bridge/poll') {
-    await env.DB.prepare("INSERT INTO writing_bridge(id,last_seen) VALUES (1,?) ON CONFLICT(id) DO UPDATE SET last_seen=excluded.last_seen WHERE writing_bridge.last_seen < ?")
-      .bind(now, now - 15).run();
-    const lease = crypto.randomUUID();
-    const job = await env.DB.prepare("UPDATE writing_jobs SET status='running',lease=?,lease_until=? WHERE id=(SELECT id FROM writing_jobs WHERE expires_at>? AND (status='pending' OR (status='running' AND lease_until<?)) ORDER BY created_at LIMIT 1) RETURNING id,name,arguments,lease")
-      .bind(lease, now + 28, now, now).first();
-    return json({ job: job ? { ...job, arguments: JSON.parse(job.arguments) } : null });
+  if (!response.headers.get('content-type')?.includes('application/json')) {
+    await response.body?.cancel();
+    throw new Error('Bridge returned HTTP ' + response.status);
   }
-  if (path === '/bridge/result') {
-    if (typeof input.id !== 'string' || typeof input.lease !== 'string' || !input.response || typeof input.response !== 'object') {
-      return json({ error: 'Invalid result' }, 400);
-    }
-    const updated = await env.DB.prepare("UPDATE writing_jobs SET status='done',response=? WHERE id=? AND lease=? AND status='running' AND expires_at>?")
-      .bind(JSON.stringify(input.response), input.id, input.lease, now).run();
-    return json({ accepted: updated.meta.changes === 1 });
+  const reader = response.body.getReader();
+  const chunks = [];
+  let size = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.length;
+    if (size > 1024 * 1024) { await reader.cancel(); throw new Error('Bridge response too large'); }
+    chunks.push(value);
   }
-  if (path === '/bridge/check') {
-    const result = await queueTool(env, 'list_articles', { limit: 1 });
-    return json({ ok: !result.isError }, result.isError ? 503 : 200);
-  }
-  return json({ error: 'Not found' }, 404);
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
+  const data = JSON.parse(new TextDecoder().decode(bytes));
+  if (!response.ok || data.error) return toolError(data.error || '写作服务暂时不可用，请稍后重试。');
+  if (!data.result || typeof data.result !== 'object') throw new Error('Invalid bridge response');
+  return { content: [{ type: 'text', text: JSON.stringify(data.result) }], structuredContent: data.result };
 }
 function rpcError(id, code, message) {
   return json({ jsonrpc: "2.0", id, error: { code, message } });
@@ -499,14 +481,14 @@ async function mcp(request, env) {
       if (typeof args !== "object" || Array.isArray(args)) {
         return rpcError(id, -32602, "Tool arguments must be an object");
       }
-      if (!env.DB || !env.JIANMOXI_BRIDGE_TOKEN) {
+      if (!env.JIANMOXI_BRIDGE_URL || !env.JIANMOXI_BRIDGE_TOKEN) {
         result = toolError("写作服务连接尚未配置。");
         break;
       }
       try {
-        result = await queueTool(env, params.name, args);
+        result = await callBridge(env, params.name, args);
       } catch {
-        result = toolError("暂时无法连接写作资料，请稍后重试。");
+        result = toolError("暂时无法连接写作资料，请稍后重试；保存操作请先重新读稿确认结果。");
       }
       break;
     }
@@ -517,11 +499,10 @@ async function mcp(request, env) {
 export default {
   async fetch(request, env) {
     const path = new URL(request.url).pathname;
-    if (path.startsWith('/bridge/')) return relay(request, env, path);
     if (path === "/mcp" || path === "/mcp/") return mcp(request, env);
     if (path === "/health") {
-      const state = env.DB ? await env.DB.prepare('SELECT last_seen FROM writing_bridge WHERE id=1').first() : null;
-      const backendConnected = Boolean(state && nowSeconds() - state.last_seen < 45);
+      let backendConnected = false;
+      try { backendConnected = !(await callBridge(env, 'list_articles', { limit: 1 })).isError; } catch {}
       return json({ ok: backendConnected, service: identity.name, version: identity.version, backendConnected }, backendConnected ? 200 : 503);
     }
     if (path !== "/" || request.method !== "GET") return new Response("Not found", { status: 404 });

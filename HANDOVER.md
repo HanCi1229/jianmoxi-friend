@@ -259,3 +259,10 @@ FRIEND_QWEN_VOICE_ID=qwen-audio-3.1-tts-flash-bailian-92dcc0d4be6247a1a462fd8915
 [插件源码与接手说明](integrations/chatgpt-writing/README.md)包含工具目录、Worker、腾讯云桥接服务、检查脚本和部署配置。Site ID 保存在该目录的 `.openai/hosting.json`，后续复用这个 Site；专用密钥通过 Sites secrets 和服务器环境文件配置。
 
 插件提供 11 个读写工具，覆盖云稿、原文分页、精确改稿、回收站、书库和摘录。实际读写使用既有账号接口，绑定 owner 的私人工作区，模型生成由调用插件的 ChatGPT/Codex 会话承担。更新使用修订号防止旧内容覆盖新稿，摘录沿用原文核验。已用隔离临时账号完成新增、重试、版本冲突、恢复、书库及摘录校验测试。
+
+
+### 迁移验收状态（2026-11-20）
+
+私人 Sites 插件已发布并在当前 Codex 对话注册 11 个工具。后端隔离测试通过，但真实插件读取云稿仍未通过，不能把发布成功视为迁移完成。免费隧道方案、失败原因、部署步骤和恢复方式见 integrations/chatgpt-writing/README.md。
+
+腾讯云原数据服务和旧客户端服务暂时保留。只有新插件通过实际读写验收、确认本机草稿保存情况后，才关闭旧入口；此处不表示旧 Android 已停止服务。免费 Quick Tunnel 重启会更换地址，需重新配置 Sites 并部署。
