@@ -18,7 +18,7 @@ from urllib.request import Request, urlopen
 from jsonschema import Draft202012Validator
 from starlette.applications import Starlette
 from starlette.requests import Request as WebRequest
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, FileResponse
 from starlette.routing import Route
 
 
@@ -293,6 +293,16 @@ async def endpoint(request: WebRequest):
     credential = request.headers.get("authorization", "")
     if not hmac.compare_digest(credential.encode(), ("Bearer " + BRIDGE_TOKEN).encode()):
         return JSONResponse({"error": "Unauthorized"}, status_code=401)
+    if request.method == 'GET':
+        # One-off, read-only migration export. This directory is prepared by the administrator.
+        filename = request.query_params.get('export', '')
+        import re
+        if not re.fullmatch(r'(?:manifest\.json|workspace\.json|legacy-owner\.json\.gz|work-[A-Za-z0-9_-]{1,100}\.jmx)', filename):
+            return JSONResponse({"error": "Not found"}, status_code=404)
+        path = Path('/var/lib/jianmoxi-writing-export') / filename
+        if not path.is_file():
+            return JSONResponse({"error": "Not found"}, status_code=404)
+        return FileResponse(path, media_type='application/octet-stream')
     try:
         body = bytearray()
         async for chunk in request.stream():
@@ -315,6 +325,6 @@ async def endpoint(request: WebRequest):
         return JSONResponse({"error": "写作资料暂时不可用；保存操作请先重新读稿确认结果。"}, status_code=503)
 
 
-app = Starlette(routes=[Route("/v1", endpoint, methods=["POST"])])
+app = Starlette(routes=[Route("/v1", endpoint, methods=["POST", "GET"])])
 
 
