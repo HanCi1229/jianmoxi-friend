@@ -2,6 +2,8 @@
 
 ChatGPT 的 Chat、Work 和 Codex 作为写作工作台，腾讯云保存 Friend 的文章、书库和摘录。Plus 使用 Sites 托管的私人插件入口。
 
+**当前接入尚未通过真实工具读取验收，不可视为迁移完成。** 已完成的工作、线上版本、阻塞和继续步骤见 [STATUS.md](STATUS.md)。
+
 ## 使用
 
 1. 私人入口：[笺墨溪写作工具](https://jianmoxi-writing-tools.hanxueqing.chatgpt.site)。

@@ -401,8 +401,10 @@ const json = (body, status = 200) => new Response(JSON.stringify(body), {
 });
 function bridgeUrl(env) {
   const url = new URL(env.JIANMOXI_BRIDGE_URL);
-  if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash || url.pathname !== '/v1' ||
-      !url.hostname.endsWith('.trycloudflare.com')) throw new Error('Invalid bridge URL');
+  const direct = url.hostname === '49.234.43.25' && url.pathname === '/writing-tools/v1';
+  const tunnel = url.hostname.endsWith('.trycloudflare.com') && url.pathname === '/v1';
+  if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash || url.port ||
+      !(direct || tunnel)) throw new Error('Invalid bridge URL');
   return url.href;
 }
 async function callBridge(env, name, args) {
@@ -487,7 +489,8 @@ async function mcp(request, env) {
       }
       try {
         result = await callBridge(env, params.name, args);
-      } catch {
+      } catch (error) {
+        console.warn('Writing bridge connection failed: ' + String(error.message).slice(0, 180));
         result = toolError("暂时无法连接写作资料，请稍后重试；保存操作请先重新读稿确认结果。");
       }
       break;
