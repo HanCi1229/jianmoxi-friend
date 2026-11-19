@@ -1,0 +1,24 @@
+[Unit]
+Description=Jianmoxi private writing tools bridge
+After=network-online.target xingzou.service
+Wants=network-online.target
+Requires=xingzou.service
+
+[Service]
+User=xingzou
+Group=xingzou
+WorkingDirectory=/opt/jianmoxi-writing-tools
+EnvironmentFile=/etc/jianmoxi-writing-tools.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/jianmoxi-mcp-venv/bin/uvicorn bridge.server:app --host 127.0.0.1 --port 4190 --workers 1 --no-access-log
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/xingzou
+
+[Install]
+WantedBy=multi-user.target
