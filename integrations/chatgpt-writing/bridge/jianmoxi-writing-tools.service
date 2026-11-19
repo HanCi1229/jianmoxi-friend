@@ -10,7 +10,7 @@ Group=xingzou
 WorkingDirectory=/opt/jianmoxi-writing-tools
 EnvironmentFile=/etc/jianmoxi-writing-tools.env
 Environment=PYTHONDONTWRITEBYTECODE=1
-ExecStart=/opt/jianmoxi-mcp-venv/bin/uvicorn bridge.server:app --host 127.0.0.1 --port 4190 --workers 1 --no-access-log
+ExecStart=/opt/jianmoxi-mcp-venv/bin/python -m bridge.poller
 Restart=on-failure
 RestartSec=3
 UMask=0077

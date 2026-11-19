@@ -1,8 +1,6 @@
 """Private Sites-to-Friend bridge. All data operations use the existing account APIs."""
-import asyncio
 import datetime
 import hashlib
-import hmac
 import html
 import json
 import os
@@ -16,10 +14,6 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from jsonschema import Draft202012Validator
-from starlette.applications import Starlette
-from starlette.requests import Request as WebRequest
-from starlette.responses import JSONResponse
-from starlette.routing import Route
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -65,9 +59,8 @@ def account_session():
         return _session
 
 
-def api(route, payload=None, *, friend=False, method=None):
-    base = "http://127.0.0.1:4180" if friend else "http://127.0.0.1:8766"
-    cookie_name = "friend_session" if friend else "xingzou_session"
+def api(route, payload=None, *, method=None):
+    base = "http://127.0.0.1:8766"
     request = Request(
         base + route,
         data=None if payload is None else json.dumps(payload, ensure_ascii=False).encode(),
@@ -75,7 +68,7 @@ def api(route, payload=None, *, friend=False, method=None):
         headers={
             "Origin": PUBLIC_ORIGIN,
             "Content-Type": "application/json",
-            "Cookie": cookie_name + "=" + account_session(),
+            "Cookie": "xingzou_session=" + account_session(),
             "X-Xingzou-Space": ACCOUNT_ID,
         },
     )
@@ -290,33 +283,3 @@ def dispatch(name, arguments):
     return HANDLERS[name](arguments)
 
 
-async def invoke(request: WebRequest):
-    authorization = request.headers.get("authorization", "")
-    if not hmac.compare_digest(authorization, "Bearer " + BRIDGE_TOKEN):
-        return JSONResponse({"error": "未授权"}, status_code=401)
-    body = bytearray()
-    async for chunk in request.stream():
-        body.extend(chunk)
-        if len(body) > 1024 * 1024:
-            return JSONResponse({"error": "请求内容过长"}, status_code=413)
-    try:
-        data = json.loads(body)
-        if not isinstance(data, dict) or set(data) != {"name", "arguments"}:
-            raise ToolError("请求格式不正确")
-        if not isinstance(data["name"], str) or not isinstance(data["arguments"], dict):
-            raise ToolError("工具和参数格式不正确")
-        result = await asyncio.to_thread(dispatch, data["name"], data["arguments"])
-        return JSONResponse({"result": result})
-    except ToolError as error:
-        return JSONResponse({"error": str(error)}, status_code=error.status)
-    except (ValueError, KeyError, TypeError):
-        return JSONResponse({"error": "工具数据格式不正确"}, status_code=400)
-    except Exception:
-        return JSONResponse({"error": "写作服务暂时不可用，请稍后重试"}, status_code=503)
-
-
-async def health(request):
-    return JSONResponse({"ok": True, "tools": len(TOOLS)})
-
-
-app = Starlette(routes=[Route("/v1", invoke, methods=["POST"]), Route("/health", health, methods=["GET"])])

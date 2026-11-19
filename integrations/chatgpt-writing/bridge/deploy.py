@@ -1,4 +1,4 @@
-"""Deploy verified GitHub bridge source. Read secret/config JSON from stdin."""
+"""Deploy the outbound connection from verified GitHub source; secret JSON arrives on stdin."""
 import hashlib
 import json
 import os
@@ -15,92 +15,81 @@ from urllib.request import Request, urlopen
 
 data = json.load(sys.stdin)
 token = data['token']
+site_auth = data['site_auth']
+site = data['site_url']
 if not re.fullmatch(r'[A-Za-z0-9_-]{64}', token):
-    raise RuntimeError('A new 48-byte bridge secret is required')
+    raise RuntimeError('A 48-byte bridge credential is required')
+if not site.startswith('https://') or not site.endswith('.chatgpt.site') or '\n' in site:
+    raise RuntimeError('Configure the exact private Site origin')
+if not isinstance(site_auth, str) or len(site_auth) < 20 or '\n' in site_auth or '\r' in site_auth:
+    raise RuntimeError('Private Site service access is required')
 stage = Path('/run/jianmoxi-plugin-stage')
 dest = Path('/opt/jianmoxi-writing-tools')
-prefix = 'integrations/chatgpt-writing/'
-files = ['tools.json', 'bridge/server.py', 'bridge/requirements.txt', 'bridge/jianmoxi-writing-tools.service']
+files = ['tools.json', 'bridge/server.py', 'bridge/poller.py', 'bridge/requirements.txt', 'bridge/jianmoxi-writing-tools.service']
 for name in files:
     content = (stage / name).read_bytes()
     digest = hashlib.sha1(b'blob ' + str(len(content)).encode() + b'\0' + content).hexdigest()
-    if data['hashes'].get(prefix + name) != digest:
+    if data['hashes'].get('integrations/chatgpt-writing/' + name) != digest:
         raise RuntimeError('GitHub source mismatch for ' + name)
-secret_path = Path('/etc/jianmoxi-writing-tools.env')
+environment_path = Path('/etc/jianmoxi-writing-tools.env')
 service_path = Path('/etc/systemd/system/jianmoxi-writing-tools.service')
-nginx_path = Path('/etc/nginx/conf.d/xingzou-https.conf')
-nginx_before = nginx_path.read_text()
-needle = '    client_max_body_size 8m;'
-route = '''
-    location = /writing-tools/v1 {
-        client_max_body_size 1m;
-        proxy_pass http://127.0.0.1:4190/v1;
-        proxy_set_header Host $host;
-        proxy_connect_timeout 5s;
-        proxy_read_timeout 35s;
-        proxy_buffering off;
-    }
-'''
-if '/writing-tools/v1' not in nginx_before and nginx_before.count(needle) != 1:
-    raise RuntimeError('Review Nginx configuration before adding the route')
-nginx_next = nginx_before if '/writing-tools/v1' in nginx_before else nginx_before.replace(needle, needle + '\n' + route)
 environment = ('JIANMOXI_BRIDGE_TOKEN=' + token + '\nJIANMOXI_ACCOUNT_ID=owner\n'
                'JIANMOXI_CONTROL_DB=/var/lib/xingzou/app.db\n'
                'JIANMOXI_PUBLIC_ORIGIN=https://49.234.43.25\n'
-               'JIANMOXI_PERSONA_FILE=/opt/jianmoxi-friend/backend/friend-persona.md\n')
-if secret_path.exists() and secret_path.read_text() != environment:
+               'JIANMOXI_PERSONA_FILE=/opt/jianmoxi-friend/backend/friend-persona.md\n'
+               'JIANMOXI_SITE_URL=' + site + '\nJIANMOXI_SITES_AUTH=' + site_auth + '\n')
+if environment_path.exists() and ('JIANMOXI_BRIDGE_TOKEN=' + token + '\n') not in environment_path.read_text():
     raise RuntimeError('Existing plugin credential differs; review before replacing')
 backup = Path(tempfile.mkdtemp(prefix='jianmoxi-plugin-before-', dir='/root'))
-for path in (nginx_path, service_path, secret_path):
+for path in (service_path, environment_path):
     if path.exists():
         shutil.copy2(path, backup / path.name)
         (backup / path.name).chmod(0o600)
+previous = {}
 dest.mkdir(exist_ok=True)
 (dest / 'bridge').mkdir(exist_ok=True)
 for name in files:
-    shutil.copyfile(stage / name, dest / name)
-    (dest / name).chmod(0o644)
+    target = dest / name
+    previous[name] = target.read_bytes() if target.exists() else None
+    shutil.copyfile(stage / name, target)
+    target.chmod(0o644)
 try:
-    secret_path.write_text(environment)
-    secret_path.chmod(0o600)
+    environment_path.write_text(environment)
+    environment_path.chmod(0o600)
     shutil.copyfile(dest / 'bridge/jianmoxi-writing-tools.service', service_path)
     service_path.chmod(0o644)
-    nginx_path.write_text(nginx_next)
-    subprocess.run(['nginx', '-t'], check=True, capture_output=True)
     subprocess.run(['systemctl', 'daemon-reload'], check=True)
-    subprocess.run(['systemctl', 'enable', '--now', 'jianmoxi-writing-tools'], check=True, capture_output=True)
+    subprocess.run(['systemctl', 'enable', 'jianmoxi-writing-tools'], check=True, capture_output=True)
     subprocess.run(['systemctl', 'restart', 'jianmoxi-writing-tools'], check=True)
-    for attempt in range(20):
+    headers = {'OAI-Sites-Authorization': 'Bearer ' + site_auth}
+    for attempt in range(25):
         try:
-            with urlopen('http://127.0.0.1:4190/health', timeout=3) as response:
-                assert json.load(response)['ok']
+            with urlopen(Request(site + '/health', headers=headers), timeout=10) as response:
+                assert json.load(response)['backendConnected']
             break
-        except OSError:
-            time.sleep(.3)
+        except (OSError, AssertionError):
+            time.sleep(.5)
     else:
-        raise RuntimeError('Bridge healthcheck failed')
-    subprocess.run(['systemctl', 'reload', 'nginx'], check=True)
-    url = 'https://49.234.43.25/writing-tools/v1'
-    body = json.dumps({'name': 'list_articles', 'arguments': {'limit': 1}}).encode()
-    try:
-        urlopen(Request(url, data=body, headers={'Content-Type': 'application/json'}), timeout=10)
-        raise RuntimeError('Unauthenticated bridge request was accepted')
-    except HTTPError as error:
-        assert error.code == 401
-    request = Request(url, data=body, headers={'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token})
-    with urlopen(request, timeout=15) as response:
-        result = json.load(response)
-    assert isinstance(result['result']['total'], int)
-    print('Private bridge deployed. TLS, anonymous rejection and authenticated cloud-article access passed.')
+        raise RuntimeError('Private Site did not receive the server heartbeat')
+    headers.update(Authorization='Bearer ' + token, **{'Content-Type': 'application/json'})
+    with urlopen(Request(site + '/bridge/check', data=b'{}', headers=headers), timeout=35) as response:
+        assert json.load(response)['ok']
+    print('Private Site to Tencent workspace end-to-end query passed. Outbound service is active.')
 except Exception:
-    nginx_path.write_text(nginx_before)
-    for path in (service_path, secret_path):
-        previous = backup / path.name
-        if previous.exists():
-            shutil.copy2(previous, path)
+    subprocess.run(['systemctl', 'stop', 'jianmoxi-writing-tools'], check=False, capture_output=True)
+    for path in (service_path, environment_path):
+        previous_file = backup / path.name
+        if previous_file.exists():
+            shutil.copy2(previous_file, path)
         else:
             path.unlink(missing_ok=True)
-    subprocess.run(['systemctl', 'stop', 'jianmoxi-writing-tools'], check=False, capture_output=True)
+    for name, contents in previous.items():
+        target = dest / name
+        if contents is None:
+            target.unlink(missing_ok=True)
+        else:
+            target.write_bytes(contents)
     subprocess.run(['systemctl', 'daemon-reload'], check=False)
-    subprocess.run(['systemctl', 'reload', 'nginx'], check=False)
+    if (backup / service_path.name).exists():
+        subprocess.run(['systemctl', 'start', 'jianmoxi-writing-tools'], check=False, capture_output=True)
     raise
