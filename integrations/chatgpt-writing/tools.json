@@ -250,7 +250,7 @@
   {
     "name": "search_library",
     "title": "搜索书库",
-    "description": "按书名、作者或正文关键词搜索已有书库，返回真实作品 ID 和来源。",
+    "description": "按书名、作者或文集检索已有书库，返回真实作品 ID 和来源。正文按章节读取。",
     "inputSchema": {
       "type": "object",
       "properties": {
