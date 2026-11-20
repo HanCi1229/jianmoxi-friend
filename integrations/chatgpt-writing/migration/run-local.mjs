@@ -14,7 +14,8 @@ if (process.stdin.isTTY) process.stdin.setRawMode(false);
 process.stdin.pause();
 JSON.parse(config);
 const child = spawn('pwsh', ['-NoProfile', '-File', fileURLToPath(new URL('./transfer.ps1', import.meta.url))], {
-  windowsHide: true, stdio: ['pipe', 'pipe', 'pipe']
+  windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'],
+  env: { ...process.env, DOTNET_SYSTEM_NET_DISABLEIPV6: '1' }
 });
 child.stdin.end(config);
 child.stdout.pipe(process.stdout);

@@ -3,10 +3,11 @@ $ProgressPreference='SilentlyContinue'
 [Console]::InputEncoding=[Text.UTF8Encoding]::new($false)
 [Console]::OutputEncoding=[Text.UTF8Encoding]::new($false)
 $cfg=[Console]::In.ReadToEnd() | ConvertFrom-Json -AsHashtable
+if($cfg.mode -eq 'upload_json'){& (Join-Path $PSScriptRoot 'transfer-rpc.ps1') -Config $cfg;exit 0}
 $folder=[IO.Path]::GetFullPath($cfg.output)
 [IO.Directory]::CreateDirectory($folder) | Out-Null
-$common=@{TimeoutSec=120}
-if($cfg.proxy){$common.Proxy=$cfg.proxy}
+$common=@{TimeoutSec=120;MaximumRedirection=0}
+if($cfg.no_proxy){$common.NoProxy=$true}elseif($cfg.proxy){$common.Proxy=$cfg.proxy}
 $manifestPath=Join-Path $folder 'manifest.json'
 if($cfg.mode -eq 'download') {
     $headers=@{Authorization=('Bearer '+$cfg.source_token)}
@@ -18,22 +19,32 @@ if($manifest.format -ne 1 -or $manifest.snapshot -notmatch '^migration-\d+$'){th
 $total=$manifest.files.Count
 $done=0
 $bytes=0L
+$failed=0
+$concurrency=if($cfg.concurrency){[int]$cfg.concurrency}else{3}
+$receipt=Join-Path $folder ('uploaded-'+$manifest.snapshot+'.txt')
+$completed=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+if(Test-Path -LiteralPath $receipt){foreach($key in [IO.File]::ReadAllLines($receipt)){[void]$completed.Add($key)}}
 if($cfg.mode -eq 'upload') {
     $headers=@{Authorization=('Bearer '+$cfg.migration_token);'OAI-Sites-Authorization'=('Bearer '+$cfg.site_access)}
     $body=@{snapshot=$manifest.snapshot;counts=$manifest.counts}|ConvertTo-Json -Compress
     Invoke-RestMethod -Uri ($cfg.site_url+'/admin/start') -Method POST -Headers $headers -ContentType 'application/json' -Body ([Text.Encoding]::UTF8.GetBytes($body)) @common | Out-Null
 }
-$manifest.files | ForEach-Object -ThrottleLimit 6 -Parallel {
+$manifest.files | ForEach-Object -ThrottleLimit $concurrency -Parallel {
     $ErrorActionPreference='Stop'
     $ProgressPreference='SilentlyContinue'
     $config=$using:cfg
     $entry=$_
     $targetFolder=$using:folder
+    $previouslyUploaded=$using:completed
     if($entry.file -notmatch '^(workspace\.json|legacy-owner\.json\.gz|work-[A-Za-z0-9_-]{1,100}\.jmx)$'){throw 'Invalid export filename'}
     $path=[IO.Path]::GetFullPath((Join-Path $targetFolder $entry.file))
     if(-not $path.StartsWith($targetFolder+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Export path outside staging'}
-    $options=@{TimeoutSec=120}
-    if($config.proxy){$options.Proxy=$config.proxy}
+    $options=@{TimeoutSec=120;MaximumRedirection=0}
+    if($config.no_proxy){$options.NoProxy=$true}elseif($config.proxy){$options.Proxy=$config.proxy}
+    if($config.mode -eq 'upload' -and $previouslyUploaded.Contains($entry.key)){
+        [pscustomobject]@{bytes=[long]$entry.bytes;key=$entry.key;skipped=$true}
+        return
+    }
     for($attempt=0;$attempt -lt 4;$attempt++) {
         try {
             if($config.mode -eq 'download') {
@@ -54,16 +65,22 @@ $manifest.files | ForEach-Object -ThrottleLimit 6 -Parallel {
             } else {throw 'Unknown transfer mode'}
             break
         } catch {
-            if($attempt -eq 3){throw ('Transfer failed for '+$entry.file+': '+$_.Exception.Message)}
+            if($attempt -eq 3){
+                [pscustomobject]@{failed=$true;file=$entry.file;message=$_.Exception.Message}
+                return
+            }
             Start-Sleep -Milliseconds (500*($attempt+1))
         }
     }
-    [pscustomobject]@{bytes=[long]$entry.bytes}
+    [pscustomobject]@{bytes=[long]$entry.bytes;key=$entry.key;skipped=$false}
 } | ForEach-Object {
+    if($_.failed){$failed++;Write-Output ('Retained for retry: '+$_.file);return}
     $done++
     $bytes+=$_.bytes
+    if($cfg.mode -eq 'upload' -and -not $_.skipped){[IO.File]::AppendAllText($receipt,$_.key+[Environment]::NewLine,[Text.UTF8Encoding]::new($false))}
     if($done % 50 -eq 0 -or $done -eq $total){Write-Output ($cfg.mode+': '+$done+'/'+$total+' objects, '+[math]::Round($bytes/1MB,1)+' MiB verified')}
 }
+if($failed -gt 0){throw ([string]$failed+' objects still need retry; successful upload receipts are retained.')}
 if($cfg.mode -eq 'upload') {
     $workspace=[IO.File]::ReadAllText((Join-Path $folder 'workspace.json'))|ConvertFrom-Json -AsHashtable
     $body=@{snapshot=$manifest.snapshot;workspace=$workspace}|ConvertTo-Json -Depth 100 -Compress

@@ -1,4 +1,4 @@
-> 2026-11-20 产品转向 ChatGPT 写作工作台。新版通过私人插件在 Chat、Work、Codex 中调用腾讯云的文章、书库和摘录，适配 Plus 的 Sites 插件入口。[新版源码与使用说明](integrations/chatgpt-writing/README.md)。下方保留旧客户端开发说明。
+> 2026-11-20 产品转向 ChatGPT 写作工作台。文章、书库和摘录正在迁入私人插件自带存储，完成后日常读写不依赖腾讯云。[新版源码与使用说明](integrations/chatgpt-writing/README.md)，[实际迁移进度](integrations/chatgpt-writing/STATUS.md)。下方保留旧客户端开发说明。
 # 笺墨溪 Friend
 
 面向阅读、写作和日常聊天的陪伴应用，包含网页端和 Android 客户端。

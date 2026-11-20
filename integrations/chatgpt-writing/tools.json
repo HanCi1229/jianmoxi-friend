@@ -391,5 +391,43 @@
       "idempotentHint": true,
       "openWorldHint": false
     }
+  },
+  {
+    "name": "migration_import",
+    "title": "迁移导入（临时）",
+    "description": "当前所有者已授权迁移的专用入口，将旧数据导入私人托管存储。完成后关闭，不用于普通聊天。",
+    "inputSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation",
+        "payload"
+      ],
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": [
+            "start",
+            "objects",
+            "part",
+            "finish_object",
+            "workspace",
+            "works",
+            "complete",
+            "status"
+          ]
+        },
+        "payload": {
+          "type": "string",
+          "maxLength": 900000
+        }
+      }
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": true,
+      "openWorldHint": false
+    }
   }
 ]

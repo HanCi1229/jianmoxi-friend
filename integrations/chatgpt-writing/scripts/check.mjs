@@ -26,6 +26,7 @@ const DB = {
 };
 const blobs = new Map();
 const BUCKET = {
+  async list({ prefix }) { return { objects: [...blobs.keys()].filter(key => key.startsWith(prefix)).map(key => ({ key })), truncated: false }; },
   async delete(keys) { for (const key of Array.isArray(keys) ? keys : [keys]) blobs.delete(key); },
   async head(key) { const row = blobs.get(key); return row ? { size: row.body.length, customMetadata: row.meta } : null; },
   async put(key, body, options) {
@@ -60,7 +61,7 @@ async function call(method, params = {}, headers = {}, targetEnv = env) {
 assert.deepEqual((await call('tools/list', {}, {}, { ...env, MIGRATION_TOKEN: undefined })).result.tools, catalog);
 assert.equal((await call('tools/list')).result.tools.at(-1).name, 'migration_import');
 assert.equal((await call('initialize', { protocolVersion: '2025-03-26' })).result.protocolVersion, '2025-03-26');
-assert.equal((await call('server/discover')).result.serverInfo.version, '2.0.0');
+assert.equal((await call('server/discover')).result.serverInfo.version, '2.1.0');
 assert.equal((await call('tools/call', { name: 'list_articles' })).result.isError, true);
 assert.equal((await call('tools/call', { name: 'shell' }, { 'oai-authenticated-user-id': 'owner' })).error.code, -32602);
 await assert.rejects(dispatchLocal(env, 'list_articles', {}), error => error.status === 503);
@@ -90,6 +91,10 @@ await admin('works', { works: [{ key: objectKey, sha256: hash, bytes: content.le
 blobs.set(snapshot + '/legacy-owner.json.gz', { body: Buffer.from('archive'), meta: {} });
 blobs.set(snapshot + '/workspace.json', { body: Buffer.from('{}'), meta: {} });
 assert.equal((await migrationRpc(env, 'objects', JSON.stringify({ files: [{ key: objectKey, sha256: hash, bytes: content.length, data: content.toString('base64') }] }))).stored, 1);
+const encodedUpload = await worker.fetch(new Request('https://test.chatgpt.site/admin/rpc', { method: 'POST',
+  headers: { Authorization: 'Bearer ' + env.MIGRATION_TOKEN }, body: JSON.stringify({ operation: 'objects',
+    payload: JSON.stringify({ files: [{ key: objectKey, sha256: hash, bytes: content.length, data: content.toString('base64') }] }) }) }), env);
+assert.equal((await encodedUpload.json()).stored, 1);
 const transport = Buffer.alloc(512 * 1024 + 17, 7);
 const transportKey = snapshot + '/works/transport-fixture.jmx';
 const digest = async bytes => [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(b => b.toString(16).padStart(2, '0')).join('');
@@ -101,8 +106,17 @@ for (let offset = 0, index = 0; offset < transport.length; offset += 512 * 1024,
 assert.equal((await migrationRpc(env, 'finish_object', JSON.stringify({ key: transportKey, bytes: transport.length, parts: 2, sha256: await digest(transport) }))).stored, true);
 assert.deepEqual(Buffer.from(blobs.get(transportKey).body), transport);
 assert.equal(blobs.has(transportKey + '.part-0'), false);
+const httpChunk = Buffer.alloc(1024 * 1024, 9);
+const httpKey = snapshot + '/works/http-fixture.jmx';
+const chunkResponse = await worker.fetch(new Request('https://test.chatgpt.site/admin/rpc', { method: 'POST', headers: { Authorization: 'Bearer ' + env.MIGRATION_TOKEN },
+  body: JSON.stringify({ operation: 'part', payload: JSON.stringify({ key: httpKey, index: 0, sha256: await digest(httpChunk), data: httpChunk.toString('base64') }) }) }), env);
+assert.equal((await chunkResponse.json()).stored, true);
+await migrationRpc(env, 'finish_object', JSON.stringify({ key: httpKey, bytes: httpChunk.length, parts: 1, sha256: await digest(httpChunk) }));
 await assert.rejects(migrationRpc({ ...env, MIGRATION_TOKEN: undefined }, 'status', '{}'), error => error.status === 403);
 assert.equal((await admin('complete', {})).ready, true);
+blobs.set(transportKey + '.part-9', { body: Buffer.from('temporary'), meta: {} });
+assert.equal((await migrationRpc(env, 'cleanup', '{}')).temporary_parts_deleted, 1);
+assert.ok(blobs.has(transportKey));
 
 const first = await dispatchLocal(env, 'list_articles', {});
 assert.equal(first.total, 1);
@@ -124,7 +138,11 @@ assert.equal((await dispatchLocal(env, 'list_excerpts', {})).total, 1);
 await assert.rejects(dispatchLocal(env, 'save_excerpt', { work_id: 'test-book', text: '不存在的句子' }), error => error.status === 400);
 
 const id = '367bdb47-c740-48a5-b35c-36a7f3053f72';
+const realNow = Date.now;
+Date.now = () => Date.parse('2026-11-20T16:30:00Z');
 const created = await dispatchLocal(env, 'create_article', { article_id: id, title: '新稿', content: '第一句，第二句。' });
+Date.now = realNow;
+assert.equal((await dispatchLocal(env, 'read_article', { article_id: id })).date, '2026-11-21');
 assert.equal((await dispatchLocal(env, 'create_article', { article_id: id, title: '新稿', content: '第一句，第二句。' })).revision, created.revision);
 await assert.rejects(dispatchLocal(env, 'create_article', { article_id: id, title: '不同稿', content: '第一句，第二句。' }), error => error.status === 409);
 const revised = await dispatchLocal(env, 'edit_article', { article_id: id, expected_revision: created.revision, edits: [{ old_text: '第二句', new_text: '$&原样保存' }] });

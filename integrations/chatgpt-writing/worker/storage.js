@@ -7,6 +7,7 @@ const codepoints = text => [...text];
 const normalized = text => text.replace(/\s/gu, '');
 const query = (env, sql, ...args) => env.DB.prepare(sql).bind(...args);
 const isoNow = () => new Date().toISOString();
+const localDate = () => new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
 const referenceUrl = (id, chapter = 0, offset = 0) => 'https://jianmoxi-writing-tools.hanxueqing.chatgpt.site/reference?work_id=' + encodeURIComponent(id) + '&chapter=' + chapter + '&offset=' + offset;
 const hashHex = async value => [...new Uint8Array(await crypto.subtle.digest('SHA-256', utf8.encode(value)))].map(b => b.toString(16).padStart(2, '0')).join('');
 const setting = async (env, key) => (await query(env, 'SELECT value FROM workspace_settings WHERE key=?', key).first())?.value;
@@ -135,7 +136,7 @@ export async function dispatchLocal(env, name, args) {
         throw new WorkspaceError('该文章 ID 已被使用，请读取原文或为新稿生成不同 ID', 409);
       }
       return saveDraft(env, { id: args.article_id, title: args.title, content: args.content, status,
-        date: isoNow().slice(0, 10), seed: '', group: '', summary: '', img: '' });
+        date: localDate(), seed: '', group: '', summary: '', img: '' });
     }
     case 'edit_article': {
       const row = await getArticle(env, args.article_id);
@@ -232,6 +233,7 @@ export async function migrationRoute(request, env) {
   const raw = await request.text();
   if (utf8.encode(raw).length > 2 * 1024 * 1024) throw new WorkspaceError('Import batch too large', 413);
   const input = JSON.parse(raw);
+  if (url.pathname === '/admin/rpc') return migrationRpc(env, input.operation, input.payload);
   if (!/^migration-\d+$/.test(input.snapshot ?? '')) throw new WorkspaceError('Invalid snapshot');
   const previous = await setting(env, 'snapshot');
   if (previous && previous !== input.snapshot) throw new WorkspaceError('A different snapshot is already present', 409);
@@ -335,7 +337,7 @@ export async function migrationRpc(env, operation, payload) {
         !/^[a-f0-9]{64}$/.test(input.sha256 ?? '')) throw new WorkspaceError('Invalid part');
     if (await setting(env, 'ready') === '1') throw new WorkspaceError('Migration already finalized', 409);
     const bytes = decode(input.data);
-    if (!bytes.length || bytes.length > 512 * 1024) throw new WorkspaceError('Invalid part size');
+    if (!bytes.length || bytes.length > 1024 * 1024) throw new WorkspaceError('Invalid part size');
     await env.BUCKET.put(input.key + '.part-' + input.index, bytes, {
       sha256: input.sha256, customMetadata: { sha256: input.sha256 }
     });
@@ -365,6 +367,21 @@ export async function migrationRpc(env, operation, payload) {
     await env.BUCKET.put(input.key, bytes, { sha256: input.sha256, customMetadata: { sha256: input.sha256 } });
     await env.BUCKET.delete(keys);
     return { stored: true, bytes: bytes.length };
+  }
+  if (operation === 'cleanup') {
+    if (await setting(env, 'ready') !== '1') throw new WorkspaceError('Verify the completed migration first', 409);
+    const snapshot = await setting(env, 'snapshot');
+    let cursor, deleted = 0;
+    do {
+      const page = await env.BUCKET.list({ prefix: snapshot + '/', cursor, limit: 1000 });
+      for (const object of page.objects) {
+        if (!/\.part-\d+$/.test(object.key)) continue;
+        const original = object.key.replace(/\.part-\d+$/, '');
+        if (validKey(original) && await env.BUCKET.head(original)) { await env.BUCKET.delete(object.key); deleted++; }
+      }
+      cursor = page.truncated ? page.cursor : undefined;
+    } while (cursor);
+    return { temporary_parts_deleted: deleted };
   }
   throw new WorkspaceError('Unknown migration operation');
 }
